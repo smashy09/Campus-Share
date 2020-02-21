@@ -43,19 +43,17 @@ function create() {
 };
 
 function update() {
+    this.player.setVelocity(0);
+
     if (this.cursors.left.isDown) {
-        this.player.setVelocity
+        this.player.setVelocityX(-160);
     } else if(this.cursors.right.isDown) {
-        console.log('right');
-    } else {
-        
-    }
+        this.player.setVelocityX(160);
+    } 
     
     if (this.cursors.up.isDown) {
-        console.log('up');
+        this.player.setVelocityY(-160);
     } else if(this.cursors.down.isDown) {
-        console.log('down');
-    } else {
-        
-    }
+        this.player.setVelocityY(160);
+    } 
 };
