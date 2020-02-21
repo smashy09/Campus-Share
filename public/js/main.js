@@ -26,6 +26,8 @@ function preload() {
     this.load.image('button1', '/images/ui/blue_button01.png',);
     this.load.spritesheet('items', '/images/items.png', { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet('characters', '/images/characters.png', { frameWidth: 32, frameHeight: 32 });
+
+    this.load.spritesheet('pokemon', '/images/images.png', { frameWidth: 67, frameHeight: 67 });
 };
 
 function create() {
@@ -34,6 +36,8 @@ function create() {
     this.add.sprite(300, 100, 'button1');
     this.add.image(200, 250, 'items', 0);
     this.physics.add.image(500, 100, 'button1');
+    this.add.sprite(400, 300, 'pokemon', 0);
+
 
     this.player = this.physics.add.image(32, 32, 'characters', 2);
     this.player.setScale(2);
