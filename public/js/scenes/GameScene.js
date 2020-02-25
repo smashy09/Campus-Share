@@ -8,9 +8,8 @@ class GameScene extends Phaser.Scene {
     create() {
         const goldPickAudio = this.sound.add('goldSound', {loop: false, volume: 0.2});
         
-        const button = this.add.image(200, 200, 'button1');
-        button.setOrigin(0.5, 0.5);
-        this.add.sprite(300, 100, 'button1');
+        
+       
         
         this.chest = this.physics.add.image(200, 250, 'items', 0);
         
@@ -20,9 +19,8 @@ class GameScene extends Phaser.Scene {
         this.pokemon = this.physics.add.sprite(400, 300, 'pokemon', 0);
     
     
-        this.player = this.physics.add.image(32, 32, 'characters', 2);
-        this.player.setScale(2);
-        this.player.body.setCollideWorldBounds(true);
+        this.player = new Player(this,32, 32, 'characters', 2);
+        
     
         // physics
         //this.physics.add.collider(this.player, this.wall); this will make the object move and run away from the point of contact. and disappear. 
@@ -35,21 +33,10 @@ class GameScene extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
         };
     
-        update() {
-            this.player.setVelocity(0);
-        
-            if (this.cursors.left.isDown) {
-                this.player.setVelocityX(-160);
-            } else if(this.cursors.right.isDown) {
-                this.player.setVelocityX(160);
-            } 
-            
-            if (this.cursors.up.isDown) {
-                this.player.setVelocityY(-160);
-            } else if(this.cursors.down.isDown) {
-                this.player.setVelocityY(160);
-            } 
-        };
+        update () {
+            this.player.update(this.cursors);
+
+        }
 
 
 }
