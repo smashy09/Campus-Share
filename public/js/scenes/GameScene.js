@@ -5,6 +5,10 @@ class GameScene extends Phaser.Scene {
     }
 
     init() {
+
+        //launch instead of start. start will tell phaser to shutdown the current scene. where launch will have it working in parallel
+
+        // this allows a static tracking
         this.scene.launch('Ui');
     }
     
@@ -30,7 +34,7 @@ class GameScene extends Phaser.Scene {
         //  this.wall.setImmovable(); this will prevent the object from moving at all.
         this.physics.add.collider(this.player, this.wall);
     
-        this.physics.add.overlap(this.player, this.chest, function(player, chest) {goldPickAudio.play(); chest.destroy();});
+        this.physics.add.overlap(this.player, this.chest, collectChest);
         this.physics.add.overlap(this.player, this.pokemon, function() {console.log('overlap'); });
     
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -41,6 +45,8 @@ class GameScene extends Phaser.Scene {
 
         }
 
-
+        collectChest(player, chest) {
+            goldPickAudio.play(); chest.destroy();
+        }
 }
 
