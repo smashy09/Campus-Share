@@ -5,6 +5,7 @@ class BootScene extends Phaser.Scene {
 
     preload() {
     this.load.image('button1', '/images/ui/blue_button01.png',);
+    this.load.image('button2', '/images/ui/blue_button01.png',);
     this.load.spritesheet('items', '/images/items.png', { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet('characters', '/images/characters.png', { frameWidth: 32, frameHeight: 32 });
 
@@ -16,7 +17,7 @@ class BootScene extends Phaser.Scene {
 
     create() {
         console.log('start game')
-        this.scene.start('Game');
+        this.scene.start('Title');
     }
     
 }
