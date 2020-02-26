@@ -4,6 +4,9 @@ class GameScene extends Phaser.Scene {
 
     }
 
+    init() {
+        this.scene.launch('Ui');
+    }
     
     create() {
         const goldPickAudio = this.sound.add('goldSound', {loop: false, volume: 0.2});

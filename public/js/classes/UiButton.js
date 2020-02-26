@@ -18,10 +18,11 @@ class UiButton extends Phaser.GameObjects.Container {
     }
     createButton() {
     //create play game button
-    this.button = this.add.image(0, 0,  'button1');
+    this.button = this.add.image(0,0,'button1');
         // make button interactive
     this.button.setInteractive();
 
+        //scale the button
     this.button.setScale(1.4);
     //create the button text
     this.buttonText = this.add.text(0, 0, this.text, { fontSize: '26px', fill: "#fff" });
@@ -46,9 +47,9 @@ class UiButton extends Phaser.GameObjects.Container {
     this.button.on('pointerout', () => {
         
         this.button.setTexture(this.key);
-    })
+    });
 
-        };
+    }
 }
 
 
