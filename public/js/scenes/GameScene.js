@@ -13,12 +13,12 @@ class GameScene extends Phaser.Scene {
     }
     
     create() {
-        const goldPickAudio = this.sound.add('goldSound', {loop: false, volume: 0.2});
+        this.goldPickAudio = this.sound.add('goldSound', {loop: false, volume: 0.2});
         
         
        
         
-        this.chest = this.physics.add.image(200, 250, 'items', 0);
+        this.chest = new Chest(this, 200, 250, 'items', 0);
         
         this.wall = this.physics.add.image(500, 100, 'button1');
         this.wall.setImmovable();
@@ -34,19 +34,26 @@ class GameScene extends Phaser.Scene {
         //  this.wall.setImmovable(); this will prevent the object from moving at all.
         this.physics.add.collider(this.player, this.wall);
     
-        this.physics.add.overlap(this.player, this.chest, collectChest);
+        this.physics.add.overlap(this.player, this.chest, this.collectChest, null, this);
         this.physics.add.overlap(this.player, this.pokemon, function() {console.log('overlap'); });
     
         this.cursors = this.input.keyboard.createCursorKeys();
         };
     
-        update () {
+    update () {
             this.player.update(this.cursors);
 
-        }
+    }
 
-        collectChest(player, chest) {
-            goldPickAudio.play(); chest.destroy();
-        }
+    collectChest(player, chest) {
+            // play gold pickup sound
+        this.goldPickAudio.play(); 
+
+            //update score in the ui
+        this.events.emit('updateScore', chest.coins);
+
+            //destroy the chest game object
+        chest.destroy();
+    }
 }
 
