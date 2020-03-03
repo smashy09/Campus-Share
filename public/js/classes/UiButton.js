@@ -17,15 +17,15 @@ class UiButton extends Phaser.GameObjects.Container {
         this.scene.add.existing(this);
     }
     createButton() {
-    //create play game button
-    this.button = this.add.image(0, 0,'button1');
+     //create play game button
+    this.button = this.scene.add.image(0, 0, 'button1');
         // make button interactive
     this.button.setInteractive();
 
         //scale the button
     this.button.setScale(1.4);
     //create the button text
-    this.buttonText = this.add.text(0, 0, this.text, { fontSize: '26px', fill: "#fff" });
+    this.buttonText = this.scene.add.text(0, 0, this.text, { fontSize: '26px', fill: "#fff" });
 
     //to align text into objects center
     Phaser.Display.Align.In.Center(this.buttonText, this.button);
@@ -37,6 +37,7 @@ class UiButton extends Phaser.GameObjects.Container {
     // listen for events
     this.button.on('pointerdown', () => {
         this.targetCallback();
+        
     });
 
     this.button.on('pointerover', () => {

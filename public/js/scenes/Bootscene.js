@@ -17,7 +17,7 @@ class BootScene extends Phaser.Scene {
 
     loadImages() {
         this.load.image('button1', '/images/ui/blue_button01.png',);
-        this.load.image('button2', '/images/ui/blue_button01.png',);
+        this.load.image('button2', '/images/ui/blue_button02.png',);
     };
 
     loadSpritesheet () {
@@ -33,7 +33,7 @@ class BootScene extends Phaser.Scene {
     }
     create() {
         console.log('start game')
-        this.scene.start('Game');
+        this.scene.start('Title');
     }
     
 }

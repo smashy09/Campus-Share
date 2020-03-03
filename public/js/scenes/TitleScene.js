@@ -3,8 +3,6 @@ class TitleScene extends Phaser.Scene {
         super('Title');
     }
 
-    
-
     create() {
         //create title text
         this.titleText = this.add.text(this.scale.width / 2, this.scale.height / 2, 'Thirteen mmo', { fontSize: '64px', fill: '#fff' });
