@@ -7,7 +7,7 @@ var config = {
         BootScene,
         TitleScene,
         GameScene,
-        // UiScene,
+        UiScene,
     ],
     physics: {
         default: 'arcade',
