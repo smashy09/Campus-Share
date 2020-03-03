@@ -18,7 +18,7 @@ class UiButton extends Phaser.GameObjects.Container {
     }
     createButton() {
     //create play game button
-    this.button = this.add.image(0,0,'button1');
+    this.button = this.add.image(0, 0,'button1');
         // make button interactive
     this.button.setInteractive();
 
