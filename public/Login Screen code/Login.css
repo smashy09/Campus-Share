@@ -1,0 +1,108 @@
+#login_container{
+    border: black 1px solid;
+    position: absolute;
+    width: 960px;
+    height: 650px;
+    left: 25%;
+    bottom: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#Game_title{
+    font-size: 16pt;
+}
+
+#Game_logo{
+    border: black 1px solid;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* PASSWORD STYLING START */
+
+#Username_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+#Username_text{
+    margin-right: 40px;
+    font-size: 32pt;
+}
+#Enter_user{
+    width: 250px;
+    height: 30px;
+    padding: 5px;
+}
+#Username_text{
+    margin-right: 40px;
+    font-size: 32pt;
+}
+#Enter_user{
+    width: 250px;
+    height: 30px;
+    padding: 5px;
+}
+
+/* PASSWORD STYLING End */
+
+
+/* PASSWORD STYLING START */
+
+#Password_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+#Password_text{
+    margin-right: 40px;
+    font-size: 32pt;
+}
+#Enter_pass{
+    width: 250px;
+    height: 30px;
+    padding: 5px;
+}
+#Password_text{
+    margin-right: 50px;
+    font-size: 32pt;
+}
+#Enter_pass{
+    width: 250px;
+    height: 30px;
+    padding: 5px;
+}
+
+/* PASSWORD STYLING END */
+
+/* BUTTON STYLING START */
+#Play_button{
+    background-color: green;
+    color: white;
+    font-size: 24pt;
+    padding: 10px 32px;
+    border: none;
+    box-shadow: 2px 3px lightgreen;
+    border-radius: 5px;
+    margin-top: 40px;
+}
+#Play_button:hover{
+    transition: 0.5s;
+    cursor: pointer;
+    background-color: lightblue;
+}
+/* BUTTON STYLING END */
+
+#Sign_up{
+    font-size: 16pt;
+    margin-top: 20px;
+}
