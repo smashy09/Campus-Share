@@ -54,6 +54,10 @@ body{
     justify-content: center;
 }
 
+#Sign_in{
+    font-size: 20pt;
+    height: 80px;
+}
 
 /* USERNAME STYLING START */
 
@@ -101,20 +105,12 @@ body{
 
 
 /* BUTTON STYLING START */
-#Play_button{
-    background-color: green;
-    color: white;
-    font-size: 24pt;
-    padding: 10px 32px;
-    border: none;
-    box-shadow: 2px 3px lightgreen;
-    border-radius: 5px;
-    margin-top: 40px;
+#Play_container img{
+   width: 300px;
 }
-#Play_button:hover{
-    transition: 0.5s;
+
+#Play_container :hover{
     cursor: pointer;
-    background-color: lightblue;
 }
 /* BUTTON STYLING END */
 
