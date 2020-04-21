@@ -18,7 +18,7 @@ class GameScene extends Phaser.Scene {
         //make the map
         this.createMap();
         
-        
+        console.log(this.cache.tilemap.get('map4').data);
         this.createAudio();
         
         this.createChests();
