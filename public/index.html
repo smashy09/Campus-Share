@@ -3,25 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>zenva</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/phaser@3.16.2/dist/phaser.min.js"></script>
-  <!-- <script src="/socket.io/socket.io.js"></script> -->
-  <link href="/css/game.css" rel="stylesheet">
-</head>
-<body> hello
-    <div id="phaser-game">
+    <title>BCITA</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+  <!-- <script src="/socket.io/socket.io.js"></script> -->
+  <link href="css/login.css" rel="stylesheet">
+  <script src="/public/js/utils.js"></script>
+</head>
+<body class="text-center"> 
+  <div id="outerborder">
+
+    <div id="master_container">
+
+      <div id="title_container">
+        <div id="Game_title">
+          <h1>Campus Journey</h1>
+      </div>
+
+      <div id="Game_logo">
+        
+        <p><img id="theLogo" src="./assets/Icon(objects)/1x/logo_transparent.png"></p>
     </div>
-    <script src="/js/classes/items.js" charset="utf-8"></script>
-    <script src="/js/classes/player.js" charset="utf-8"></script>
-    <script src="/js/classes/UiButton.js" charset="utf-8"></script>
-    <script src="/js/scenes/BootScene.js" charset="utf-8"></script>
+  </div>
+<form class="form-signin">
+  <h1>Please sign in</h1>
+  <label class="sr-only" for="email">Email</label>
+  <input type="email" class="form-control" id="email" placeholder="Email address" required autofocus>
+  <label class="sr-only" for="password">password</label>
+  <input type="password" class="form-control" id="password" placeholder="Password" required>
+  <a class="btn btn-lg btn-primary btn-block" onClick="signIn()">Sign in</a>
+  <a href="signup.html">Don't have an account? Sign up here.</a>
+  <a href="forgot-password.html"> Forgot password? Click here.</a>
+  <a href="reset-password.html"> Want to reset password? Click here.</a>
+</form>
     
-    <script src="/js/scenes/TitleScene.js" charset="utf-8"></script>
-    <script src="/js/scenes/GameScene.js" charset="utf-8"></script>
-    
-    <script src="/js/scenes/UiScene.js" charset="utf-8"></script>
+    </div>
     <script src="/js/main.js" charset="utf-8"></script>
     
     
