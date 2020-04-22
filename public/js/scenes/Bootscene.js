@@ -23,19 +23,19 @@ class BootScene extends Phaser.Scene {
         this.load.image('button1', '/images/ui/blue_button01.png',);
         this.load.image('button2', '/images/ui/blue_button02.png',);
 
-        this.load.image('background', '/assets/Map/SE1-floor1.png');
+        this.load.image('background', '/assets/Map/exterior.tmx');
 
-        this.load.image('background2', '/assets/Map/background.png');
+        // this.load.image('background2', '/assets/Map/.png');
 
-        this.load.image('background3', '/assets/Map/SE1-floor2v2.png');
+        // this.load.image('background3', '/assets/Map/.png');
     };
     
     loadTileMap() {
-        this.load.tilemapTiledJSON('map', '/assets/Map/large_level.json');
+        this.load.tilemapTiledJSON('map', '/assets/Map/exterior.json');
 
-        this.load.tilemapTiledJSON('map2', '/assets/Map/SE1v2.json');
-        this.load.tilemapTiledJSON('map3', '/assets/Map/se2.json');
-        this.load.tilemapTiledJSON('map4', '/assets/Map/dungeontest.json');
+        this.load.tilemapTiledJSON('map2', '/assets/Map/SE1 (2nd Floor).json');
+        this.load.tilemapTiledJSON('map3', '/assets/Map/SE1.json');
+        
     }
     loadSpritesheet () {
         

@@ -1,25 +1,52 @@
+require('dotenv').config();
 const express = require("express");
 const PORT = process.env.port || 5000;
 
 const mongoose = require("mongoose")
 const app = express();
+const passport = require('passport');
+
+const routes = require('./routes/main');
+const passwordRoutes = require('./routes/password');
+const secureRoutes = require('./routes/secure');
 
 
 
 
-//DB config
-const db = require("./config/keys").MongoURI;
-//connect to mongo
+// setup mongo
+const uri = process.env.MongoURI;
+const mongoConfig = {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+};
+if (process.env.MONGO_USER_NAME && process.env.MONGO_PASSWORD) {
+  mongoConfig.auth = { authSource: 'admin' };
+  mongoConfig.user = process.env.MONGO_USER_NAME;
+  mongoConfig.pass = process.env.MONGO_PASSWORD;
+}
+  mongoose.connect(uri, mongoConfig);
 
-// mongoose.connect(db, { useNewUrlParser: true})
-// .then(() => console.log('MongoDb Connected...'))
-// .catch(err => console.log(err));
+  mongoose.connection.on('error', (error) => {
+    console.log(error);
+    process.exit(1);
+  });
 
+  mongoose.set('useFindAndModify', false);
 
 
 //bodyparse
 app.use(express.urlencoded({ extended: false}));
+app.use(bodyParser.json()); // parse application/json
+app.use(cookieParser());
+app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN }));
 
+// require passport auth
+require('./auth/auth');
+
+//login
+app.get('/', (req, res) => {
+  res.send(__dirname + '/index.html');
+});
 
 // game
 app.get('/game.html', function (req, res) {

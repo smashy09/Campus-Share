@@ -18,7 +18,7 @@ class GameScene extends Phaser.Scene {
         //make the map
         this.createMap();
         
-        console.log(this.cache.tilemap.get('map4').data);
+        console.log(this.cache.tilemap.get('map').data);
         this.createAudio();
         
         this.createChests();
@@ -48,12 +48,13 @@ class GameScene extends Phaser.Scene {
     createMap() {
         // this.map = this.add.image(1000,600, 'background3');
         //create tile map
-        this.map = this.make.tilemap({key: 'map4'});
-       // add tileset image
-        this.tiles = this.map.addTilesetImage("bglevel", 'background2', 32, 32, 1, 2);
+        this.map = this.make.tilemap({key: 'map'});
+       // add tileset image . use the tileset name, key of the image, etc
+        // this.tiles = this.map.addTilesetImage("SE1-floor2v2", 'background3', 32, 32, 0, 0);
 
+        this.tiles = this.map.addTilesetImage("building", 'background', 32, 32, 0, 0);
         //create background layer
-        this.backgroundLayer = this.map.createStaticLayer("bglevel", this.tiles, 0,0);
+        this.backgroundLayer = this.map.createStaticLayer("Floor", this.tiles, 0,0);
         this.physics.world.bounds.width = this.map.widthInPixeles * 2;
         this.physics.world.bounds.height = this.map.heightInPixeles * 2;
 
