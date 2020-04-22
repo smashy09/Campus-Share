@@ -40,8 +40,13 @@ app.use(bodyParser.json()); // parse application/json
 app.use(cookieParser());
 app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN }));
 
+
+
 // require passport auth
 require('./auth/auth');
+
+//serve static assets
+app.use(express.static(__dirname + '/public'));
 
 //login
 app.get('/', (req, res) => {
@@ -53,7 +58,7 @@ app.get('/game.html', function (req, res) {
   res.sendFile(__dirname + '/public/game.html');
 });
 
-app.use(express.static(__dirname + '/public'));
+
 
 // app.use('/', require('./public/'));
 
