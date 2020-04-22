@@ -6,9 +6,9 @@ const mongoose = require("mongoose")
 const app = express();
 const passport = require('passport');
 
-const routes = require('./routes/main');
-const passwordRoutes = require('./routes/password');
-const secureRoutes = require('./routes/secure');
+// const routes = require('./routes/main');
+// const passwordRoutes = require('./routes/password');
+// const secureRoutes = require('./routes/secure');
 
 
 
