@@ -18,7 +18,7 @@ class GameScene extends Phaser.Scene {
         //make the map
         this.createMap();
         
-        console.log(this.cache.tilemap.get('map').data);
+        console.log(this.cache.tilemap.get('map3').data);
         this.createAudio();
         
         this.createChests();
@@ -31,6 +31,7 @@ class GameScene extends Phaser.Scene {
         //  this.wall.setImmovable(); this will prevent the object from moving at all.
         this.addCollisions() ; 
     
+        this.createAnimations();
         this.createInput();
     }
     update () {
@@ -41,28 +42,84 @@ class GameScene extends Phaser.Scene {
         this.goldPickAudio = this.sound.add('goldSound', {loop: false, volume: 0.2});
     }
 
+    addCollisions() {
+        //check collision wall to player
+        this.physics.add.collider(this.player, this.map.wallLayer);
+    
+        this.physics.add.overlap(this.player, this.chests, this.collectChest, null, this);
+        
+        this.physics.add.overlap(this.player, this.pokemon, function() {console.log('overlap'); });
+
+
+    }
     createPlayer() {
-        this.player = new Player(this,32, 32, 'characters', 2);
+        this.player = new Player(this,500, 100, 'player', 1);
+        
     }
 
+    createAnimations() {
+        //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
+        this.anims.create({
+          key: 'left',
+          frames: this.anims.generateFrameNumbers('player', {
+            frames: [1,7,8,9]
+          }),
+          frameRate: 10,
+          repeat: -1
+        });
+    
+        // animation with key 'right'
+        this.anims.create({
+          key: 'right',
+          frames: this.anims.generateFrameNumbers('player', {
+            frames: [1, 10, 11, 12]
+          }),
+          frameRate: 10,
+          repeat: -1
+        });
+    
+        this.anims.create({
+          key: 'up',
+          frames: this.anims.generateFrameNumbers('player', {
+            frames: [4, 5, 6]
+          }),
+          frameRate: 10,
+          repeat: -1
+        });
+    
+        this.anims.create({
+          key: 'down',
+          frames: this.anims.generateFrameNumbers('player', {
+            frames: [1, 2, 3]
+          }),
+          frameRate: 10,
+          repeat: -1
+        });
+      }
     createMap() {
-        // this.map = this.add.image(1000,600, 'background3');
+        
         //create tile map
-        this.map = this.make.tilemap({key: 'map'});
+    //    this.map = new Map(this, 'map3', 'BCITA-tileset', 'background','Floor', 'wall');
+        //create tile map
+        this.map = this.make.tilemap({key: 'map3'});
        // add tileset image . use the tileset name, key of the image, etc
-        // this.tiles = this.map.addTilesetImage("SE1-floor2v2", 'background3', 32, 32, 0, 0);
 
-        this.tiles = this.map.addTilesetImage("building", 'background', 32, 32, 0, 0);
+        this.tiles = this.map.addTilesetImage("BCITA-tileset", 'background', 32, 32, 0, 0);
+        
         //create background layer
         this.backgroundLayer = this.map.createStaticLayer("Floor", this.tiles, 0,0);
-        this.physics.world.bounds.width = this.map.widthInPixeles * 2;
-        this.physics.world.bounds.height = this.map.heightInPixeles * 2;
+        this.backgroundLayer.setScale(2);
+
+        this.wallLayer = this.map.createStaticLayer('wall', this.tiles, 0, 0);
+        this.wallLayer.setScale(2);
+        this.wallLayer.setCollisionByExclusion([-1]);
+
+
+        this.physics.world.bounds.width = this.map.widthInPixels * 2;
+        this.physics.world.bounds.height = this.map.heightInPixels * 2;
 
         //limit camera view
-        this.cameras.main.setBounds(0,0, this.map.widthInPixles * 2, this.map.heightInPixles * 2)
-
-        // this.blockedLayer = this.map.createStaticLayer('blocked', this.tiles, 0, 0)
-        
+        this.cameras.main.setBounds(0,0, this.map.widthInPixels * 2, this.map.heightInPixels * 2)
 
     }
     createChests() {
@@ -111,13 +168,7 @@ class GameScene extends Phaser.Scene {
     
     }
 
-    addCollisions() {
-        this.physics.add.collider(this.player, [this.wall,this.wall2]);
     
-        this.physics.add.overlap(this.player, this.chests, this.collectChest, null, this);
-        
-        this.physics.add.overlap(this.player, this.pokemon, function() {console.log('overlap'); });
-    }
     collectChest(player, chest) {
             // play gold pickup sound
         this.goldPickAudio.play(); 

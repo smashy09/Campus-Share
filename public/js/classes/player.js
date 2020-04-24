@@ -1,3 +1,10 @@
+
+const Direction = {
+    RIGHT: 'RIGHT',
+    LEFT: 'LEFT',
+    UP: 'UP',
+    DOWN: 'DOWN',
+  };
 class Player extends Phaser.Physics.Arcade.Image {
     constructor(scene, x, y, key, frame) {
         super(scene, x, y, key, frame);
@@ -10,7 +17,7 @@ class Player extends Phaser.Physics.Arcade.Image {
         this.setImmovable(false);
 
         //scale our player
-        this.setScale(2);
+        this.setScale(0.5);
         this.setCollideWorldBounds(true);
 
         //add player to existing scene
@@ -20,19 +27,47 @@ class Player extends Phaser.Physics.Arcade.Image {
     
     }
 
+    // update(cursors) {
+    //     this.body.setVelocity(0);
+    
+    //     if (cursors.left.isDown) {
+    //         this.body.setVelocityX(-this.velocity);
+    //     } else if(cursors.right.isDown) {
+    //         this.body.setVelocityX(this.velocity);
+    //     } 
+        
+    //     if (cursors.up.isDown) {
+    //         this.body.setVelocityY(-this.velocity);
+    //     } else if(cursors.down.isDown) {
+    //         this.body.setVelocityY(this.velocity);
+    //     } 
+
+        
+    // };
+
     update(cursors) {
         this.body.setVelocity(0);
     
         if (cursors.left.isDown) {
-            this.body.setVelocityX(-this.velocity);
-        } else if(cursors.right.isDown) {
-            this.body.setVelocityX(this.velocity);
-        } 
-        
+          this.body.setVelocityX(-this.velocity);
+          this.currentDirection = Direction.LEFT;
+          //todo
+        //   this.player.flipX = false;
+        } else if (cursors.right.isDown) {
+          this.body.setVelocityX(this.velocity);
+          this.currentDirection = Direction.RIGHT;
+          //todo
+        //   this.player.flipX = true;
+        }
+    
         if (cursors.up.isDown) {
-            this.body.setVelocityY(-this.velocity);
-        } else if(cursors.down.isDown) {
-            this.body.setVelocityY(this.velocity);
-        } 
-    };
+          this.body.setVelocityY(-this.velocity);
+          this.currentDirection = Direction.UP;
+         
+        } else if (cursors.down.isDown) {
+          this.body.setVelocityY(this.velocity);
+          this.currentDirection = Direction.DOWN;
+          
+        }
+    }
 }
