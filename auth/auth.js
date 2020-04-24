@@ -1,56 +1,56 @@
 const passport = require('passport');
-const localStrategy = require('passport-local');
-const jwtStrategy = require('passport-jwt');
+const localStrategy = require('passport-local').Strategy;
+const JWTstrategy = require('passport-jwt').Strategy;
 
-const UserModel = require('../models/UserModel');
+const UserModel = require('../models/userModel');
 
 // handle user registration
-passport.use('signup', new localStrategy.Strategy({
+passport.use('signup', new localStrategy({
   usernameField: 'email',
   passwordField: 'password',
-  passReqToCallback: true,
-}, async (request, email, password, done) => {
+  passReqToCallback: true
+}, async (req, email, password, done) => {
   try {
-    const { username } = request.body;
-    const user = await UserModel.create({ email, password, username });
+    const { name } = req.body;
+    const user = await UserModel.create({ email, password, name});
     return done(null, user);
   } catch (error) {
-    return done(error);
+    done(error);
   }
 }));
 
 // handle user login
-passport.use('login', new localStrategy.Strategy({
+passport.use('login', new localStrategy({
   usernameField: 'email',
-  passwordField: 'password',
+  passwordField: 'password'
 }, async (email, password, done) => {
   try {
     const user = await UserModel.findOne({ email });
     if (!user) {
-      return done(new Error('user not found'), false);
+      return done(null, false, { message: 'User not found' });
     }
-    const valid = await user.isValidPassword(password);
-    if (!valid) {
-      return done(new Error('invalid password'), false);
+    const validate = await user.isValidPassword(password);
+    if (!validate) {
+      return done(null, false, { message: 'Wrong Password' });
     }
-    return done(null, user);
+    return done(null, user, { message: 'Logged in Successfully' });
   } catch (error) {
     return done(error);
   }
 }));
 
-// verify jwt token
-passport.use(new jwtStrategy.Strategy({
-  secretOrKey: process.env.JWT_SECRET,
-  jwtFromRequest: (request) => {
+// verify token is valid
+passport.use(new JWTstrategy({
+  secretOrKey: 'top_secret',
+  jwtFromRequest: function (req) {
     let token = null;
-    if (request && request.cookies) token = request.cookies.jwt;
+    if (req && req.cookies) token = req.cookies['jwt'];
     return token;
-  },
+  }
 }, async (token, done) => {
   try {
     return done(null, token.user);
   } catch (error) {
-    return done(error);
+    done(error);
   }
 }));
