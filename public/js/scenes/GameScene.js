@@ -24,7 +24,7 @@ class GameScene extends Phaser.Scene {
         this.createChests();
         // this.chest = new Chest(this, 200, 290, 'items', 0);
         this.createWalls ();
-        
+        this.createObject();
         this.createPlayer();
          // physics
         //this.physics.add.collider(this.player, this.wall); this will make the object move and run away from the point of contact. and disappear. 
@@ -49,11 +49,13 @@ class GameScene extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.chests, this.collectChest, null, this);
         
         this.physics.add.overlap(this.player, this.pokemon, function() {console.log('overlap'); });
+        this.physics.add.overlap(this.player, this.ball, function() {console.log('overlap'); });
 
 
     }
     createPlayer() {
         this.player = new Player(this,500, 100, 'player', 1);
+        this.player.setScale(2)
         
     }
 
@@ -131,7 +133,7 @@ class GameScene extends Phaser.Scene {
            this.spawnChest();
        }
        
-        this.pokemon = this.physics.add.sprite(400, 300, 'pokemon', 0);
+        // this.pokemon = this.physics.add.sprite(400, 300, 'pokemon', 0);
     }
     spawnChest(){
         const location = this.chestPositions[Math.floor(Math.random() * this.chestPositions.length)];
@@ -161,7 +163,10 @@ class GameScene extends Phaser.Scene {
         this.wall2.setImmovable();
     }
 
-  
+    createObject() {
+        this.ball = this.physics.add.image(400, 300, 'basketball')
+        this.ball.setScale(0.5);
+    }
 
     createInput() {
         this.cursors = this.input.keyboard.createCursorKeys();
