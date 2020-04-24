@@ -45,13 +45,11 @@ body{
 }
 
 #Game_logo{
-    border: black 1px solid;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-image: url(logo_transparent.png);
+    width: 180px;
+    height: 200px;
+    background-position: center;
+    background-size: cover;
 }
 
 #Sign_in{
