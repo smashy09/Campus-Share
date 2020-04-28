@@ -69,15 +69,25 @@ router.post('/token', (req, res) => {
   }
 });
 
-router.post('/logout', (req, res) => {
-  if (req.cookies) {
-    const refreshToken = req.cookies['refreshJwt'];
-    if (refreshToken in tokenList) delete tokenList[refreshToken]
-    res.clearCookie('refreshJwt');
-    res.clearCookie('jwt');
-  }
+// router.post('/logout', (req, res) => {
+//   if (req.cookies) {
+//     const refreshToken = req.cookies['refreshJwt'];
+//     if (refreshToken in tokenList) delete tokenList[refreshToken]
+//     res.clearCookie('refreshJwt');
+//     res.clearCookie('jwt');
+//   }
 
-  res.status(200).json({ message: 'logged out' });
+//   res.status(200).json({ message: 'logged out' });
+// });
+
+router.post('/logout', (request, response) => {
+  if (request.cookies) {
+    const refreshToken = request.cookies.refreshJwt;
+    if (refreshToken in tokenList) delete tokenList[refreshToken];
+    response.clearCookie('jwt');
+    response.clearCookie('refreshJwt');
+  }
+  response.status(200).json({ message: 'logged out', status: 200 });
 });
 
 module.exports = router;

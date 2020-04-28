@@ -11,13 +11,14 @@ const cookieParser = require('cookie-parser');
 const routes = require('./routes/main');
 const passwordRoutes = require('./routes/password');
 const secureRoutes = require('./routes/secure');
-const asyncMiddleware = require('./middleware/asyncMiddleware');
+const asyncMiddleware = require('../middleware/asyncMiddleware');
 
 
 
 // setup mongo
 const uri = process.env.MONGO_CONNECTION_URL;
-mongoose.connect(uri, { useNewUrlParser : true, useCreateIndex: true });
+mongoose.connect(uri, { useUnifiedTopology: true,
+  useNewUrlParser: true });
 mongoose.connection.on('error', (error) => {
   console.log(error);
   process.exit(1);
@@ -47,10 +48,10 @@ app.get('/game.html', function (req, res) {
   res.sendFile(__dirname + '/public/game.html');
 });
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/../public'));
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/../index.html');
 });
 
 // main routes

@@ -24,7 +24,7 @@ class BootScene extends Phaser.Scene {
         //items
         this.load.image('button1', '/images/ui/blue_button01.png',);
         this.load.image('button2', '/images/ui/blue_button02.png',);
-
+        this.load.image('basketball', '/assets/Icon(objects)/1x/Basketball.png',);
         
         //map
         this.load.image('background', '/assets/Map/BCITA-tileset.png');
@@ -45,7 +45,7 @@ class BootScene extends Phaser.Scene {
         
         this.load.spritesheet('items', '/images/items.png', { frameWidth: 32, frameHeight: 32 });
         // this.load.spritesheet('characters', '/images/characters.png', { frameWidth: 32, frameHeight: 32 });
-        this.load.spritesheet('player', '/images/Charactors/charactor_full motions.png', { frameWidth: 179, frameHeight: 189 });
+        this.load.spritesheet('player', '/images/Charactors/C_Enginnering/enginnering1_front.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('pokemon', '/images/images.png', { frameWidth: 67, frameHeight: 67 });
 
         
