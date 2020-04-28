@@ -2,7 +2,7 @@ const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const JWTstrategy = require('passport-jwt').Strategy;
 
-const UserModel = require('../models/userModel');
+const UserModel = require('../models/UserModel');
 
 // handle user registration
 passport.use('signup', new localStrategy({
