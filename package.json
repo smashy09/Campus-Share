@@ -1,7 +1,7 @@
 {
   "name": "mmotest",
   "version": "1.0.0",
-  "description": "",
+  "description": "Thirteen South project code name Campus Journey",
   "main": "app.js",
   "scripts": {
     "start": "node src/app.js",
