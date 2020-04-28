@@ -45,13 +45,13 @@ require('./auth/auth');
 // });
 
 app.get('/game.html', function (req, res) {
-  res.sendFile(__dirname + '../public/game.html');
+  res.sendFile(__dirname + '../public/mmotest/game.html');
 });
 
-app.use(express.static(__dirname + '../public'));
+app.use(express.static(__dirname + '../public/mmotest'));
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '../index.html');
+  res.sendFile(__dirname + '../mmotest/index.html');
 });
 
 // main routes
