@@ -45,7 +45,7 @@ require('./auth/auth');
 // });
 
 app.get('/game.html', function (req, res) {
-  res.sendFile(__dirname + '/public/game.html');
+  res.sendFile(__dirname + '/../public/game.html');
 });
 
 app.use(express.static(__dirname + '/../public'));
