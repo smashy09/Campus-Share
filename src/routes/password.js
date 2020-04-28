@@ -5,7 +5,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 const asyncMiddleware = require('../middleware/asyncMiddleware');
-const UserModel = require('../models/userModel');
+const UserModel = require('../models/UserModel');
 
 const email = process.env.EMAIL;
 const pass = process.env.PASSWORD;
