@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser');
 const routes = require('./routes/main');
 const passwordRoutes = require('./routes/password');
 const secureRoutes = require('./routes/secure');
-const asyncMiddleware = require('../middleware/asyncMiddleware');
+const asyncMiddleware = require('./middleware/asyncMiddleware');
 
 
 
