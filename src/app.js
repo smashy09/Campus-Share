@@ -45,13 +45,13 @@ require('./auth/auth');
 // });
 
 app.get('/game.html', function (req, res) {
-  res.sendFile(__dirname + '/../public/game.html');
+  res.sendFile(__dirname + '../public/game.html');
 });
 
-app.use(express.static(__dirname + '/../public'));
+app.use(express.static(__dirname + '../public'));
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/../index.html');
+  res.sendFile(__dirname + '../index.html');
 });
 
 // main routes
@@ -61,21 +61,6 @@ app.use('/', passport.authenticate('jwt', { session : false }), secureRoutes);
 
 
 
-// app.get('/game.html', passport.authenticate('jwt', {session: false}), (req, res) => {
-//   res.status(200).json(req.user);
-// });
-// //serve static assets
-// app.use(express.static(__dirname + '/public'));
-
-// //login
-// app.get('/', (req, res) => {
-//   res.send(__dirname + '/index.html');
-// });
-
-// // game
-// app.get('/game.html', function (req, res) {
-//   res.sendFile(__dirname + '/public/game.html');
-// });
 
 
 
