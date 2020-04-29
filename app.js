@@ -69,7 +69,7 @@ require('./auth/auth');
 //   response.status(200).json(request.user);
 // });
 
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 
 
