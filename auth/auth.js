@@ -24,15 +24,19 @@ passport.use('login', new localStrategy({
   usernameField: 'email',
   passwordField: 'password'
 }, async (email, password, done) => {
+  console.log("passport login")
   try {
     const user = await UserModel.findOne({ email });
     if (!user) {
+      console.log("user not found")
       return done(null, false, { message: 'User not found' });
     }
     const validate = await user.isValidPassword(password);
     if (!validate) {
+      console.log("wrong password")
       return done(null, false, { message: 'Wrong Password' });
     }
+    console.log('Logged in Successfully')
     return done(null, user, { message: 'Logged in Successfully' });
   } catch (error) {
     return done(error);
@@ -67,4 +71,4 @@ passport.use(new JWTstrategy({
 //   } catch (error) {
 //     done(error);
 //   }
-// }));
+// }));ai
