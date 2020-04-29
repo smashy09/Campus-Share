@@ -41,16 +41,30 @@ passport.use('login', new localStrategy({
 
 // verify token is valid
 passport.use(new JWTstrategy({
-  secretOrKey: 'top_secret',
-  jwtFromRequest: function (req) {
+  secretOrKey: process.env.JWT_SECRET,
+  jwtFromRequest: (request) => {
     let token = null;
-    if (req && req.cookies) token = req.cookies['jwt'];
+    if (request && request.cookies) token = request.cookies.jwt;
     return token;
-  }
+  },
 }, async (token, done) => {
   try {
     return done(null, token.user);
   } catch (error) {
-    done(error);
+    return done(error);
   }
 }));
+// passport.use(new JWTstrategy({
+//   secretOrKey: 'top_secret',
+//   jwtFromRequest: function (req) {
+//     let token = null;
+//     if (req && req.cookies) token = req.cookies['jwt'];
+//     return token;
+//   }
+// }, async (token, done) => {
+//   try {
+//     return done(null, token.user);
+//   } catch (error) {
+//     done(error);
+//   }
+// }));

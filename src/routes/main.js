@@ -5,6 +5,20 @@ const jwt = require('jsonwebtoken');
 const tokenList = {};
 const router = express.Router();
 
+function processLogoutRequest(request, response) {
+  if (request.cookies) {
+    const refreshToken = request.cookies.refreshJwt;
+    if (refreshToken in tokenList) delete tokenList[refreshToken];
+    response.clearCookie('jwt');
+    response.clearCookie('refreshJwt');
+  }
+  if (request.method === 'POST') {
+    response.status(200).json({ message: 'logged out', status: 200 });
+  } else if (request.method === 'GET') {
+    response.sendFile('logout.html', { root: './public' });
+  }
+}
+
 router.get('/status', (req, res, next) => {
   res.status(200).json({ status: 'ok' });
 });
@@ -13,61 +27,64 @@ router.post('/signup', passport.authenticate('signup', { session: false }), asyn
   res.status(200).json({ message: 'signup successful' });
 });
 
-router.post('/login', async (req, res, next) => {
-  passport.authenticate('login', async (err, user, info) => {
-    try {
-      if (err || !user) {
-        const error = new Error('An Error occured');
-        return next(error);
-      }
-      req.login(user, { session: false }, async (error) => {
-        if (error) return next(error);
-        const body = {
-          _id: user._id,
-          email: user.email,
-          name: user.name,
-        };
+router.post('/login', passport.authenticate('login', { session: false }), async (req, res, next) => {
 
-        const token = jwt.sign({ user: body }, 'top_secret', { expiresIn: 300 });
-        const refreshToken = jwt.sign({ user: body }, 'top_secret_refresh', { expiresIn: 86400 });
+  const token = jwt.sign({ user: req.user }, process.env.JWT_SECRET, { expiresIn: 30000 });
+  const refreshToken = jwt.sign(
+    { user: req.user }, process.env.JWT_REFRESH_SECRET, { expiresIn: 86400 },
+  );
 
-        // store tokens in cookie
-        res.cookie('jwt', token);
-        res.cookie('refreshJwt', refreshToken);
+  // store tokens in cookie
+  res.cookie('jwt', token);
+  res.cookie('refreshJwt', refreshToken);
 
-        // store tokens in memory
-        tokenList[refreshToken] = {
-          token,
-          refreshToken,
-          email: user.email,
-          _id: user._id,
-          name: user.name
-        };
+  // store tokens in memory
+  tokenList[refreshToken] = {
+    token,
+    refreshToken,
+    email: req.user.email,
+    _id: req.user._id,
+    name: req.user.name
+  };
 
-        //Send back the token to the user
-        return res.status(200).json({ token, refreshToken });
-      });
-    } catch (error) {
-      return next(error);
-    }
-  })(req, res, next);
+  //Send back the token to the user
+  res.status(200).json({ token, refreshToken });
 });
 
 router.post('/token', (req, res) => {
   const { refreshToken } = req.body;
   if (refreshToken in tokenList) {
-    const body = { email: tokenList[refreshToken].email, _id: tokenList[refreshToken]._id, name: tokenList[refreshToken].name };
-    const token = jwt.sign({ user: body }, 'top_secret', { expiresIn: 300 });
+    const body = {
+      email: tokenList[refreshToken].email,
+      _id: tokenList[refreshToken]._id,
+      name: tokenList[refreshToken].name,
+    };
+    const token = jwt.sign({ user: body }, process.env.JWT_SECRET, { expiresIn: 300 });
 
     // update jwt
     res.cookie('jwt', token);
     tokenList[refreshToken].token = token;
 
-    res.status(200).json({ token });
+    res.status(200).json({ token, status: 200 });
   } else {
-    res.status(401).json({ message: 'Unauthorized' });
+    res.status(401).json({ message: 'unauthorized', status: 401 });
   }
 });
+// router.post('/token', (req, res) => {
+//   const { refreshToken } = req.body;
+//   if (refreshToken in tokenList) {
+//     const body = { email: tokenList[refreshToken].email, _id: tokenList[refreshToken]._id, name: tokenList[refreshToken].name };
+//     const token = jwt.sign({ user: body }, 'top_secret', { expiresIn: 300 });
+
+//     // update jwt
+//     res.cookie('jwt', token);
+//     tokenList[refreshToken].token = token;
+
+//     res.status(200).json({ token });
+//   } else {
+//     res.status(401).json({ message: 'Unauthorized' });
+//   }
+// });
 
 // router.post('/logout', (req, res) => {
 //   if (req.cookies) {
@@ -80,14 +97,18 @@ router.post('/token', (req, res) => {
 //   res.status(200).json({ message: 'logged out' });
 // });
 
-router.post('/logout', (request, response) => {
-  if (request.cookies) {
-    const refreshToken = request.cookies.refreshJwt;
-    if (refreshToken in tokenList) delete tokenList[refreshToken];
-    response.clearCookie('jwt');
-    response.clearCookie('refreshJwt');
-  }
-  response.status(200).json({ message: 'logged out', status: 200 });
-});
+
+router.route('/logout')
+  .get(processLogoutRequest)
+  .post(processLogoutRequest);
+// router.post('/logout', (request, response) => {
+//   if (request.cookies) {
+//     const refreshToken = request.cookies.refreshJwt;
+//     if (refreshToken in tokenList) delete tokenList[refreshToken];
+//     response.clearCookie('jwt');
+//     response.clearCookie('refreshJwt');
+//   }
+//   response.status(200).json({ message: 'logged out', status: 200 });
+// });
 
 module.exports = router;
