@@ -10,7 +10,7 @@ function postData(url = '', data = {}) {
     redirect: 'follow',
     referrer: 'no-referer',
     body: JSON.stringify(data),
-  }).then(response => response.json());
+  })
 }
 
 document.querySelector(".form-signin").addEventListener("submit", function(event) {
@@ -31,7 +31,7 @@ function signIn() {
     })
     .catch((error) => {
       window.alert(error.message);
-      window.location.replace('/index.html');
+      //window.location.replace('/index.html');
     })
 }
 

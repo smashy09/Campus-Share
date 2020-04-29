@@ -30,7 +30,7 @@ router.post('/signup', passport.authenticate('signup', { session: false }), asyn
 router.post('/login', passport.authenticate('login', { session: false }), async (req, res, next) => {
 
   console.log("logging in")
-  
+
   const token = jwt.sign({ user: req.user }, process.env.JWT_SECRET, { expiresIn: 30000 });
   const refreshToken = jwt.sign(
     { user: req.user }, process.env.JWT_REFRESH_SECRET, { expiresIn: 86400 },
@@ -50,7 +50,7 @@ router.post('/login', passport.authenticate('login', { session: false }), async 
   };
 
   //Send back the token to the user
-  res.status(200).json({ token, refreshToken });
+  res.send({ token, refreshToken });
 });
 
 router.post('/token', (req, res) => {
