@@ -1,3 +1,4 @@
+
 class Map {
     constructor(scene, key, tileSetName, bgKey, bgLayerName, blockedLayerName) {
         this.scene = scene; // scene this map belongs to

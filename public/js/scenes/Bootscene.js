@@ -1,6 +1,6 @@
 class BootScene extends Phaser.Scene {
     constructor() {
-        super('Boot');
+        super('BootScene');
     }
 
     preload() {
@@ -40,7 +40,7 @@ class BootScene extends Phaser.Scene {
         this.load.tilemapTiledJSON('map2', '/assets/Map/SE1 (2nd Floor).json');
         this.load.tilemapTiledJSON('map3', '/assets/Map/SEbeta.json');
         
-    }
+    };
     loadSpritesheet () {
         
         this.load.spritesheet('items', '/images/items.png', { frameWidth: 32, frameHeight: 32 });
@@ -49,17 +49,17 @@ class BootScene extends Phaser.Scene {
         this.load.spritesheet('pokemon', '/images/images.png', { frameWidth: 67, frameHeight: 67 });
 
         
-    }
+    };
 
     
     
     loadAudio () {
         this.load.audio('goldSound', ['/audio/Pickup.wav']);
 
-    }
+    };
     create() {
         console.log('start game')
         this.scene.start('Title');
-    }
+    };
     
-}
+};
