@@ -1,109 +1,79 @@
-.form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
-  }
-  .form-signin .checkbox {
-    font-weight: 400;
-  }
-  .form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 16px;
-  }
-  .form-signin .form-control:focus {
-    z-index: 2;
-  }
-  .form-signin input {
-    margin-bottom: 10px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
 /* CONTAINERS Start */
 body{
-  background-color: #A0ACCC;
+    background-color: #A0ACCC;
 }
 #master_container{
-  position: absolute;
-  border: 20px solid #143D75;
-  height: 90vh;
-  width: 90vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  background-color: #B6F9C9;
-  left: 4%;
-  bottom: 2.5%;
+    position: absolute;
+    border: 20px solid #143D75;
+    height: 90vh;
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #B6F9C9;
+    left: 4%;
+    bottom: 2.5%;
 }
 
 #title_container{
 
-  width: 400px;
-  height: 250px;
+    width: 400px;
+    height: 250px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
 #login_container{
-  border: brown 5px dotted;
-  border-radius: 20px;
-  background-color: #FECE00;
-  width: 760px;
-  height: 350px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    border: brown 5px dotted;
+    border-radius: 20px;
+    background-color: #FECE00;
+    width: 760px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 /* CONTAINERS END */
 
 
 #Game_title{
-  font-size: 16pt;
+    font-size: 16pt;
 }
 
 #Game_logo{
-  border: black 1px solid;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    background-image: url(logo_transparent.png);
+    width: 180px;
+    height: 200px;
+    background-position: center;
+    background-size: cover;
 }
 
-#theLogo {
-  width: 100px;
-}
 #Sign_in{
-  font-size: 20pt;
-  height: 80px;
+    font-size: 20pt;
+    height: 80px;
 }
 
 /* USERNAME STYLING START */
 
 #Username_container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
 }
 #Username_text{
-  margin-right: 40px;
-  font-size: 32pt;
+    margin-right: 40px;
+    font-size: 32pt;
 }
 #Enter_user{
-  border: 2px black solid;
-  width: 250px;
-  height: 30px;
-  padding: 5px;
+    border: 2px black solid;
+    width: 250px;
+    height: 30px;
+    padding: 5px;
 }
 
 /* USERNAME STYLING End */
@@ -112,20 +82,20 @@ body{
 /* PASSWORD STYLING START */
 
 #Password_container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
 }
 #Password_text{
-  margin-right: 49px;
-  font-size: 32pt;
+    margin-right: 49px;
+    font-size: 32pt;
 }
 #Enter_pass{
-  border: 2px black solid;
-  width: 250px;
-  height: 30px;
-  padding: 5px;
+    border: 2px black solid;
+    width: 250px;
+    height: 30px;
+    padding: 5px;
 }
 
 
@@ -134,26 +104,27 @@ body{
 
 /* BUTTON STYLING START */
 #Play_container img{
- width: 300px;
+   width: 300px;
 }
 
 #Play_container :hover{
-  cursor: pointer;
+    cursor: pointer;
 }
 /* BUTTON STYLING END */
 
 #Sign_up{
-  font-size: 16pt;
-  margin-top: 20px;
+    font-size: 16pt;
+    margin-top: 20px;
 }
 
 
 /* FONT */
 @font-face{
-  font-family: Arial, Helvetica, sans-serif;
-  src: url(Pixeled.ttf) format(truetype);
+    font-family: Arial, Helvetica, sans-serif;
+    src: url(Pixeled.ttf) format(truetype);
 }
 
 body{
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
+
