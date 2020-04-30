@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"SE14(Basement)test.json"
-        }
-    },
  "height":34,
  "infinite":false,
  "layers":[
@@ -54,30 +46,8 @@
  "tileheight":32,
  "tilesets":[
         {
-         "columns":10,
          "firstgid":1,
-         "image":"..\/..\/..\/Map\/tileset.png",
-         "imageheight":4419,
-         "imagewidth":328,
-         "margin":0,
-         "name":"main tileset",
-         "spacing":0,
-         "tilecount":1380,
-         "tileheight":32,
-         "tilewidth":32
-        }, 
-        {
-         "columns":10,
-         "firstgid":1381,
-         "image":"tileset.png",
-         "imageheight":4419,
-         "imagewidth":328,
-         "margin":0,
-         "name":"tileset",
-         "spacing":0,
-         "tilecount":1380,
-         "tileheight":32,
-         "tilewidth":32
+         "source":"..\/..\/..\/Map\/main tileset.tsx"
         }],
  "tilewidth":32,
  "type":"map",

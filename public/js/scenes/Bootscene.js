@@ -28,17 +28,16 @@ class BootScene extends Phaser.Scene {
         
         //map
         this.load.image('background', '/assets/Map/BCITA-tileset.png');
+        this.load.image('tileset1', '/assets/Map/tileset.png');
 
         // this.load.image('background2', '/assets/Map/.png');
 
-        // this.load.image('background3', '/assets/Map/.png');
+      
     };
     
     loadTileMap() {
-        this.load.tilemapTiledJSON('map', '/assets/Map/exterior.json');
-
-        this.load.tilemapTiledJSON('map2', '/assets/Map/SE1 (2nd Floor).json');
-        this.load.tilemapTiledJSON('map3', '/assets/Map/SEbeta.json');
+        this.load.tilemapTiledJSON('map14', '/assets/Map/SE14(Basement)test.json');
+        this.load.tilemapTiledJSON('map', '/assets/Map/SE14(Basement).json');
         
     };
     loadSpritesheet () {

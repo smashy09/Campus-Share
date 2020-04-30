@@ -18,7 +18,7 @@ class GameScene extends Phaser.Scene {
         //make the map
         this.createMap();
         
-        console.log(this.cache.tilemap.get('map3').data);
+        console.log(this.cache.tilemap.get('map14').data);
         this.createAudio();
         
         this.createChests();
@@ -44,18 +44,22 @@ class GameScene extends Phaser.Scene {
 
     addCollisions() {
         //check collision wall to player
-        this.physics.add.collider(this.player, this.map.wallLayer);
+        // this.physics.add.collider(this.player, this.map.wallLayer);
     
         this.physics.add.overlap(this.player, this.chests, this.collectChest, null, this);
         
         this.physics.add.overlap(this.player, this.pokemon, function() {console.log('overlap'); });
         this.physics.add.overlap(this.player, this.ball, function() {console.log('overlap'); });
-
-
+        this.physics.add.collider(this.player,  this.wallLayer);
+        this.physics.add.overlap(this.player,   this.stairs,     function() {
+            this.player.onStairs = true;
+        }, null, this);
+        
     }
     createPlayer() {
         this.player = new Player(this,500, 100, 'player', 1);
         this.player.setScale(2)
+    
         
     }
 
@@ -103,22 +107,31 @@ class GameScene extends Phaser.Scene {
         //create tile map
     //    this.map = new Map(this, 'map3', 'BCITA-tileset', 'background','Floor', 'wall');
         //create tile map
-        this.map = this.make.tilemap({key: 'map3'});
+        this.map = this.make.tilemap({key: 'map14'});
        // add tileset image . use the tileset name, key of the image, etc
 
-        this.tiles = this.map.addTilesetImage("BCITA-tileset", 'background', 32, 32, 0, 0);
+        this.tiles = this.map.addTilesetImage("main tileset", 'tileset1', 32, 32, 0, 0);
         
         //create background layer
         this.backgroundLayer = this.map.createStaticLayer("Floor", this.tiles, 0,0);
-        this.backgroundLayer.setScale(2);
+        // this.backgroundLayer.setScale(2);
 
-        this.wallLayer = this.map.createStaticLayer('wall', this.tiles, 0, 0);
-        this.wallLayer.setScale(2);
-        this.wallLayer.setCollisionByExclusion([-1]);
+        this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+        this.wallLayer = this.map.createStaticLayer('Walls, Stairs, Tables', this.tiles, 0, 0);
+        // this.wallLayer.setScale(2);
+        this.wallLayer.setCollisionByProperty({collides: true});
+        this.stairs = this.map.createStaticLayer('Items/Objects', this.tiles, 0, 0);
+        // this.wallLayer.setCollisionGroup({collides: true});
+        
+    
 
+       
+        
+        // this.physics.add.collider(this.player, this.wallLayer);
+       
 
-        this.physics.world.bounds.width = this.map.widthInPixels * 2;
-        this.physics.world.bounds.height = this.map.heightInPixels * 2;
+        // this.physics.world.bounds.width = this.map.widthInPixels * 2;
+        // this.physics.world.bounds.height = this.map.heightInPixels * 2;
 
         //limit camera view
         this.cameras.main.setBounds(0,0, this.map.widthInPixels * 2, this.map.heightInPixels * 2)
