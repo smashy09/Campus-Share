@@ -6,11 +6,11 @@
     <title>signup</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <!-- <script src="/socket.io/socket.io.js"></script> -->
   <link href="css/signup.css" rel="stylesheet">
-  <script src="/public/js/utils.js"></script>
+  <!-- <script src="js/utils.js"></script> -->
 </head>
     
   <body class="text-center"> 
@@ -19,18 +19,40 @@
       <h1>Sign Up</h1>
       <label class="sr-only" for="email">Email</label>
       <input type="email" class="form-control" id="email" placeholder="Email address" required autofocus>
-      <label class="sr-only" for="name">Name</label>
-      <input type="Name" class="form-control" id="password" placeholder="Name" required>
       <label class="sr-only" for="password">password</label>
       <input type="password" class="form-control" id="password" placeholder="Password" required>
-      <a class="btn btn-lg btn-primary btn-block" onClick="signUp()">Sign in</a>
+      <label class="sr-only" for="name">Name</label>
+      <input type="Name" class="form-control" id="password" placeholder="Name" required>
+      
+      <a class="btn btn-lg btn-primary btn-block" onClick="signUp()">Sign Up</a>
       <a href="index.html">Already have an account? Log in here.</a>
      
     </form>
-        
+    <script>
+      function signUp() {
+        var data = {
+          email: document.forms[0].elements[0].value,
+          password: document.forms[0].elements[1].value,
+          name: document.forms[0].elements[2].value
+        };
+        $.ajax({
+          type: 'POST',
+          url: '/signup',
+          data,
+          success: function (data) {
+            window.alert('user created successfully');
+            window.location.replace('/index.html');
+          },
+          error: function (xhr) {
+            window.alert(JSON.stringify(xhr));
+            window.location.replace('/signup.html');
+          }
+        });
+      }
+    </script>
     
-    <script src="/js/main.js" charset="utf-8"></script>
-    
+    <script src="js/main.js" charset="utf-8"></script>
+    <!-- <script src="js/utils.js" charset="utf-8"></script> -->
     
 </body>
 </html>

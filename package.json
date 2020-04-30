@@ -1,16 +1,20 @@
 {
   "name": "mmotest",
   "version": "1.0.0",
-  "description": "",
+  "description": "Thirteen South project code name Campus Journey",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
     "dev": "nodemon app.js"
+  },
+  "engines": {
+    "node": "10.16"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^4.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
