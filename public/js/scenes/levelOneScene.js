@@ -1,6 +1,6 @@
-class GameScene extends Phaser.Scene {
+class levelOneScene extends Phaser.Scene {
     constructor() {
-        super("Game");
+        super("level1");
 
     }
 
@@ -12,9 +12,11 @@ class GameScene extends Phaser.Scene {
         this.scene.launch('Ui');
         this.score = 0
 
-        console.log(data)
+        
         this._LEVEL = data.level;
         this._LEVELS = data.levels;
+        this._NEWGAME = data.newGame;
+
 
     }
     
@@ -23,7 +25,7 @@ class GameScene extends Phaser.Scene {
         //make the map
         this.createMap();
         
-        console.log(this.cache.tilemap.get('map14').data);
+        
         this.createAudio();
         
         this.createChests();
@@ -39,11 +41,37 @@ class GameScene extends Phaser.Scene {
         this.createAnimations();
         this.createInput();
         // this.createSound();
-        // this.createPortal();
+        this.createPortal();
+        this.loadNextLevel();
     }
     update () {
             this.player.update(this.cursors);
 
+    }
+    createPlayer() {
+        this.map.findObject('Player', (obj) => {
+            
+            if (this._NEWGAME && this._LEVEL === 1) {
+                if (obj.type === 'StartingPosition') {
+                    this.player = new Player(this, obj.x, obj.y);
+                }
+            } else {
+                this.player = new Player(this, obj.x, obj.y);
+            }
+            
+            
+        })
+        
+    };
+
+    createPortal() {
+         this.map.findObject('Portal', (obj) => {
+        if (this._LEVEL === 1) {
+        this.portal = new Portal(this, obj.x, obj.y + 68);
+        } else if (this._LEVEL === 2) {
+            this.portal = new Portal(this, obj.x, obj.y)
+        }
+    })
     }
     createAudio() {
         this.goldPickAudio = this.sound.add('goldSound', {loop: false, volume: 0.2});
@@ -58,24 +86,14 @@ class GameScene extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.pokemon, function() {console.log('overlap'); });
         this.physics.add.overlap(this.player, this.ball, function() {console.log('overlap'); });
         this.physics.add.collider(this.player,  this.wallLayer);
-        this.physics.add.overlap(this.player,   this.stairs,     function() {
-            this.player.onStairs = true;
-        }, null, this);
+        this.physics.add.overlap(this.player, this.portal, this.loadNextLevel.bind(this))
+       
+        // this.physics.add.overlap(this.player,   this.stairs,     function() {
+        //     this.player.onStairs = true;
+        // }, null, this);
         
     }
-    createPlayer() {
-        // this.map.findObject('player', (obj) => {
-
-        // })
-        this.player = new Player(this,500, 100);
-        this.player.setScale(2)
     
-        
-    }
-
-    // createPortal() {
-    //     this.portal = this.add.sprite(this, 1000,25, 'portal', 407)
-    // }
     createAnimations() {
 
         this.player2 = this.add.sprite('playerLeft')
@@ -124,10 +142,10 @@ class GameScene extends Phaser.Scene {
         //create tile map
     //    this.map = new Map(this, 'map3', 'BCITA-tileset', 'background','Floor', 'wall');
         //create tile map
-        this.map = this.make.tilemap({key: 'map'});
+        this.map = this.make.tilemap({key: this._LEVELS[this._LEVEL]});
        // add tileset image . use the tileset name, key of the image, etc
 
-        this.tiles = this.map.addTilesetImage("main tileset", 'tileset1', 32, 32, 0, 0);
+        this.tiles = this.map.addTilesetImage("RPGpack_sheet", 'tileset2', 64, 64, 0, 0);
         
         //create background layer
         this.backgroundLayer = this.map.createStaticLayer("Floor", this.tiles, 0,0);
@@ -141,15 +159,8 @@ class GameScene extends Phaser.Scene {
         this.stairs = this.map.createStaticLayer('Items/Objects', this.tiles, 0, 0);
         
         // this.wallLayer.setScale(2);
-    
-
-       
-        
-        // this.physics.add.collider(this.player, this.wallLayer);
-       
-
-        // this.physics.world.bounds.width = this.map.widthInPixels * 2;
-        // this.physics.world.bounds.height = this.map.heightInPixels * 2;
+    // TODO test later
+    //this.wallLayer.setCollisionByExclusion([-1]);
 
         //limit camera view
         this.cameras.main.setBounds(0,0, this.map.widthInPixels * 2, this.map.heightInPixels * 2)
@@ -223,10 +234,11 @@ class GameScene extends Phaser.Scene {
         this.bgMusic.play();
     }
 
-    //loadNextLevel () {}
+    loadNextLevel () {
+        this.scene.restart( { level: 2, levels: this._LEVELS, newGame: false})
+    }
 
-    //loadNextMap() {
-    //this.scene.start
+    //loadnewmap(){
+    //this.scene.start('placeholder')
     //}
 };
-
