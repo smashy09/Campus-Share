@@ -28,17 +28,17 @@ class BootScene extends Phaser.Scene {
         
         //map
         this.load.image('background', '/assets/Map/BCITA-tileset.png');
+        this.load.image('tileset1', '/assets/Map/tileset.png');
 
         // this.load.image('background2', '/assets/Map/.png');
 
-        // this.load.image('background3', '/assets/Map/.png');
+      
     };
     
     loadTileMap() {
-        this.load.tilemapTiledJSON('map', '/assets/Map/exterior.json');
+        this.load.tilemapTiledJSON('map14', '/assets/Map/SE14(Basement)test.json');
+        this.load.tilemapTiledJSON('map', '/assets/Map/SE14(wcollide).json');
 
-        this.load.tilemapTiledJSON('map2', '/assets/Map/SE1 (2nd Floor).json');
-        this.load.tilemapTiledJSON('map3', '/assets/Map/SEbeta.json');
         
     };
     loadSpritesheet () {
@@ -46,7 +46,7 @@ class BootScene extends Phaser.Scene {
         this.load.spritesheet('items', '/images/items.png', { frameWidth: 32, frameHeight: 32 });
         // this.load.spritesheet('characters', '/images/characters.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('player', '/images/Charactors/C_Enginnering/enginnering1_front.png', { frameWidth: 32, frameHeight: 32 });
-        this.load.spritesheet('pokemon', '/images/images.png', { frameWidth: 67, frameHeight: 67 });
+        this.load.spritesheet('student', '/images/student_front.png', { frameWidth: 32, frameHeight: 32 });
 
         
     };
