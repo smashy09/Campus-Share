@@ -4,13 +4,18 @@ class GameScene extends Phaser.Scene {
 
     }
 
-    init() {
+    init(data) {
 
         //launch instead of start. start will tell phaser to shutdown the current scene. where launch will have it working in parallel
 
         // this allows a static tracking
         this.scene.launch('Ui');
         this.score = 0
+
+        console.log(data)
+        this._LEVEL = data.level;
+        this._LEVELS = data.levels;
+
     }
     
     create() {
@@ -23,7 +28,7 @@ class GameScene extends Phaser.Scene {
         
         this.createChests();
         // this.chest = new Chest(this, 200, 290, 'items', 0);
-        this.createWalls ();
+        // this.createWalls ();
         this.createObject();
         this.createPlayer();
          // physics
@@ -33,6 +38,7 @@ class GameScene extends Phaser.Scene {
     
         this.createAnimations();
         this.createInput();
+        // this.createPortal();
     }
     update () {
             this.player.update(this.cursors);
@@ -63,12 +69,19 @@ class GameScene extends Phaser.Scene {
         
     }
 
+    // createPortal() {
+    //     this.portal = this.add.sprite(this, 1000,25, 'portal', 407)
+    // }
     createAnimations() {
+
+        this.player2 = this.add.sprite('playerLeft')
+        this.player3 = this.add.sprite('playerRight')
+        this.player4 = this.add.sprite('playerUp')
         //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
         this.anims.create({
           key: 'left',
-          frames: this.anims.generateFrameNumbers('player', {
-            frames: [1,7,8,9]
+          frames: this.anims.generateFrameNumbers('playerLeft', {
+            frames: [1,2,3]
           }),
           frameRate: 10,
           repeat: -1
@@ -77,8 +90,8 @@ class GameScene extends Phaser.Scene {
         // animation with key 'right'
         this.anims.create({
           key: 'right',
-          frames: this.anims.generateFrameNumbers('player', {
-            frames: [1, 10, 11, 12]
+          frames: this.anims.generateFrameNumbers('playerRight', {
+            frames: [1,3]
           }),
           frameRate: 10,
           repeat: -1
@@ -86,8 +99,8 @@ class GameScene extends Phaser.Scene {
     
         this.anims.create({
           key: 'up',
-          frames: this.anims.generateFrameNumbers('player', {
-            frames: [4, 5, 6]
+          frames: this.anims.generateFrameNumbers('playerUp', {
+            frames: [1,2,3]
           }),
           frameRate: 10,
           repeat: -1
@@ -98,7 +111,7 @@ class GameScene extends Phaser.Scene {
           frames: this.anims.generateFrameNumbers('player', {
             frames: [1, 2, 3]
           }),
-          frameRate: 10,
+          frameRate: 1,
           repeat: -1
         });
       }
@@ -201,5 +214,11 @@ class GameScene extends Phaser.Scene {
         //spawn chest
         this.time.delayedCall(2000, this.spawnChest, [], this);
     }
-}
+
+    //loadNextLevel () {}
+
+    //loadNextMap() {
+    //this.scene.start
+    //}
+};
 

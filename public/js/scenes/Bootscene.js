@@ -46,8 +46,12 @@ class BootScene extends Phaser.Scene {
         this.load.spritesheet('items', '/images/items.png', { frameWidth: 32, frameHeight: 32 });
         // this.load.spritesheet('characters', '/images/characters.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('player', '/images/Charactors/C_Enginnering/enginnering1_front.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('playerLeft', '/images/Charactors/C_Enginnering/C_Enginnering1_left.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('playerRight', '/images/Charactors/C_Enginnering/C_Enginnering1_right.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('playerUp', '/images/Charactors/C_Enginnering/enginnering1_back.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('student', '/images/student_front.png', { frameWidth: 32, frameHeight: 32 });
-
+        this.load.spritesheet('portal', '/assets/Map/tileset.png', { frameWidth: 32, frameHeight: 32 });
+        
         
     };
 
@@ -59,7 +63,7 @@ class BootScene extends Phaser.Scene {
     };
     create() {
         console.log('start game')
-        this.scene.start('Title');
+        this.scene.start('Game', { level: 1, newGame: true, levels: []});
     };
     
 };
