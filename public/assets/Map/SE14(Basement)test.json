@@ -3,7 +3,8 @@
     {
      "export":
         {
-         "target":"."
+         "format":"json",
+         "target":"SE14(Basement).json"
         }
     },
  "height":34,
@@ -27,6 +28,12 @@
          "id":2,
          "name":"Walls, Stairs, Tables",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collides",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":60,

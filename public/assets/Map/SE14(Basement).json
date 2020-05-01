@@ -1,4 +1,11 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "target":"."
+        }
+    },
  "height":34,
  "infinite":false,
  "layers":[
@@ -20,6 +27,12 @@
          "id":2,
          "name":"Walls, Stairs, Tables",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collides",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":60,
@@ -46,8 +59,17 @@
  "tileheight":32,
  "tilesets":[
         {
+         "columns":10,
          "firstgid":1,
-         "source":"..\/..\/..\/Map\/main tileset.tsx"
+         "image":"..\/..\/..\/Map\/tileset.png",
+         "imageheight":4419,
+         "imagewidth":328,
+         "margin":0,
+         "name":"main tileset",
+         "spacing":0,
+         "tilecount":1380,
+         "tileheight":32,
+         "tilewidth":32
         }],
  "tilewidth":32,
  "type":"map",

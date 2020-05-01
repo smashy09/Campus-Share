@@ -107,7 +107,7 @@ class GameScene extends Phaser.Scene {
         //create tile map
     //    this.map = new Map(this, 'map3', 'BCITA-tileset', 'background','Floor', 'wall');
         //create tile map
-        this.map = this.make.tilemap({key: 'map14'});
+        this.map = this.make.tilemap({key: 'map'});
        // add tileset image . use the tileset name, key of the image, etc
 
         this.tiles = this.map.addTilesetImage("main tileset", 'tileset1', 32, 32, 0, 0);
@@ -118,11 +118,12 @@ class GameScene extends Phaser.Scene {
 
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         this.wallLayer = this.map.createStaticLayer('Walls, Stairs, Tables', this.tiles, 0, 0);
-        // this.wallLayer.setScale(2);
-        this.wallLayer.setCollisionByProperty({collides: true});
-        this.stairs = this.map.createStaticLayer('Items/Objects', this.tiles, 0, 0);
-        // this.wallLayer.setCollisionGroup({collides: true});
         
+        this.wallLayer.setCollisionByProperty({collides: true});
+        this.wallLayer.setCollision([2], true);
+        this.stairs = this.map.createStaticLayer('Items/Objects', this.tiles, 0, 0);
+        
+        // this.wallLayer.setScale(2);
     
 
        
