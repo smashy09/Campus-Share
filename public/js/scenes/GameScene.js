@@ -38,6 +38,7 @@ class GameScene extends Phaser.Scene {
     
         this.createAnimations();
         this.createInput();
+        this.createSound();
         // this.createPortal();
     }
     update () {
@@ -213,6 +214,10 @@ class GameScene extends Phaser.Scene {
         chest.makeInactive();
         //spawn chest
         this.time.delayedCall(2000, this.spawnChest, [], this);
+    }
+    createSound() {
+        this.bgMusic = this.sound.add('bgMusic');
+        this.bgMusic.play();
     }
 
     //loadNextLevel () {}

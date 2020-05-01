@@ -59,6 +59,7 @@ class BootScene extends Phaser.Scene {
     
     loadAudio () {
         this.load.audio('goldSound', ['/audio/Pickup.wav']);
+        this.load.audio('bgMusic', '/audio/omou matsu.mp3');
 
     };
     create() {
