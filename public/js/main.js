@@ -7,6 +7,7 @@ var config = {
     // backgroundColor: "#5f2a55",
     scene: [
         BootScene,
+        levelOneScene,
         TitleScene,
         GameScene,
         UiScene,

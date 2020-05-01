@@ -5,9 +5,9 @@ const Direction = {
     UP: 'UP',
     DOWN: 'DOWN',
   };
-class Player extends Phaser.Physics.Arcade.Image {
-    constructor(scene, x, y, key, frame) {
-        super(scene, x, y, key, frame);
+class Player extends Phaser.Physics.Arcade.Sprite {
+    constructor(scene, x, y) {
+        super(scene, x, y, 'player', 1);
         this.scene = scene;
         this.velocity = 160; // velocity(speed) to move players
 
@@ -17,7 +17,7 @@ class Player extends Phaser.Physics.Arcade.Image {
         this.setImmovable(false);
 
         //scale our player
-        this.setScale(0.5);
+        this.setScale(2);
         this.setCollideWorldBounds(true);
 
         //add player to existing scene
