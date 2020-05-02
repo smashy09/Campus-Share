@@ -15,15 +15,51 @@ class GameScene extends Phaser.Scene {
         console.log(data)
         this._LEVEL = data.level;
         this._LEVELS = data.levels;
+        this._NEWGAME = data.newGame;
+
 
     }
     
     create() {
         
+        this.anims.create({
+            key: 'LEFT',
+            frames: this.anims.generateFrameNumbers('engineer', {
+              start:3 ,end: 5
+            }),
+            frameRate: 10,
+            repeat: 1
+          });
+          this.anims.create({
+            key: 'RIGHT',
+            frames: this.anims.generateFrameNumbers('engineer', {
+              start:6 ,end: 8
+            }),
+            frameRate: 10,
+            repeat: 1
+          });
+      
+          this.anims.create({
+            key: 'UP',
+            frames: this.anims.generateFrameNumbers('engineer', {
+              start:9 ,end: 11
+            }),
+            frameRate: 10,
+            repeat: 1
+          });
+      
+          this.anims.create({
+            key: 'DOWN',
+            frames: this.anims.generateFrameNumbers('engineer', {
+              start:0 ,end: 2
+            }),
+            frameRate: 10,
+            repeat: 1
+          });
         //make the map
         this.createMap();
         
-        console.log(this.cache.tilemap.get('map14').data);
+        
         this.createAudio();
         
         this.createChests();
@@ -36,7 +72,7 @@ class GameScene extends Phaser.Scene {
         //  this.wall.setImmovable(); this will prevent the object from moving at all.
         this.addCollisions() ; 
     
-        this.createAnimations();
+        // this.createAnimations();
         this.createInput();
         // this.createSound();
         // this.createPortal();
@@ -69,56 +105,14 @@ class GameScene extends Phaser.Scene {
         // })
         this.player = new Player(this,500, 100);
         this.player.setScale(2)
-    
-        
+        const boy = this.add.sprite(200,200, 'engineer', 5)
+        boy.anims.play('LEFT', true);
     }
 
     // createPortal() {
     //     this.portal = this.add.sprite(this, 1000,25, 'portal', 407)
     // }
-    createAnimations() {
-
-        this.player2 = this.add.sprite('playerLeft')
-        this.player3 = this.add.sprite('playerRight')
-        this.player4 = this.add.sprite('playerUp')
-        //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
-        this.anims.create({
-          key: 'left',
-          frames: this.anims.generateFrameNumbers('playerLeft', {
-            frames: [1,2,3]
-          }),
-          frameRate: 10,
-          repeat: -1
-        });
     
-        // animation with key 'right'
-        this.anims.create({
-          key: 'right',
-          frames: this.anims.generateFrameNumbers('playerRight', {
-            frames: [1,3]
-          }),
-          frameRate: 10,
-          repeat: -1
-        });
-    
-        this.anims.create({
-          key: 'up',
-          frames: this.anims.generateFrameNumbers('playerUp', {
-            frames: [1,2,3]
-          }),
-          frameRate: 10,
-          repeat: -1
-        });
-    
-        this.anims.create({
-          key: 'down',
-          frames: this.anims.generateFrameNumbers('player', {
-            frames: [1, 2, 3]
-          }),
-          frameRate: 1,
-          repeat: -1
-        });
-      }
     createMap() {
         
         //create tile map
@@ -142,11 +136,7 @@ class GameScene extends Phaser.Scene {
         
         // this.wallLayer.setScale(2);
     
-
-       
-        
         // this.physics.add.collider(this.player, this.wallLayer);
-       
 
         // this.physics.world.bounds.width = this.map.widthInPixels * 2;
         // this.physics.world.bounds.height = this.map.heightInPixels * 2;
@@ -196,7 +186,7 @@ class GameScene extends Phaser.Scene {
 
     createObject() {
         this.ball = this.physics.add.image(400, 300, 'basketball')
-        this.ball.setScale(0.5);
+        this.ball.setScale(1);
     }
 
     createInput() {
@@ -222,7 +212,7 @@ class GameScene extends Phaser.Scene {
         this.bgMusic = this.sound.add('bgMusic', {volume: 0.5});
         this.bgMusic.play();
     }
-
+    
     //loadNextLevel () {}
 
     //loadNextMap() {

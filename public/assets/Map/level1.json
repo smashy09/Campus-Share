@@ -3,7 +3,8 @@
     {
      "export":
         {
-         "target":"..\/..\/..\/..\/..\/..\/..\/Downloads\/Source-Files-Develop-an-Action-RPG-with-Phaser-3-updated-05042020 2\/Source-Files-Develop-an-Action-RPG-with-Phaser-3-4\/01_Creating a Level in Tiled\/project_end"
+         "format":"json",
+         "target":"level1.json"
         }
     },
  "height":30,
@@ -59,8 +60,24 @@
                  "type":"StartingPositionPortal",
                  "visible":true,
                  "width":0,
-                 "x":1278,
-                 "y":128
+                 "x":1191.43722434578,
+                 "y":346.288738606292
+                }, 
+                {
+                 "height":18.84375,
+                 "id":22,
+                 "name":"",
+                 "rotation":0,
+                 "text":
+                    {
+                     "text":"Hello World",
+                     "wrap":true
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":89.546875,
+                 "x":2077.89636549912,
+                 "y":171.230874191414
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -306,7 +323,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":22,
+ "nextobjectid":23,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.3.4",
@@ -315,7 +332,7 @@
         {
          "columns":20,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/Source-Files-Develop-an-Action-RPG-with-Phaser-3-updated-05042020 2\/Source-Files-Develop-an-Action-RPG-with-Phaser-3-4\/01_Creating a Level in Tiled\/project_end\/RPGpack_sheet.png",
+         "image":"RPGpack_sheet.png",
          "imageheight":832,
          "imagewidth":1280,
          "margin":0,

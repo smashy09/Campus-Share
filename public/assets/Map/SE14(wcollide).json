@@ -48,14 +48,30 @@
                 {
                  "height":0,
                  "id":1,
-                 "name":"",
+                 "name":"StartingPosition",
                  "point":true,
                  "rotation":0,
-                 "type":"",
+                 "type":"StartingPosition",
                  "visible":true,
                  "width":0,
                  "x":1255.59407500788,
                  "y":565.773715726442
+                }, 
+                {
+                 "height":18.84375,
+                 "id":4,
+                 "name":"",
+                 "rotation":0,
+                 "text":
+                    {
+                     "text":"StartingPosition",
+                     "wrap":true
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":89.546875,
+                 "x":1211.2265625,
+                 "y":576.578125
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -71,10 +87,10 @@
                 {
                  "height":0,
                  "id":2,
-                 "name":"",
+                 "name":"Portal",
                  "point":true,
                  "rotation":0,
-                 "type":"",
+                 "type":"Portal",
                  "visible":true,
                  "width":0,
                  "x":1772.95934446896,
@@ -115,7 +131,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":4,
+ "nextobjectid":5,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.3.4",
