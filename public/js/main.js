@@ -9,6 +9,7 @@ var config = {
         BootScene,
         levelOneScene,
         TitleScene,
+        SelectScene,
         GameScene,
         UiScene,
     ],
