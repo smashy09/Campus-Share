@@ -92,7 +92,7 @@
 
 /* LEFT SIDE STYLINE START */
 
-.faded_journey{
+.banner_journey{
     font-family: 'Prompt', sans-serif;
     border: 1px solid black;
     position: fixed;
@@ -108,6 +108,11 @@
     transform-origin: left top 0;
 
 }
+
+/* .laptop{
+    position: relative;
+    top: 0;
+} */
 
 
 
