@@ -3,37 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BCITA</title>
+    <title>BCITA Game Login</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
   <!-- <script src="/socket.io/socket.io.js"></script> -->
   <link href="css/SignIn.css" rel="stylesheet">
   <script src="js/utils.js"></script>
 </head>
-<body class="text-center"> 
-  <div id="outerborder">
+<body > 
+  
+  <div class="row no-gutters">
 
-    <div id="master_container">
 
-      <div id="title_container">
-        <div id="Game_title">
-          <h1>Campus Journey</h1>
-      </div>
+    <div class="col no-gutters">
 
-      <div id="Game_logo">
-        
-        <p><img id="theLogo" src="./assets/Icon(objects)/1x/logo_transparent.png"></p>
+        <div class="leftside d-flex justify-content-center align-items-center">
+            
+            <div class="banner_journey">
+            <p>C A M P U S J O U R N E Y</p>
+            </div>
+
+            <div class="laptop">
+            <img src="css/imgs/laptop.png" >
+        </div>
+        </div>
+
     </div>
-  </div>
+
+      <div class="col no-gutters">
+
+        <div class="rightside d-flex justify-content-center align-items-center">
+
+           <img src="css/imgs/logo_transparent.png" class="logo">
+
+      
+
+           <div class="login-box">
 <form class="form-signin">
   <h1>Please sign in</h1>
-  <label class="sr-only" for="email">Email</label>
-  <input type="email" class="form-control" id="email" placeholder="Email address" required autofocus>
-  <label class="sr-only" for="password">password</label>
-  <input type="password" class="form-control" id="password" placeholder="Password" required>
+  <div class="textbox">
+  <span class="material-icons">
+    account_circle
+    </span>
+  <input type="email"  class="form-control" id="email" placeholder="Email address" required autofocus>
+</div>
+  <div class="textbox">
+    <span class="material-icons">
+      lock
+      </span>
+  <input type="password"  class="form-control" id="password" placeholder="Password" required></div>
   <a  onClick="signIn()"><img src="/images/button.png" alt=""></a>
   <a class="btn btn-lg btn-primary btn-block" href="signup.html">Don't have an account? Sign up here.</a>
   
@@ -42,8 +64,12 @@
   <a  href="reset-password.html"> Want to reset password? Click here.</a>
   <br>
 </form>
-    
-    </div>
+</div>
+
+</div>
+
+</div>
+</div>
     
     <script src="/js/main.js" charset="utf-8"></script>
     <!-- <script src="/js/utils.js" charset="utf-8"></script> -->

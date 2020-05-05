@@ -9,20 +9,62 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <!-- <script src="/socket.io/socket.io.js"></script> -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/signup.css" rel="stylesheet">
   <!-- <script src="js/utils.js"></script> -->
 </head>
     
-  <body class="text-center"> 
+  <body > 
+    <div class="row no-gutters">
+
+
+      <div class="col no-gutters">
+
+          <div class="leftside d-flex justify-content-center align-items-center">
+              
+              <div class="banner_journey">
+              <p>C A M P U S J O U R N E Y</p>
+              </div>
+
+              <div class="feathers">
+              <img src="css/imgs/crow signup.png" >
+          </div>
+          </div>
+
+      </div>
+
+
+      <div class="col no-gutters">
+
+          <div class="rightside d-flex justify-content-center align-items-center">
+
+             <img src="css/imgs/logo_transparent.png" class="logo">
+
+        
+
+             <div class="login-box">
     
     <form class="form-signin">
       <h1>Sign Up</h1>
-      <label class="sr-only" for="email">Email</label>
+      <div class="textbox">
+        <span class="material-icons">
+            email
+            </span>
       <input type="email" class="form-control" id="email" placeholder="Email address" required autofocus>
-      <label class="sr-only" for="password">password</label>
+      </div>
+      
+      <div class="textbox">
+        <span class="material-icons">
+            lock
+            </span>
       <input type="password" class="form-control" id="password" placeholder="Password" required>
-      <label class="sr-only" for="name">Name</label>
+      </div>
+      <div class="textbox">
+        <span class="material-icons">
+            account_circle
+            </span>
       <input type="Name" class="form-control" id="password" placeholder="Name" required>
+      </div>
       
       <a class="btn btn-lg btn-primary btn-block" onClick="signUp()">Sign Up</a>
       <a href="index.html">Already have an account? Log in here.</a>
