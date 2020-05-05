@@ -24,13 +24,14 @@
 
 .logo{
     position: relative;
-    top: -5%;
+
     width: 30%;
 }
 
 .login-box{
     width: 400px;
     color: black;
+    margin-top: 10px;
 }
 
 .login-box h1{
@@ -76,11 +77,42 @@
     padding: 5px;
 } */
 
+.signup{
+    font-size: 16pt;
+    text-decoration: underline;
+    margin-top: 10px;
+}
+
 .play_btn{
-    width: 100%;
+    width: 30%;
     cursor: pointer;
     margin-top: 20px;
 }
+
+
+/* LEFT SIDE STYLINE START */
+
+.banner_journey{
+    font-family: 'Prompt', sans-serif;
+    border: 1px solid black;
+    position: fixed;
+    left: 8%;
+    right: 0;
+    top: 0%;
+    padding-left: 10px;
+    font-size: 40pt;
+    font-weight: bold;
+    color: #FFCE80;
+    background-color: black;
+    transform: rotate(90deg);
+    transform-origin: left top 0;
+
+}
+
+/* .laptop{
+    position: relative;
+    top: 0;
+} */
 
 
 
