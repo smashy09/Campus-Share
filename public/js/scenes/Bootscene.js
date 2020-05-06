@@ -65,6 +65,12 @@ class BootScene extends Phaser.Scene {
         this.load.spritesheet('portal', '/assets/Map/tileset.png', { frameWidth: 32, frameHeight: 32 });
         
         this.load.spritesheet('engineer', '/assets/New design assets/C_Enginnering.png', {frameHeight: 32, frameWidth: 32});
+
+        this.load.spritesheet('business', '/assets/New design assets/C_business.png', {frameHeight: 32, frameWidth: 32});
+
+        this.load.spritesheet('computer', '/assets/New design assets/C_Computer.png', {frameHeight: 32, frameWidth: 32});
+
+        this.load.spritesheet('health', '/assets/New design assets/C_health and science.png', {frameHeight: 32, frameWidth: 32});
         
     };
 
@@ -77,7 +83,7 @@ class BootScene extends Phaser.Scene {
     };
     create() {
         console.log('start game')
-        this.scene.start('level1', { level: 1, newGame: true, levels: this.levels });
+        this.scene.start('Select', { level: 1, newGame: true, levels: this.levels });
     };
     
 };

@@ -105,7 +105,9 @@ class levelOneScene extends Phaser.Scene {
     };
 
     createPortal() {
+      console.log('this context', this);
       this.map.findObject('SW1 Portal Entrance ', (obj) => {
+        console.log('or this context', this);
         this.portal = new Portal(this, obj.x, obj.y - 68);
       });
       this.map.findObject('SW1 Portal Entrance to floor 2', (obj) => {

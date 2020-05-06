@@ -12,13 +12,13 @@ class GameScene extends Phaser.Scene {
         this.scene.launch('Ui');
         this.score = 0
 
-        console.log(data)
+        
         this._LEVEL = data.level;
         this._LEVELS = data.levels;
         this._NEWGAME = data.newGame;
 
-        // this.selectedCharacter = data.selectedCharacter || 0;
-        // console.log(data)
+        this.selectedCharacter = data.selectedCharacter || 0;
+        console.log(data)
 
 
     }
@@ -106,7 +106,7 @@ class GameScene extends Phaser.Scene {
         // this.map.findObject('player', (obj) => {
 
         // })
-        this.player = new Player(this,500, 100);
+        this.player = new Player(this,500, 100, this.useCharacter());
         this.player.setScale(2)
         this.name = "Tam"
         this.currentDirection = Direction.RIGHT;
@@ -123,6 +123,19 @@ class GameScene extends Phaser.Scene {
         this.weapon.alpha = 0;
     }
 
+    useCharacter(data) {
+        // const character = {0:'health',1: 'business', 2: 'computer', 3: 'engineer'}
+        this.selectedCharacter = 'health'
+        console.log(this.selectedCharacter)
+        // if (selectedCharacter === 0) {
+        //     this.useCharacter = 'health';
+        // }else if (selectedCharacter === 1) {
+        //     this.useCharacter = 'health';
+        // }else if (selectedCharacter === 2) {
+        //     this.useCharacter = 'computer';
+        // }else 
+        // this.useCharacter = 'engineer';
+    }
     // createPortal() {
     //     this.portal = this.add.sprite(this, 1000,25, 'portal', 407)
     // }
