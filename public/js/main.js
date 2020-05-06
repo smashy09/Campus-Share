@@ -1,11 +1,18 @@
 var config = {
     type: Phaser.AUTO,
-    width: 1000,
-    height: 600,
-    backgroundColor: "#5f2a55",
+    scale: {
+        width: '100%',
+        height: '100%',
+        mode: Phaser.Scale.FIT, // use the fit mode
+      },
+    roundPixels: true,
+    pixelArt: true,
+    // backgroundColor: "#5f2a55",
     scene: [
         BootScene,
+        levelOneScene,
         TitleScene,
+        SelectScene,
         GameScene,
         UiScene,
     ],
