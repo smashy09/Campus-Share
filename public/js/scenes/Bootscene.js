@@ -38,7 +38,7 @@ class BootScene extends Phaser.Scene {
         this.load.image('background', '/assets/Map/BCITA-tileset.png');
         this.load.image('tileset1', '/assets/Map/tileset.png');
         this.load.image('tileset2', '/assets/Map/RPGpack_sheet.png');
-        this.load.image('selection', '/assets/New design assets/student_front.png')
+        this.load.image('selection', '/assets/New design assets/Character selection.png')
         // this.load.image('background2', '/assets/Map/.png');
 
       
@@ -77,7 +77,7 @@ class BootScene extends Phaser.Scene {
     };
     create() {
         console.log('start game')
-        this.scene.start('Game', { level: 1, newGame: true, levels: this.levels });
+        this.scene.start('Select', { level: 1, newGame: true, levels: this.levels });
     };
     
 };
