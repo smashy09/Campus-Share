@@ -6,11 +6,11 @@ class BootScene extends Phaser.Scene {
     preload() {
 
 
-        this.levels = [
-            'level1',
-             'level2',
-             'map'
-        ];
+        this.levels = {
+            1:'level1',
+            2:'level2',
+            3: 'map'
+        };
         //load images
         this.loadImages() ;
     
@@ -37,7 +37,7 @@ class BootScene extends Phaser.Scene {
         //map
         this.load.image('background', '/assets/Map/BCITA-tileset.png');
         this.load.image('tileset1', '/assets/Map/tileset.png');
-        this.load.image('tileset2', '/assets/Map/RPGpack_sheet.png');
+        
         
         // this.load.image('background2', '/assets/Map/.png');
 
@@ -48,8 +48,8 @@ class BootScene extends Phaser.Scene {
         
         this.load.tilemapTiledJSON('map14', '/assets/Map/SE14(Basement)test.json');
         this.load.tilemapTiledJSON('map', '/assets/Map/SE14(wcollide).json');
-        this.load.tilemapTiledJSON('level1', '/assets/Map/level1.json');
-        this.load.tilemapTiledJSON('level2', '/assets/Map/level2.json');
+        this.load.tilemapTiledJSON('level1', '/assets/Map/SW1 Floor 1.json');
+        this.load.tilemapTiledJSON('level2', '/assets/Map/SW1-2nd Floor.json');
 
         
     };
@@ -77,7 +77,7 @@ class BootScene extends Phaser.Scene {
     };
     create() {
         console.log('start game')
-        this.scene.start('Select', { level: 1, newGame: true, levels: this.levels });
+        this.scene.start('level1', { level: 1, newGame: true, levels: this.levels });
     };
     
 };

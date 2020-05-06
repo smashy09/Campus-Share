@@ -9,20 +9,55 @@ class levelOneScene extends Phaser.Scene {
         //launch instead of start. start will tell phaser to shutdown the current scene. where launch will have it working in parallel
 
         // this allows a static tracking
-        this.scene.launch('Ui');
-        this.score = 0
+        
 
         console.log(data)
         this._LEVEL = data.level;
         this._LEVELS = data.levels;
         this._NEWGAME = data.newGame;
         this.loadingLevel = false;
+        this.scene.launch('Ui');
+        this.score = 0
 
 
     }
     
     create() {
         
+      this.anims.create({
+        key: 'LEFT',
+        frames: this.anims.generateFrameNumbers('engineer', {
+          start:3 ,end: 5
+        }),
+        frameRate: 10,
+        repeat: 1
+      });
+      this.anims.create({
+        key: 'RIGHT',
+        frames: this.anims.generateFrameNumbers('engineer', {
+          start:6 ,end: 8
+        }),
+        frameRate: 10,
+        repeat: 1
+      });
+  
+      this.anims.create({
+        key: 'UP',
+        frames: this.anims.generateFrameNumbers('engineer', {
+          start:9 ,end: 11
+        }),
+        frameRate: 10,
+        repeat: 1
+      });
+  
+      this.anims.create({
+        key: 'DOWN',
+        frames: this.anims.generateFrameNumbers('engineer', {
+          start:0 ,end: 2
+        }),
+        frameRate: 10,
+        repeat: 1
+      });
         //make the map
         this.createMap();
         
@@ -42,37 +77,49 @@ class levelOneScene extends Phaser.Scene {
         this.createInput();
         // this.createSound();
         this.createPortal();
-        this.loadNextLevel();
+        
     }
     update () {
             this.player.update(this.cursors);
 
     }
     createPlayer() {
-        this.map.findObject('Player', (obj) => {
-            console.log(obj);
-          if (this._NEWGAME && this._LEVEL === 1) {
-            if (obj.type === 'StartingPosition') {
-              this.player = new Player(this, obj.x, obj.y);
-            }
-          } else {
-            if (obj.type === 'StartingPositionPortal') {
-              this.player = new Player(this, obj.x, obj.y);
-            }
-          }
-        });
-          console.log(this.player);
+
+      this.player = new Player(this,500, 100);
+        this.player.setScale(2)
+        this.name = "Tam"
+        // this.map.findObject('Player', (obj) => {
+        //     console.log(obj);
+        //   if (this._NEWGAME && this._LEVEL === 1) {
+        //     if (obj.type === 'SW1 Portal Entrance') {
+        //       this.player = new Player(this, obj.x, obj.y);
+        //     }
+        //   } else {
+        //     if (obj.type === 'SW1 Floor 2 Entrance and Exit') {
+        //       this.player = new Player(this, obj.x, obj.y);
+        //     }
+        //   }
+        // });
+        //   console.log(this.player);
         
     };
 
     createPortal() {
-        this.map.findObject('Portal', (obj) => {
-          if (this._LEVEL === 1) {
-            this.portal = new Portal(this, obj.x, obj.y - 68);
-          } else if (this._LEVEL === 2) {
-            this.portal = new Portal(this, obj.x, obj.y + 70);
-          }
-        });
+      this.map.findObject('SW1 Portal Entrance ', (obj) => {
+        this.portal = new Portal(this, obj.x, obj.y - 68);
+      });
+      this.map.findObject('SW1 Portal Entrance to floor 2', (obj) => {
+        this.portal2 = new Portal(this, obj.x, obj.y + 268);
+      });
+        // this.map.findObject('SW1 Portal Entrance ', (obj) => {
+        //   if (this._LEVEL === 1) {
+        //     console.log('portal made')
+        //     this.portal = new Portal(this, obj.x, obj.y - 68);
+        //   } else if (this._LEVEL === 2) {
+        //     console.log('portal made 2')
+        //     this.portal = new Portal(this, obj.x, obj.y + 70);
+        //   }
+        // });
       }
     createAudio() {
         this.goldPickAudio = this.sound.add('goldSound', {loop: false, volume: 0.2});
@@ -87,11 +134,9 @@ class levelOneScene extends Phaser.Scene {
         
         this.physics.add.overlap(this.player, this.ball, function() {console.log('overlap'); });
         this.physics.add.collider(this.player,  this.wallLayer);
-        this.physics.add.overlap(this.player, this.portal, this.loadNextLevel.bind(this));
-       
-        // this.physics.add.overlap(this.player,   this.stairs,     function() {
-        //     this.player.onStairs = true;
-        // }, null, this);
+        this.physics.add.overlap(this.player, this.portal2, this.loadNextLevel.bind(this));
+        this.physics.add.overlap(this.player, this.portal, function() {console.log('overlap'); });
+        
         
     }
     
@@ -143,21 +188,21 @@ class levelOneScene extends Phaser.Scene {
         
        
         //create tile map
-        this.add.tileSprite(0, 0, 8000, 8000, 'tileset2', 31);
+        // this.add.tileSprite(0, 0, 8000, 8000, 'tileset1', 52);
     // create the tilemap
-    this.map = this.make.tilemap({ key: this._LEVELS[this._LEVEL] });
+    this.map = this.make.tilemap({ key: 'level1' });
  
         // this.map = this.make.tilemap({key: 'level1'});
        // add tileset image . use the tileset name, key of the image, etc
 
-        this.tiles = this.map.addTilesetImage("RPGpack_sheet", 'tileset2', 64, 64, 0, 0);
+        this.tiles = this.map.addTilesetImage("main tileset", 'tileset1', 32, 32, 0, 0);
         
         //create background layer
-        this.backgroundLayer = this.map.createStaticLayer("Floor", this.tiles, 0,0);
+        this.backgroundLayer = this.map.createStaticLayer("SW1 Floor", this.tiles, 0,0);
         // this.backgroundLayer.setScale(2);
 
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-        this.wallLayer = this.map.createStaticLayer('Walls, Stairs, Tables', this.tiles, 0, 0);
+        this.wallLayer = this.map.createStaticLayer('SW1 Walls and Tables', this.tiles, 0, 0);
         
         this.wallLayer.setCollisionByProperty({collides: true});
         this.wallLayer.setCollision([2], true);
@@ -252,17 +297,19 @@ class levelOneScene extends Phaser.Scene {
         
 //     }
 loadNextLevel () {
-    if (!this.loadingLevel) {
-      this.cameras.main.fade(500, 0, 0, 0);
-      this.cameras.main.on( 'camerafadeoutcomplete', () => {
-        if (this._LEVEL === 1) {
-        this.scene.restart({level: 2, levels: this._LEVELS, newGame: false});
-      } else if (this._LEVEL === 2) {
-        this.scene.restart({level: 1, levels: this._LEVELS, newGame: false});
-      }
-    });
-    this.loadingLevel = true;
-    }
+
+  this.scene.restart({level: 2, levels: this._LEVELS, newGame: false})
+    // if (!this.loadingLevel) {
+    //   this.cameras.main.fade(500, 0, 0, 0);
+    //   this.cameras.main.on( 'camerafadeoutcomplete', () => {
+    //     if (this._LEVEL === 1) {
+    //     this.scene.restart({level: 2, levels: this._LEVELS, newGame: false});
+    //   } else if (this._LEVEL === 2) {
+    //     this.scene.restart({level: 1, levels: this._LEVELS, newGame: false});
+    //   }
+    // });
+    // this.loadingLevel = true;
+    // }
   }
 
     //loadnewmap(){
