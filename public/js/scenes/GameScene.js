@@ -17,6 +17,9 @@ class GameScene extends Phaser.Scene {
         this._LEVELS = data.levels;
         this._NEWGAME = data.newGame;
 
+        // this.selectedCharacter = data.selectedCharacter || 0;
+        // console.log(data)
+
 
     }
     

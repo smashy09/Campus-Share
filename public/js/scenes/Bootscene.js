@@ -38,7 +38,7 @@ class BootScene extends Phaser.Scene {
         this.load.image('background', '/assets/Map/BCITA-tileset.png');
         this.load.image('tileset1', '/assets/Map/tileset.png');
         this.load.image('tileset2', '/assets/Map/RPGpack_sheet.png');
-        this.load.image('selection', '/assets/New design assets/Character selection.png')
+        
         // this.load.image('background2', '/assets/Map/.png');
 
       
@@ -61,7 +61,7 @@ class BootScene extends Phaser.Scene {
         this.load.spritesheet('playerLeft', '/images/Charactors/C_Enginnering/C_Enginnering1_left.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('playerRight', '/images/Charactors/C_Enginnering/C_Enginnering1_right.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('playerUp', '/images/Charactors/C_Enginnering/enginnering1_back.png', { frameWidth: 32, frameHeight: 32 });
-        this.load.spritesheet('student', '/images/student_front.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('student', '/assets/New design assets/Character selection.png', { frameWidth: 64, frameHeight: 64 });
         this.load.spritesheet('portal', '/assets/Map/tileset.png', { frameWidth: 32, frameHeight: 32 });
         
         this.load.spritesheet('engineer', '/assets/New design assets/C_Enginnering.png', {frameHeight: 32, frameWidth: 32});
