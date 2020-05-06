@@ -32,6 +32,7 @@ class BootScene extends Phaser.Scene {
         this.load.image('button1', '/images/ui/blue_button01.png',);
         this.load.image('button2', '/images/ui/blue_button02.png',);
         this.load.image('basketball', '/assets//New design assets/Basketball.png',);
+        this.load.image('weapon1', '/assets//New design assets/tennis racket.png',);
         this.load.image('portalicon', '/assets/Icon(objects)/1x/laptop.png',);
         //map
         this.load.image('background', '/assets/Map/BCITA-tileset.png');

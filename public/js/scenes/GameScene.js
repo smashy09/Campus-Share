@@ -105,8 +105,19 @@ class GameScene extends Phaser.Scene {
         // })
         this.player = new Player(this,500, 100);
         this.player.setScale(2)
-        const boy = this.add.sprite(200,200, 'engineer', 5)
-        boy.anims.play('LEFT', true);
+        this.name = "Tam"
+        this.currentDirection = Direction.RIGHT;
+        this.playerAttacking = false;
+        this.flipX = true;
+        this.swordHit = false;
+
+        //weapon
+        this.weapon = this.physics.add.image(32, 32, 'weapon1');
+        
+        this.weapon.setScale(1.5);
+        
+       
+        this.weapon.alpha = 0;
     }
 
     // createPortal() {
