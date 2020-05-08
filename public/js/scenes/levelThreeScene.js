@@ -183,7 +183,7 @@ class levelThreeScene extends Phaser.Scene {
         
         
         // this.physics.add.overlap(this.player, this.ball, function() {console.log('overlap'); });
-        // this.physics.add.collider(this.player,  this.wallLayer);
+        this.physics.add.collider(this.player,this.wallLayer);
         
         
         // this.physics.add.collider(this.player, this.blockedLayer);
@@ -282,7 +282,7 @@ class levelThreeScene extends Phaser.Scene {
     }
     createChests() {
         this.chests = this.physics.add.group();
-        this.chestPositions = [[100, 100], [200,200], [300, 300], [400,400], [500, 500]];
+        this.chestPositions = [[1000, 400], [1200,200], [1300, 300], [1400,400], [1500, 500]];
        //specify the max number of chest we can have
        this.maxNumberChests = 4
        for (let i =0; i <this.maxNumberChests; i+=1){

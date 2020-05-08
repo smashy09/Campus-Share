@@ -79,7 +79,7 @@ class levelTwoScene extends Phaser.Scene {
         //this.physics.add.collider(this.player, this.wall); this will make the object move and run away from the point of contact. and disappear. 
         //  this.wall.setImmovable(); this will prevent the object from moving at all.
         this.addCollisions() ; 
-    
+        this.createNPC();
         
         this.createInput();
         // this.createSound();
@@ -98,7 +98,13 @@ class levelTwoScene extends Phaser.Scene {
     createAudio() {
         this.goldPickAudio = this.sound.add('goldSound', {loop: false, volume: 0.2});
     }
-
+    createNPC() {
+        this.map.findObject('NPC Alex Tutorial', (obj) => {
+        
+            this.npc = this.physics.add.image(obj.x, obj.y, 'alex');
+            this.npc.setScale(2);
+        });
+    }
     addCollisions() {
         //check collision wall to player
         // this.physics.add.collider(this.player, this.map.wallLayer);
@@ -109,6 +115,7 @@ class levelTwoScene extends Phaser.Scene {
         
         
         this.physics.add.collider(this.player,this.wallLayer);
+        this.physics.add.collider(this.player,this.npc);
         
         
     }
@@ -292,5 +299,18 @@ this.map.findObject('SW1 Floor 2 Entrance and Exit', (obj) => {
         // }, this);
         this.scene.start('levelThree',{level: 3, levels: this._LEVELS, newGame: false});
         this.loadingLevel = true;
+
+        // if (!this.loadingLevel) {
+        //     this.cameras.main.fade(500, 0, 0, 0);
+        //     this.cameras.main.on( 'camerafadeoutcomplete', () => {
+        //       if (this._LEVEL === 2) {
+        //       this.scene.start('llevelThree',{level: 3, levels: this._LEVELS, newGame: false});
+        //     } else if (this._LEVEL === 3) {
+        //       this.scene.start({level: 2, levels: this._LEVELS, newGame: false});
+        //     }
+        //   });
+        //   this.loadingLevel = true;
+        //   }
+        
     }
 };

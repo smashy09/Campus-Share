@@ -10,13 +10,13 @@ var config = {
     // backgroundColor: "#5f2a55",
     scene: [
         BootScene,
-        levelOneScene,
-        TitleScene,
         SelectScene,
+        levelOneScene,
         levelTwoScene,
         levelThreeScene,
         GameScene,
         UiScene,
+        TitleScene,
     ],
     physics: {
         default: 'arcade',

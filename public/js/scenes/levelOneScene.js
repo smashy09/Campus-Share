@@ -71,7 +71,7 @@ class levelOneScene extends Phaser.Scene {
         }
         // this.chest = new Chest(this, 200, 290, 'items', 0);
         // this.createWalls ();
-        this.createObject();
+        // this.createObject();
         this.createPlayer();
          // physics
         
@@ -190,7 +190,7 @@ class levelOneScene extends Phaser.Scene {
         
         
         // this.physics.add.overlap(this.player, this.ball, function() {console.log('overlap'); });
-        // this.physics.add.collider(this.player,  this.wallLayer);
+        this.physics.add.collider(this.player,this.wallLayer);
         
         
         // this.physics.add.collider(this.player, this.blockedLayer);
@@ -261,7 +261,7 @@ class levelOneScene extends Phaser.Scene {
        this.wallLayer = this.map.createStaticLayer('Walls and Tables', this.tiles, 0, 0);
        
        this.wallLayer.setCollisionByProperty({collides: true});
-       this.wallLayer.setCollision([2], true);
+      //  this.wallLayer.setCollision([2], true);
       //  this.decor = this.map.createStaticLayer('Decoration', this.tiles, 0, 0);
 
         
@@ -270,7 +270,7 @@ class levelOneScene extends Phaser.Scene {
         // this.backgroundLayer.setScale(0.5);
 
         //setbounds of the world
-        // this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+        this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
 
         //create wall layer
         // this.wallLayer = this.map.createStaticLayer('SW1 Walls and Tables', this.tiles, 0, 0);
@@ -284,7 +284,7 @@ class levelOneScene extends Phaser.Scene {
     //this.wallLayer.setCollisionByExclusion([-1]);
 
         //limit camera view
-        // this.cameras.main.setBounds(0,0, this.map.widthInPixels * 2, this.map.heightInPixels * 2)
+        this.cameras.main.setBounds(0,0, this.map.widthInPixels * 2, this.map.heightInPixels * 2)
 
     }
     createChests() {

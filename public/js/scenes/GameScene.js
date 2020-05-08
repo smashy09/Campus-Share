@@ -161,7 +161,7 @@ class GameScene extends Phaser.Scene {
     createMap() {
         
         //create tile map
-    //    this.map = new Map(this, 'map3', 'BCITA-tileset', 'background','Floor', 'wall');
+    
         //create tile map
         this.map = this.make.tilemap({key: 'map'});
        // add tileset image . use the tileset name, key of the image, etc

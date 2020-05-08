@@ -19,7 +19,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
        
         //scale our player
         this.setScale(2);
-        // this.setCollideWorldBounds(true);
+        this.setCollideWorldBounds(true);
 
         //add player to existing scene
         this.scene.add.existing(this);
