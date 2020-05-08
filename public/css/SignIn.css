@@ -1,0 +1,119 @@
+
+
+
+.leftside, .rightside{
+
+    height: 100vh;
+    width: 100%;
+
+}
+
+
+
+.leftside{
+
+    background: #F5FFB8;
+
+}
+
+.rightside{
+    flex-direction: column;
+    background: #63CBF0;
+
+}
+
+.logo{
+    position: relative;
+
+    width: 30%;
+}
+
+.login-box{
+    width: 400px;
+    color: black;
+    margin-top: 10px;
+}
+
+.login-box h1{
+    float: left;
+    font-size: 40px;
+    border-bottom: 4px solid black;
+    margin-bottom: 40px;
+    padding: 10px 0;
+}
+
+.textbox{
+    width: 100%;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 8px 0;
+    margin: 8px 0;
+    border-bottom: 1px solid black;
+}
+
+.textbox span{
+    margin-top: 10px;
+    width: 30px;
+    float: left;
+    text-align: center;
+}
+
+.textbox input{
+    border: none;
+    outline: none;
+    background: none;
+    color: black;
+    font-size: 22pt;
+    width: 80%;
+    float: left;
+    margin: 0 10px;
+}
+
+/* .btn{
+    width: 100%;
+    background: yellow;
+    border: 3px solid coral;
+    color: black;
+    padding: 5px;
+} */
+
+.signup{
+    font-size: 16pt;
+    text-decoration: underline;
+    margin-top: 10px;
+}
+
+.play_btn{
+    width: 30%;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+
+/* LEFT SIDE STYLINE START */
+
+.banner_journey{
+    font-family: 'Prompt', sans-serif;
+    border: 1px solid black;
+    position: fixed;
+    left: 8%;
+    right: 0;
+    top: 0%;
+    padding-left: 10px;
+    font-size: 40pt;
+    font-weight: bold;
+    color: #FFCE80;
+    background-color: black;
+    transform: rotate(90deg);
+    transform-origin: left top 0;
+
+}
+
+/* .laptop{
+    position: relative;
+    top: 0;
+} */
+
+
+
+

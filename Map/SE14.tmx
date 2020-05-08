@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="9">
+=======
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="1">
+>>>>>>> developer
  <tileset firstgid="1" source="main tileset.tsx"/>
  <layer id="1" name="Floor" width="60" height="34">
   <data encoding="csv">
