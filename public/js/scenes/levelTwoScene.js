@@ -1,6 +1,6 @@
-class GameScene extends Phaser.Scene {
+class levelTwoScene extends Phaser.Scene {
     constructor() {
-        super("Game");
+        super("leveltwo");
         
 
     }
@@ -17,7 +17,7 @@ class GameScene extends Phaser.Scene {
         this._LEVEL = data.level;
         this._LEVELS = data.levels;
         this._NEWGAME = data.newGame;
-
+        this.loadingLevel = false;
         this.selectedCharacter = data.selectedCharacter || 0;
         console.log(data)
 
@@ -61,23 +61,35 @@ class GameScene extends Phaser.Scene {
             repeat: 1
           });
         //make the map
-          
+        
+        
         this.createMap();
-        // make audio
+        
+        
         this.createAudio();
-        //chest
-        this.createChests();
+        
+        if (this._LEVEL === 3) {
+            this.createChests();
+            }
         // this.chest = new Chest(this, 200, 290, 'items', 0);
         // this.createWalls ();
-        this.createObject();
+        // this.createObject();
         this.createPlayer();
          // physics
         //this.physics.add.collider(this.player, this.wall); this will make the object move and run away from the point of contact. and disappear. 
         //  this.wall.setImmovable(); this will prevent the object from moving at all.
         this.addCollisions() ; 
+        this.createNPC();
+        
         this.createInput();
         // this.createSound();
         this.createPortal();
+        // this.loadNextMap();
+      
+        this.physics.add.overlap(this.player, this.portal, function() {console.log('overlap') });
+        this.physics.add.overlap(this.player, this.portal3, this.loadNextMap.bind(this));
+        this.physics.add.overlap(this.player, this.portal2, this.loadNextMap.bind(this));
+        this.physics.add.overlap(this.player, this.portal3, this.loadNextMap.bind(this));
     }
     update () {
             this.player.update(this.cursors);
@@ -86,28 +98,31 @@ class GameScene extends Phaser.Scene {
     createAudio() {
         this.goldPickAudio = this.sound.add('goldSound', {loop: false, volume: 0.2});
     }
-
+    createNPC() {
+        this.map.findObject('NPC Alex Tutorial', (obj) => {
+        
+            this.npc = this.physics.add.image(obj.x, obj.y, 'alex');
+            this.npc.setScale(2);
+        });
+    }
     addCollisions() {
         //check collision wall to player
         // this.physics.add.collider(this.player, this.map.wallLayer);
-        this.physics.add.overlap(this.player, this.portal,     function() {this.loadNextMap(this)
-    });
+    
         this.physics.add.overlap(this.player, this.chests, this.collectChest, null, this);
         
-        this.physics.add.overlap(this.player, this.pokemon, function() {console.log('overlap'); });
         this.physics.add.overlap(this.player, this.ball, function() {console.log('overlap'); });
-        this.physics.add.overlap(this.player, this.portal, function() {console.log('overlap'); });
-        this.physics.add.collider(this.player,  this.wallLayer);
-        this.physics.add.overlap(this.player, this.portal,     
-            this.loadNextMap.bind());
         
+        
+        this.physics.add.collider(this.player,this.wallLayer);
+        this.physics.add.collider(this.player,this.npc);
         
         
     }
     useCharacter(data) {
-        
+        //  const character = {0:'health',1: 'business', 2: 'computer', 3: 'engineer'}
         // this.selectedCharacter = 'health'
-        // console.log(this.selectedCharacter)
+        console.log(this.selectedCharacter)
         if (this.selectedCharacter === 0) {
            return this.selectedCharacter = 'health';
         }else if (this.selectedCharacter === 1) {
@@ -126,44 +141,60 @@ class GameScene extends Phaser.Scene {
         
         console.log(this.useCharacter([this.selectedCharacter]));
         // this.player = new Player(this,500, 100, this.useCharacter([this.selectedCharacter]));
-        this.map.findObject('Player', (obj) => {
+       
+        this.map.findObject('Player Spawn', (obj) => {
             this.player = new Player(this, obj.x, obj.y,this.useCharacter([this.selectedCharacter]) );
-        })
-
-        // this.player = new Player(this,500, 100, 'business')
+          });
+          this.map.findObject('Player Spawn1', (obj) => {
+            this.player = new Player(this, obj.x, obj.y,this.useCharacter([this.selectedCharacter]) );
+          });
         this.player.setScale(2)
-        // this.name = "Tam"
-        // this.currentDirection = Direction.RIGHT;
-        // this.playerAttacking = false;
-        // this.flipX = true;
-        // this.swordHit = false;
+        this.name = "Tam"
+        this.currentDirection = Direction.RIGHT;
+        this.playerAttacking = false;
+        this.flipX = true;
+        this.swordHit = false;
 
-        // //weapon
-        // this.weapon = this.physics.add.image(32, 32, 'weapon1');
+        //weapon
+        this.weapon = this.physics.add.image(32, 32, 'weapon1');
         
-        // this.weapon.setScale(1.5);
+        this.weapon.setScale(1.5);
         
        
-        // this.weapon.alpha = 0;
+        this.weapon.alpha = 0;
     }
 
-    
     createPortal() {
-        this.portal = this.physics.add.image(500, 70, 'portalicon')
-        console.log('portal has been made');
-        // this.map.findObject('Portal', (obj) => {
-            
-        //     this.portal = new Portal(this, obj.x + 50 , obj.y );
-        //     this.physics.world.enable(this.portal);
-        //     console.log('portal has been made');
-        // })
-    }
+    // this.map.findObject('SW1 Floor 2 Entrance and Exit', (obj) => {
+    //     this.portal = new Portal(this, obj.x , obj.y)
+    //     console.log(this.portal)
+    // })
+
+    this.map.findObject('SW1 Portal Entrance', (obj) => {
+        
+        this.portal2 = new Portal(this, obj.x, obj.y);
+    });
+    this.map.findObject('SW1 Portal Entrance to floor 2', (obj) => {
+      
+      this.portal3 = new Portal(this, obj.x, obj.y);
+  });
+
+  this.map.findObject('SW1 Portal Exit', (obj) => {
+      
+    this.portal4 = new Portal(this, obj.x, obj.y);
+});
+
+this.map.findObject('SW1 Floor 2 Entrance and Exit', (obj) => {
+      
+  this.portal5 = new Portal(this, obj.x, obj.y);
+});
+}
     createMap() {
         
         //create tile map
-    
+    //    this.map = new Map(this, 'map3', 'BCITA-tileset', 'background','Floor', 'wall');
         //create tile map
-        this.map = this.make.tilemap({key: 'map'});
+         this.map = this.make.tilemap({key: 'SW1'});
        // add tileset image . use the tileset name, key of the image, etc
 
         this.tiles = this.map.addTilesetImage("main tileset", 'tileset1', 32, 32, 0, 0);
@@ -173,11 +204,11 @@ class GameScene extends Phaser.Scene {
         // this.backgroundLayer.setScale(2);
 
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-        this.wallLayer = this.map.createStaticLayer('Walls, Stairs, Tables', this.tiles, 0, 0);
+        this.wallLayer = this.map.createStaticLayer('Walls and Tables', this.tiles, 0, 0);
         
         this.wallLayer.setCollisionByProperty({collides: true});
         this.wallLayer.setCollision([2], true);
-        this.stairs = this.map.createStaticLayer('Items/Objects', this.tiles, 0, 0);
+        // this.stairs = this.map.createStaticLayer('Items/Objects', this.tiles, 0, 0);
         
         // this.wallLayer.setScale(2);
     
@@ -254,15 +285,32 @@ class GameScene extends Phaser.Scene {
         this.time.delayedCall(2000, this.spawnChest, [], this);
     }
     createSound() {
-        this.bgMusic = this.sound.add('bgMusic', {volume: 0.5});
+        this.bgMusic = this.sound.add('bgMusic2', {volume: 0.5});
         this.bgMusic.play();
     }
     
-    //loadNextLevel 
+    //loadNextLevel () {}
 
     loadNextMap() {
-        this.scene.start('leveltwo');
-        // this.scene.start('leveltwo', {level: 'level2', levels: this._LEVELS, newGame: false});
+        // this.input.once('pointerdown', function () {
+
+        //     this.scene.switch('Game');
+
+        // }, this);
+        this.scene.start('levelThree',{level: 3, levels: this._LEVELS, newGame: false});
+        this.loadingLevel = true;
+
+        // if (!this.loadingLevel) {
+        //     this.cameras.main.fade(500, 0, 0, 0);
+        //     this.cameras.main.on( 'camerafadeoutcomplete', () => {
+        //       if (this._LEVEL === 2) {
+        //       this.scene.start('llevelThree',{level: 3, levels: this._LEVELS, newGame: false});
+        //     } else if (this._LEVEL === 3) {
+        //       this.scene.start({level: 2, levels: this._LEVELS, newGame: false});
+        //     }
+        //   });
+        //   this.loadingLevel = true;
+        //   }
+        
     }
 };
-

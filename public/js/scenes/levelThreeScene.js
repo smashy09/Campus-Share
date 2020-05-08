@@ -1,6 +1,6 @@
-class levelOneScene extends Phaser.Scene {
+class levelThreeScene extends Phaser.Scene {
     constructor() {
-        super("level1");
+        super("levelThree");
 
     }
 
@@ -71,7 +71,7 @@ class levelOneScene extends Phaser.Scene {
         }
         // this.chest = new Chest(this, 200, 290, 'items', 0);
         // this.createWalls ();
-        // this.createObject();
+        this.createObject();
         this.createPlayer();
          // physics
         
@@ -79,17 +79,10 @@ class levelOneScene extends Phaser.Scene {
     
         this.createAnimations();
         this.createInput();
-        const musicConfig = {
-          mute: false,
-          volume: 1,
-          loop: true,
-          delay:0
-        }
-        this.createSound(musicConfig);
-        
+        // this.createSound();
         this.createPortal();
-        this.physics.add.overlap(this.player, this.portal, this.loadNextLevel.bind(this));
-        this.physics.add.overlap(this.player, this.portal3, this.loadNextLevel2.bind(this));
+        this.physics.add.overlap(this.player, this.portal5, this.loadNextLevel.bind(this));
+        
         
     }
     update () {
@@ -248,7 +241,7 @@ class levelOneScene extends Phaser.Scene {
     // create the tilemap
     // this.map = this.make.tilemap({ key: this._LEVELS[this._LEVEL] });
  
-        this.map = this.make.tilemap({key: 'busstop'});
+        this.map = this.make.tilemap({key: 'SW1-2'});
         
        // add tileset image . use the tileset name, key of the image, etc
        this.tiles = this.map.addTilesetImage("main tileset", 'tileset1', 32, 32, 0, 0);
@@ -261,8 +254,8 @@ class levelOneScene extends Phaser.Scene {
        this.wallLayer = this.map.createStaticLayer('Walls and Tables', this.tiles, 0, 0);
        
        this.wallLayer.setCollisionByProperty({collides: true});
-      //  this.wallLayer.setCollision([2], true);
-      //  this.decor = this.map.createStaticLayer('Decoration', this.tiles, 0, 0);
+       this.wallLayer.setCollision([2], true);
+       this.decor = this.map.createStaticLayer('Decoration', this.tiles, 0, 0);
 
         
         //create background layer
@@ -270,7 +263,7 @@ class levelOneScene extends Phaser.Scene {
         // this.backgroundLayer.setScale(0.5);
 
         //setbounds of the world
-        this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+        // this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
 
         //create wall layer
         // this.wallLayer = this.map.createStaticLayer('SW1 Walls and Tables', this.tiles, 0, 0);
@@ -284,12 +277,12 @@ class levelOneScene extends Phaser.Scene {
     //this.wallLayer.setCollisionByExclusion([-1]);
 
         //limit camera view
-        this.cameras.main.setBounds(0,0, this.map.widthInPixels * 2, this.map.heightInPixels * 2)
+        // this.cameras.main.setBounds(0,0, this.map.widthInPixels * 2, this.map.heightInPixels * 2)
 
     }
     createChests() {
         this.chests = this.physics.add.group();
-        this.chestPositions = [[100, 100], [200,200], [300, 300], [400,400], [500, 500]];
+        this.chestPositions = [[1000, 400], [1200,200], [1300, 300], [1400,400], [1500, 500]];
        //specify the max number of chest we can have
        this.maxNumberChests = 4
        for (let i =0; i <this.maxNumberChests; i+=1){
@@ -362,7 +355,7 @@ loadNextLevel () {
     if (!this.loadingLevel) {
       this.cameras.main.fade(500, 0, 0, 0);
       this.cameras.main.on( 'camerafadeoutcomplete', () => {
-        if (this._LEVEL === 1) {
+        if (this._LEVEL === 3) {
         this.scene.start('leveltwo',{level: 2, levels: this._LEVELS, newGame: false});
       } else if (this._LEVEL === 2) {
         this.scene.start({level: 1, levels: this._LEVELS, newGame: false});
@@ -372,21 +365,6 @@ loadNextLevel () {
     }
   }
 
-  loadNextLevel2 () {
-
-    // this.scene.restart({level: 'leveltwo', levels: this._LEVELS, newGame: false});
-      if (!this.loadingLevel) {
-        this.cameras.main.fade(500, 0, 0, 0);
-        this.cameras.main.on( 'camerafadeoutcomplete', () => {
-          if (this._LEVEL === 2) {
-          this.scene.restart({level: 3, levels: this._LEVELS, newGame: false});
-        } else if (this._LEVEL === 3) {
-          this.scene.restart({level: 2, levels: this._LEVELS, newGame: false});
-        }
-      });
-      this.loadingLevel = true;
-      }
-    }
-
+ 
     
 };

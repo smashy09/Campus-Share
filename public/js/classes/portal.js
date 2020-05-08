@@ -3,15 +3,13 @@ class Portal extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, 'portalicon');
         this.scene = scene;
         // velocity(speed) to move players
-
+        this.setScale(0.5);
         //enable physics
         this.scene.physics.world.enable(this);
-        // set immovable if another object collide
 
         //add player to existing scene
         this.scene.add.existing(this);
-        //follow player
-        
+       
     
     }
 }
