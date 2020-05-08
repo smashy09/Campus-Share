@@ -1,16 +1,21 @@
 class BootScene extends Phaser.Scene {
     constructor() {
         super('BootScene');
+        
     }
 
     preload() {
 
-
         this.levels = {
-            1:'level1',
-            2:'level2',
-            3: 'map'
-        };
+            1: 'zone1',
+            2: 'zone2',
+        }
+        // this.levels = {
+        //     1:'map',
+        //     2:'level2',
+        //     3:'level1',
+            
+        // };
         //load images
         this.loadImages() ;
     
@@ -31,13 +36,14 @@ class BootScene extends Phaser.Scene {
         //items
         this.load.image('button1', '/images/ui/blue_button01.png',);
         this.load.image('button2', '/images/ui/blue_button02.png',);
-        this.load.image('basketball', '/assets//New design assets/Basketball.png',);
-        this.load.image('weapon1', '/assets//New design assets/tennis racket.png',);
+        this.load.image('basketball', '/assets/New design assets/Basketball.png',);
+        this.load.image('weapon1', '/assets/New design assets/tennis racket.png',);
         this.load.image('portalicon', '/assets/Icon(objects)/1x/laptop.png',);
+        this.load.image('backpack', '/assets/New design assets/backpack_open.png',);
         //map
         this.load.image('background', '/assets/Map/BCITA-tileset.png');
         this.load.image('tileset1', '/assets/Map/tileset.png');
-        
+        this.load.image('RPGpack_sheet', '/assets/Map/RPGpack_sheet.png');
         
         // this.load.image('background2', '/assets/Map/.png');
 
@@ -46,11 +52,11 @@ class BootScene extends Phaser.Scene {
     
     loadTileMap() {
         
-        this.load.tilemapTiledJSON('map14', '/assets/Map/SE14(Basement)test.json');
         this.load.tilemapTiledJSON('map', '/assets/Map/SE14(wcollide).json');
         this.load.tilemapTiledJSON('level1', '/assets/Map/SW1 Floor 1.json');
         this.load.tilemapTiledJSON('level2', '/assets/Map/SW1-2nd Floor.json');
-
+        this.load.tilemapTiledJSON('zone1', '/assets/Map/level1.json');
+        this.load.tilemapTiledJSON('zone2', '/assets/Map/level2.json');
         
     };
     loadSpritesheet () {
@@ -83,7 +89,7 @@ class BootScene extends Phaser.Scene {
     };
     create() {
         console.log('start game')
-        this.scene.start('Select', { level: 1, newGame: true, levels: this.levels });
+        this.scene.start('level1', { level: 1, newGame: true, levels: this.levels });
     };
     
 };

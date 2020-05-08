@@ -54,7 +54,7 @@ class SelectScene extends Phaser.Scene {
     pointerdown(character) {
 
         console.log(this);
-        this.scene.start('Game', { selectedCharacter: character.characterId })
+        this.scene.start('leveltwo', { selectedCharacter: character.characterId })
     }
 
 }

@@ -20,8 +20,6 @@ class levelOneScene extends Phaser.Scene {
         this.score = 0
         this.loadingLevel = false;
 
-        this.selectedCharacter = data.selectedCharacter || 0;
-        console.log(data)
 
     }
     
@@ -29,7 +27,7 @@ class levelOneScene extends Phaser.Scene {
         
       this.anims.create({
         key: 'LEFT',
-        frames: this.anims.generateFrameNumbers(this.useCharacter([this.selectedCharacter]), {
+        frames: this.anims.generateFrameNumbers('engineer', {
           start:3 ,end: 5
         }),
         frameRate: 10,
@@ -37,7 +35,7 @@ class levelOneScene extends Phaser.Scene {
       });
       this.anims.create({
         key: 'RIGHT',
-        frames: this.anims.generateFrameNumbers(this.useCharacter([this.selectedCharacter]), {
+        frames: this.anims.generateFrameNumbers('engineer', {
           start:6 ,end: 8
         }),
         frameRate: 10,
@@ -46,7 +44,7 @@ class levelOneScene extends Phaser.Scene {
   
       this.anims.create({
         key: 'UP',
-        frames: this.anims.generateFrameNumbers(this.useCharacter([this.selectedCharacter]), {
+        frames: this.anims.generateFrameNumbers('engineer', {
           start:9 ,end: 11
         }),
         frameRate: 10,
@@ -55,7 +53,7 @@ class levelOneScene extends Phaser.Scene {
   
       this.anims.create({
         key: 'DOWN',
-        frames: this.anims.generateFrameNumbers(this.useCharacter([this.selectedCharacter]), {
+        frames: this.anims.generateFrameNumbers('engineer', {
           start:0 ,end: 2
         }),
         frameRate: 10,
@@ -96,10 +94,10 @@ class levelOneScene extends Phaser.Scene {
       this.map.findObject('Player', (obj) => {
         if (this._NEWGAME && this._LEVEL === 1) {
           if (obj.type === 'StartingPosition'){
-            this.player = new Player(this, obj.x, obj.y,this.useCharacter([this.selectedCharacter]) );
+            this.player = new Player(this, obj.x, obj.y);
           }
         } else {
-          this.player = new Player(this, obj.x, obj.y,this.useCharacter([this.selectedCharacter]) );
+          this.player = new Player(this, obj.x, obj.y);
         }
       });
         
@@ -132,21 +130,6 @@ class levelOneScene extends Phaser.Scene {
       this.physics.add.overlap(this.player, this.portal, function() {console.log('overlap'); });
      
       }
-      useCharacter(data) {
-        
-        // this.selectedCharacter = 'health'
-        // console.log(this.selectedCharacter)
-        if (this.selectedCharacter === 0) {
-           return this.selectedCharacter = 'health';
-        }else if (this.selectedCharacter === 1) {
-            return this.selectedCharacter = 'business';
-        }else if (this.selectedCharacter === 2) {
-            return  this.selectedCharacter = 'computer';
-        }else if (this.selectedCharacter === 3) {
-        return this.selectedCharacter = 'engineer';
-        }
-        return this.selectedCharacter;
-    }
     createAudio() {
         this.goldPickAudio = this.sound.add('goldSound', {loop: false, volume: 0.2});
     }

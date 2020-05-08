@@ -56,22 +56,6 @@
                  "width":0,
                  "x":1255.59407500788,
                  "y":565.773715726442
-                }, 
-                {
-                 "height":18.84375,
-                 "id":4,
-                 "name":"",
-                 "rotation":0,
-                 "text":
-                    {
-                     "text":"StartingPosition",
-                     "wrap":true
-                    },
-                 "type":"",
-                 "visible":true,
-                 "width":89.546875,
-                 "x":1211.2265625,
-                 "y":576.578125
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -95,22 +79,6 @@
                  "width":0,
                  "x":1772.95934446896,
                  "y":75.6381972896313
-                }, 
-                {
-                 "height":18.84375,
-                 "id":3,
-                 "name":"",
-                 "rotation":0,
-                 "text":
-                    {
-                     "text":"Portal",
-                     "wrap":true
-                    },
-                 "type":"",
-                 "visible":true,
-                 "width":89.546875,
-                 "x":1737.26249064371,
-                 "y":102.522656988654
                 }],
          "opacity":1,
          "type":"objectgroup",

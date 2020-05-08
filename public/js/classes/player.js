@@ -11,15 +11,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, key, 0);
         this.scene = scene;
         this.velocity = 160; // velocity(speed) to move players
-        this.key = key
+        
         //enable physics
         this.scene.physics.world.enable(this);
         // set immovable if another object collide
         this.setImmovable(false);
-
+       
         //scale our player
         this.setScale(2);
-        this.setCollideWorldBounds(true);
+        // this.setCollideWorldBounds(true);
 
         //add player to existing scene
         this.scene.add.existing(this);

@@ -13,6 +13,7 @@ var config = {
         levelOneScene,
         TitleScene,
         SelectScene,
+        levelTwoScene,
         GameScene,
         UiScene,
     ],
