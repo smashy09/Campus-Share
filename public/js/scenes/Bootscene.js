@@ -7,8 +7,13 @@ class BootScene extends Phaser.Scene {
     preload() {
 
         this.levels = {
-            1: 'zone1',
-            2: 'zone2',
+            1: 'busstop',
+            2: 'SW1',
+            3: 'SW1-2',
+            4: 'outdoor1',
+            5: 'SE2',
+            6: 'SE14',
+
         }
         // this.levels = {
         //     1:'map',
@@ -52,9 +57,18 @@ class BootScene extends Phaser.Scene {
     
     loadTileMap() {
         
-        this.load.tilemapTiledJSON('map', '/assets/Map/SE14(wcollide).json');
-        this.load.tilemapTiledJSON('level1', '/assets/Map/SW1 Floor 1.json');
-        this.load.tilemapTiledJSON('level2', '/assets/Map/SW1-2nd Floor.json');
+        this.load.tilemapTiledJSON('busstop', '/assets/Map/spawnpoint.json');
+        
+        
+        this.load.tilemapTiledJSON('SW1', '/assets/Map/SW1 Floor 1.json');
+        this.load.tilemapTiledJSON('SW1-2', '/assets/Map/SW1-2nd Floor.json');
+
+        this.load.tilemapTiledJSON('outdoor1', '/assets/Map/Outside Area Between SW1 and SE2.json');
+
+        this.load.tilemapTiledJSON('SE2', '/assets/Map/SE2.json');
+
+        this.load.tilemapTiledJSON('SE14', '/assets/Map/SE14(wcollide).json');
+
         this.load.tilemapTiledJSON('zone1', '/assets/Map/level1.json');
         this.load.tilemapTiledJSON('zone2', '/assets/Map/level2.json');
         
@@ -85,11 +99,11 @@ class BootScene extends Phaser.Scene {
     loadAudio () {
         this.load.audio('goldSound', ['/audio/Pickup.wav']);
         this.load.audio('bgMusic', '/audio/omou matsu.mp3');
-
+        this.load.audio('bgMusic2', '/audio/ayeon- more sunshine.mp3')
     };
     create() {
         console.log('start game')
-        this.scene.start('level1', { level: 1, newGame: true, levels: this.levels });
+        this.scene.start('Select', );
     };
-    
+    //{ level: 1, newGame: true, levels: this.levels }
 };

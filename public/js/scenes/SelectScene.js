@@ -3,6 +3,14 @@ class SelectScene extends Phaser.Scene {
         super('Select');
     }
 
+    init(data){
+        
+        this._LEVEL = data.level;
+        this._LEVELS = data.levels;
+        this._NEWGAME = data.newGame;
+        this.loadingLevel = false;
+        
+    }
     create() {
         
 
@@ -13,12 +21,13 @@ class SelectScene extends Phaser.Scene {
         this.createCharacters();
         
         console.log('selection')
-       
+        
         // this.input.on('pointerdown', () => {
             
         //     this.scene.start('Game')
 
         // })
+        
     }
 
     createCharacters() {
@@ -41,7 +50,7 @@ class SelectScene extends Phaser.Scene {
         }
     
     }
-
+    
     pointerover(){
         this.setAlpha(1)
     }
@@ -52,9 +61,10 @@ class SelectScene extends Phaser.Scene {
     }
 
     pointerdown(character) {
-
+        var datas = { level: 1, newGame: true, levels: this.levels, selectedCharacter: character.characterId };
+        console.log(datas);
         console.log(this);
-        this.scene.start('leveltwo', { selectedCharacter: character.characterId })
+        this.scene.start('level1', datas)
     }
 
 }
