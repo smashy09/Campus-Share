@@ -93,7 +93,7 @@ class levelOneScene extends Phaser.Scene {
       // this.player = new Player(this,500, 100);
       //   this.player.setScale(2)
       //   this.name = "Tam"
-      this.map.findObject('Player', (obj) => {
+      this.map.findObject('Player_Spawn_S', (obj) => {
         if (this._NEWGAME && this._LEVEL === 1) {
           if (obj.type === 'StartingPosition'){
             this.player = new Player(this, obj.x, obj.y,this.useCharacter([this.selectedCharacter]) );
@@ -107,13 +107,26 @@ class levelOneScene extends Phaser.Scene {
 
     createPortal() {
 
-      this.map.findObject('Portal', (obj) => {
-        if (this._LEVEL === 1) {
-          this.portal = new Portal(this, obj.x , obj.y - 68);
-        } else if (this._LEVEL === 2) {
+      this.map.findObject('SW1_Portal_1', (obj) => {
+        
           this.portal = new Portal(this, obj.x, obj.y);
-        }
       });
+      this.map.findObject('SE2_Portal_1', (obj) => {
+        
+        this.portal = new Portal(this, obj.x, obj.y);
+    });
+
+    this.map.findObject('SE2_Portal_2', (obj) => {
+        
+      this.portal = new Portal(this, obj.x, obj.y);
+  });
+      // this.map.findObject('Portal', (obj) => {
+      //   if (this._LEVEL === 1) {
+      //     this.portal = new Portal(this, obj.x , obj.y - 68);
+      //   } else if (this._LEVEL === 2) {
+      //     this.portal = new Portal(this, obj.x, obj.y);
+      //   }
+      // });
       
       // this.map.findObject('SW1 Portal Entrance ', (obj) => {
         
