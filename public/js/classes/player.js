@@ -7,8 +7,8 @@ const Direction = {
     
   };
 class Player extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y) {
-        super(scene, x, y, 'engineer', 0);
+    constructor(scene, x, y, key) {
+        super(scene, x, y, key, 0);
         this.scene = scene;
         this.velocity = 160; // velocity(speed) to move players
         
@@ -16,7 +16,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.scene.physics.world.enable(this);
         // set immovable if another object collide
         this.setImmovable(false);
-
+       
         //scale our player
         this.setScale(2);
         this.setCollideWorldBounds(true);
