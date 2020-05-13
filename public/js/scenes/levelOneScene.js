@@ -79,17 +79,12 @@ class levelOneScene extends Phaser.Scene {
     
         this.createAnimations();
         this.createInput();
-        const musicConfig = {
-          mute: false,
-          volume: 1,
-          loop: true,
-          delay:0
-        }
-        this.createSound(musicConfig);
+        
+        this.createSound();
         
         this.createPortal();
         this.physics.add.overlap(this.player, this.portal, this.loadNextLevel.bind(this));
-        this.physics.add.overlap(this.player, this.portal3, this.loadNextLevel2.bind(this));
+        // this.physics.add.overlap(this.player, this.portal3, this.loadNextLevel2.bind(this));
         //video test
         
 
@@ -102,12 +97,13 @@ class levelOneScene extends Phaser.Scene {
       //     this.setAlpha(0.4)
       // }
       
-      const video = this.add.image(500,1200, 'portalicon').setInteractive();
+      const video = this.add.image(500,1200, 'quest').setInteractive();
+      video.setScale(2)
       video.on('pointerdown', this.pointerdown.bind(this));
       this.movie = this.add.video(800, 1300, 'testvideo');
       this.movie.setScale(0.5);
       this.movie.setVisible(false);
-      video.on('pointerout', this.pointerout);
+      video.on('pointerout', this.pointerout.bind(this));
       this.quest = this.add.text(700, 1200, 'Click To See Quest', { font: '"Press to See Quest"' });
       this.quest.setScale(4)
      
@@ -373,7 +369,14 @@ class levelOneScene extends Phaser.Scene {
         this.time.delayedCall(2000, this.spawnChest, [], this);
     }
     createSound() {
-        this.bgMusic = this.sound.add('bgMusic2', {volume: 0.5});
+      const musicConfig = {
+        mute: false,
+        volume: 1,
+        loop: true,
+        delay:0,
+        rate: 1,
+      }
+        this.bgMusic = this.sound.add('bgMusic2', musicConfig);
         this.bgMusic.play();
     }
 

@@ -43,7 +43,9 @@ class BootScene extends Phaser.Scene {
         this.load.image('button2', '/images/ui/blue_button02.png');
         this.load.image('basketball', '/assets/New design assets/Basketball.png');
         this.load.image('weapon1', '/assets/New design assets/tennis racket.png');
-        this.load.image('portalicon', '/assets/Icon(objects)/1x/laptop.png');
+        this.load.image('portalicon', '/assets/New design assets/portal(64x64).png');
+        this.load.image('portal2', '/assets/New design assets/portal1 (64x64).png');
+        this.load.image('quest', '/assets/New design assets/laptop.png');
         this.load.image('backpack', '/assets/New design assets/backpack_open.png');
 
         this.load.image('alex', '/assets/New design assets/NPC1.png');

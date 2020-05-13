@@ -170,7 +170,7 @@ class levelTwoScene extends Phaser.Scene {
     //     console.log(this.portal)
     // })
 
-    this.map.findObject('SW1 Portal Entrance', (obj) => {
+    this.map.findObject('SW1 Portal Entrance ', (obj) => {
         
         this.portal2 = new Portal(this, obj.x, obj.y);
     });
@@ -179,9 +179,9 @@ class levelTwoScene extends Phaser.Scene {
       this.portal3 = new Portal(this, obj.x, obj.y);
   });
 
-  this.map.findObject('SW1 Portal Exit', (obj) => {
+  this.map.findObject('SW1 Portal Exit to outside', (obj) => {
       
-    this.portal4 = new Portal(this, obj.x, obj.y);
+    this.portal4 = this.physics.add.image(obj.x, obj.y, 'portal2')
 });
 
 this.map.findObject('SW1 Floor 2 Entrance and Exit', (obj) => {
