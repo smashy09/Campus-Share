@@ -82,17 +82,30 @@ class levelTwoScene extends Phaser.Scene {
         this.createNPC();
         
         this.createInput();
-        // this.createSound();
+        
+        // const musicConfig = {
+        //     mute: false,
+        //     volume: 1,
+        //     loop: true,
+        //     delay:0,
+        //     rate: 1,
+        //   }
+        //     this.bgMusic = this.sound.add('bgMusic2', musicConfig);
+        //     this.physics.add.overlap(this.player, this.portal2, this.bgMusic.stop());
+        //   this.createSound();
         this.createPortal();
         // this.loadNextMap();
       
-        this.physics.add.overlap(this.player, this.portal, function() {console.log('overlap') });
+        // this.physics.add.overlap(this.player, this.portal, function() {console.log('overlap') });
         this.physics.add.overlap(this.player, this.portal3, this.loadNextMap.bind(this));
         this.physics.add.overlap(this.player, this.portal2, this.loadNextLevel2.bind(this));
-        this.physics.add.overlap(this.player, this.portal3, this.loadNextMap.bind(this));
+        this.physics.add.overlap(this.player, this.portal4, this.loadNextlevel4.bind(this));
     }
     update () {
             this.player.update(this.cursors);
+            // if(game.input.keyboard.isDown(Phaser.Keyboard.space)) {
+            //     this.bgMusic.stop();
+            //      }
 
     }
     createAudio() {
@@ -139,15 +152,18 @@ class levelTwoScene extends Phaser.Scene {
 
         // })
         
-        console.log(this.useCharacter([this.selectedCharacter]));
+        // console.log(this.useCharacter([this.selectedCharacter]));
         // this.player = new Player(this,500, 100, this.useCharacter([this.selectedCharacter]));
-       
-        this.map.findObject('Player Spawn', (obj) => {
+        if (this._LEVEL === 2) {
+        this.map.findObject('Player Spawn1', (obj) => {
             this.player = new Player(this, obj.x, obj.y,this.useCharacter([this.selectedCharacter]) );
           });
-          this.map.findObject('Player Spawn1', (obj) => {
+        }
+        if (this._LEVEL === 3) {
+          this.map.findObject('Player Spawn2', (obj) => {
             this.player = new Player(this, obj.x, obj.y,this.useCharacter([this.selectedCharacter]) );
           });
+        }
         this.player.setScale(2)
         this.name = "Tam"
         this.currentDirection = Direction.RIGHT;
@@ -184,10 +200,10 @@ class levelTwoScene extends Phaser.Scene {
     this.portal4 = this.physics.add.image(obj.x, obj.y, 'portal2')
 });
 
-this.map.findObject('SW1 Floor 2 Entrance and Exit', (obj) => {
+// this.map.findObject('SW1 Floor 2 Entrance and Exit', (obj) => {
       
-  this.portal5 = new Portal(this, obj.x, obj.y);
-});
+//   this.portal5 = new Portal(this, obj.x, obj.y);
+// });
 }
     createMap() {
         
@@ -285,9 +301,10 @@ this.map.findObject('SW1 Floor 2 Entrance and Exit', (obj) => {
         this.time.delayedCall(2000, this.spawnChest, [], this);
     }
     createSound() {
-        this.bgMusic = this.sound.add('bgMusic2', {volume: 0.5});
-        this.bgMusic.play();
-    }
+      
+          this.bgMusic.play();
+          
+      }
     
     //loadNextLevel () {}
 
@@ -323,5 +340,18 @@ this.map.findObject('SW1 Floor 2 Entrance and Exit', (obj) => {
       });
       this.loadingLevel = true;
       }
+    }
+    loadNextlevel4() {
+        if (!this.loadingLevel) {
+            this.cameras.main.fade(500, 0, 0, 0);
+            this.cameras.main.on( 'camerafadeoutcomplete', () => {
+              if (this._LEVEL === 2) {
+              this.scene.start('levelfour', {level: 4, levels: this._LEVELS, newGame: false});
+            } else if (this._LEVEL === 3) {
+              this.scene.start({level: 2, levels: this._LEVELS, newGame: false});
+            }
+          });
+          this.loadingLevel = true;
+          }
     }
 };

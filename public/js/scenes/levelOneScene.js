@@ -79,8 +79,16 @@ class levelOneScene extends Phaser.Scene {
     
         this.createAnimations();
         this.createInput();
-        
-        this.createSound();
+        const musicConfig = {
+          mute: false,
+          volume: 1,
+          loop: true,
+          delay:0,
+          rate: 1,
+        }
+          this.bgMusic = this.sound.add('bgMusic2', musicConfig);
+          this.physics.add.overlap(this.player, this.portal, this.bgMusic.stop());
+        // this.createSound();
         
         this.createPortal();
         this.physics.add.overlap(this.player, this.portal, this.loadNextLevel.bind(this));
@@ -96,7 +104,7 @@ class levelOneScene extends Phaser.Scene {
       //     console.log(this);
       //     this.setAlpha(0.4)
       // }
-      
+      this.physics.add.overlap(this.player, this.bus, this.loadNextLevel.bind(this));
       const video = this.add.image(500,1200, 'quest').setInteractive();
       video.setScale(2)
       video.on('pointerdown', this.pointerdown.bind(this));
@@ -106,13 +114,25 @@ class levelOneScene extends Phaser.Scene {
       video.on('pointerout', this.pointerout.bind(this));
       this.quest = this.add.text(700, 1200, 'Click To See Quest', { font: '"Press to See Quest"' });
       this.quest.setScale(4)
+      this.createBus();
      
     }
     update () {
             this.player.update(this.cursors);
+          //   if(game.input.keyboard.isDown(Phaser.Keyboard.space)) {
+          //  this.bgMusic.stop();
+          //   }
 
     }
-    
+  
+    createBus() {
+      this.map.findObject('Bus Stop', (obj) => {
+        
+        this.bus = this.physics.add.image(obj.x, obj.y, 'busstop')
+        this.bus.setImmovable();
+    });
+      
+    }
     createPlayer() {
 
       // this.player = new Player(this,500, 100);
@@ -369,17 +389,15 @@ class levelOneScene extends Phaser.Scene {
         this.time.delayedCall(2000, this.spawnChest, [], this);
     }
     createSound() {
-      const musicConfig = {
-        mute: false,
-        volume: 1,
-        loop: true,
-        delay:0,
-        rate: 1,
-      }
-        this.bgMusic = this.sound.add('bgMusic2', musicConfig);
+      
         this.bgMusic.play();
+        
     }
-
+    stopSound() {
+      
+      this.bgMusic.destroy();
+      
+  }
 
 loadNextLevel () {
 

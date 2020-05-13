@@ -47,7 +47,11 @@ class BootScene extends Phaser.Scene {
         this.load.image('portal2', '/assets/New design assets/portal1 (64x64).png');
         this.load.image('quest', '/assets/New design assets/laptop.png');
         this.load.image('backpack', '/assets/New design assets/backpack_open.png');
+        this.load.image('busstop', '/assets/New design assets/bus stop(32x64).png');
 
+        //monster
+        this.load.image('raccoon', '/assets/New design assets/Raccoon.png');
+        //npc
         this.load.image('alex', '/assets/New design assets/NPC1.png');
         //map
         this.load.image('background', '/assets/Map/BCITA-tileset.png');

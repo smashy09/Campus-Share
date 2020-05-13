@@ -14,6 +14,7 @@ var config = {
         levelOneScene,
         levelTwoScene,
         levelThreeScene,
+        levelFourScene,
         GameScene,
         UiScene,
         TitleScene,
