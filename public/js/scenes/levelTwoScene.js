@@ -88,7 +88,7 @@ class levelTwoScene extends Phaser.Scene {
       
         this.physics.add.overlap(this.player, this.portal, function() {console.log('overlap') });
         this.physics.add.overlap(this.player, this.portal3, this.loadNextMap.bind(this));
-        this.physics.add.overlap(this.player, this.portal2, this.loadNextMap.bind(this));
+        this.physics.add.overlap(this.player, this.portal2, this.loadNextLevel2.bind(this));
         this.physics.add.overlap(this.player, this.portal3, this.loadNextMap.bind(this));
     }
     update () {
@@ -292,25 +292,36 @@ this.map.findObject('SW1 Floor 2 Entrance and Exit', (obj) => {
     //loadNextLevel () {}
 
     loadNextMap() {
-        // this.input.once('pointerdown', function () {
-
-        //     this.scene.switch('Game');
-
-        // }, this);
-        this.scene.start('levelThree',{level: 3, levels: this._LEVELS, newGame: false});
-        this.loadingLevel = true;
-
-        // if (!this.loadingLevel) {
-        //     this.cameras.main.fade(500, 0, 0, 0);
-        //     this.cameras.main.on( 'camerafadeoutcomplete', () => {
-        //       if (this._LEVEL === 2) {
-        //       this.scene.start('llevelThree',{level: 3, levels: this._LEVELS, newGame: false});
-        //     } else if (this._LEVEL === 3) {
-        //       this.scene.start({level: 2, levels: this._LEVELS, newGame: false});
-        //     }
-        //   });
-        //   this.loadingLevel = true;
-        //   }
         
+        // this.scene.start('levelThree',{level: 3, levels: this._LEVELS, newGame: false});
+        // this.loadingLevel = true;
+
+        if (!this.loadingLevel) {
+            this.cameras.main.fade(500, 0, 0, 0);
+            this.cameras.main.on( 'camerafadeoutcomplete', () => {
+              if (this._LEVEL === 2) {
+              this.scene.start('levelThree',{level: 3, levels: this._LEVELS, newGame: false});
+            } else if (this._LEVEL === 3) {
+              this.scene.start({level: 2, levels: this._LEVELS, newGame: false});
+            }
+          });
+          this.loadingLevel = true;
+          }
+        
+    }
+    loadNextLevel2 () {
+
+    // this.scene.restart({level: 'leveltwo', levels: this._LEVELS, newGame: false});
+      if (!this.loadingLevel) {
+        this.cameras.main.fade(500, 0, 0, 0);
+        this.cameras.main.on( 'camerafadeoutcomplete', () => {
+          if (this._LEVEL === 2) {
+          this.scene.start('level1', {level: 1, levels: this._LEVELS, newGame: false});
+        } else if (this._LEVEL === 3) {
+          this.scene.start({level: 2, levels: this._LEVELS, newGame: false});
+        }
+      });
+      this.loadingLevel = true;
+      }
     }
 };

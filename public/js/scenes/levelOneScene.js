@@ -122,13 +122,15 @@ class levelOneScene extends Phaser.Scene {
       // this.player = new Player(this,500, 100);
       //   this.player.setScale(2)
       //   this.name = "Tam"
+      if (this._LEVEL === 1) {
       this.map.findObject('Player Spawn', (obj) => {
         this.player = new Player(this, obj.x, obj.y,this.useCharacter([this.selectedCharacter]) );
       });
-      this.map.findObject('Player Spawn1', (obj) => {
+    } if (this._LEVEL === 2) {
+      this.map.findObject('Player Spawn2', (obj) => {
         this.player = new Player(this, obj.x, obj.y,this.useCharacter([this.selectedCharacter]) );
       });
-
+    }
       // this.map.findObject('Player Spawn', (obj) => {
       //   if (this._NEWGAME && this._LEVEL === 1) {
       //     if (obj.type === 'StartingPosition'){
@@ -392,21 +394,21 @@ loadNextLevel () {
     }
   }
 
-  loadNextLevel2 () {
+  // loadNextLevel2 () {
 
-    // this.scene.restart({level: 'leveltwo', levels: this._LEVELS, newGame: false});
-      if (!this.loadingLevel) {
-        this.cameras.main.fade(500, 0, 0, 0);
-        this.cameras.main.on( 'camerafadeoutcomplete', () => {
-          if (this._LEVEL === 2) {
-          this.scene.restart({level: 3, levels: this._LEVELS, newGame: false});
-        } else if (this._LEVEL === 3) {
-          this.scene.restart({level: 2, levels: this._LEVELS, newGame: false});
-        }
-      });
-      this.loadingLevel = true;
-      }
-    }
+  //   // this.scene.restart({level: 'leveltwo', levels: this._LEVELS, newGame: false});
+  //     if (!this.loadingLevel) {
+  //       this.cameras.main.fade(500, 0, 0, 0);
+  //       this.cameras.main.on( 'camerafadeoutcomplete', () => {
+  //         if (this._LEVEL === 2) {
+  //         this.scene.restart({level: 3, levels: this._LEVELS, newGame: false});
+  //       } else if (this._LEVEL === 3) {
+  //         this.scene.restart({level: 2, levels: this._LEVELS, newGame: false});
+  //       }
+  //     });
+  //     this.loadingLevel = true;
+  //     }
+  //   }
 
     pointerdown() {
       
