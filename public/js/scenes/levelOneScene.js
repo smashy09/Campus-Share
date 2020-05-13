@@ -90,7 +90,27 @@ class levelOneScene extends Phaser.Scene {
         this.createPortal();
         this.physics.add.overlap(this.player, this.portal, this.loadNextLevel.bind(this));
         this.physics.add.overlap(this.player, this.portal3, this.loadNextLevel2.bind(this));
+        //video test
         
+
+      //   pointerover(){
+      //     this.setAlpha(1)
+      // }
+  
+      // pointerout() {
+      //     console.log(this);
+      //     this.setAlpha(0.4)
+      // }
+      
+      const video = this.add.image(500,1200, 'portalicon').setInteractive();
+      video.on('pointerdown', this.pointerdown.bind(this));
+      this.movie = this.add.video(800, 1300, 'testvideo');
+      this.movie.setScale(0.5);
+      this.movie.setVisible(false);
+      video.on('pointerout', this.pointerout);
+      this.quest = this.add.text(700, 1200, 'Click To See Quest', { font: '"Press to See Quest"' });
+      this.quest.setScale(4)
+     
     }
     update () {
             this.player.update(this.cursors);
@@ -388,5 +408,18 @@ loadNextLevel () {
       }
     }
 
+    pointerdown() {
+      
+      this.movie = this.add.video(800, 1300, 'testvideo');
+      this.movie.setScale(0.5);
+      let x = true;
+      this.movie.play(x);
+
+    }
+    pointerout(video) {
+      console.log("move out")
+
+      this.movie.setVisible(false);
+  }
     
 };

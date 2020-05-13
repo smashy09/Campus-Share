@@ -102,6 +102,10 @@ class BootScene extends Phaser.Scene {
         this.load.audio('goldSound', ['/audio/Pickup.wav']);
         this.load.audio('bgMusic', '/audio/omou matsu.mp3');
         this.load.audio('bgMusic2', '/audio/ayeon- more sunshine.mp3')
+
+        //video
+
+        this.load.video('testvideo', '/audio/test_video.mp4')
     };
     create() {
         console.log('start game')
