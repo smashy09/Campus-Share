@@ -95,7 +95,21 @@ class levelTwoScene extends Phaser.Scene {
         //   this.createSound();
         this.createPortal();
         // this.loadNextMap();
-      
+        
+        // this.physics.add.overlap(this.player, this.npc, this.createquest1.bind(this));
+
+        this.movie = this.add.video(800, 1300, 'alex1');
+      this.movie.setScale(0.5);
+
+      this.movie.play(true);
+      this.createNPC().npc.setInteractive();
+    //   .setScale(2)
+    //   video.on('pointerdown', this.pointerdown.bind(this));
+      this.movie = this.add.video(800, 1300, 'testvideo');
+      this.movie.setScale(0.5);
+      this.movie.setVisible(false);
+      video.on('pointerout', this.pointerout.bind(this));
+      this.quest = this.add.text(700, 1200, 'Click To See Quest', { font: '"Press to See Quest"' });
         // this.physics.add.overlap(this.player, this.portal, function() {console.log('overlap') });
         this.physics.add.overlap(this.player, this.portal3, this.loadNextMap.bind(this));
         this.physics.add.overlap(this.player, this.portal2, this.loadNextLevel2.bind(this));
@@ -111,11 +125,21 @@ class levelTwoScene extends Phaser.Scene {
     createAudio() {
         this.goldPickAudio = this.sound.add('goldSound', {loop: false, volume: 0.2});
     }
+    createquest1() {
+        this.map.findObject('NPC Alex Tutorial', (obj) => {
+        this.movie = this.add.video(obj.x, obj.y, 'alex1');
+      this.movie.setScale(0.3);
+      this.movie.once();
+      
+        });
+    }
     createNPC() {
         this.map.findObject('NPC Alex Tutorial', (obj) => {
         
-            this.npc = this.physics.add.image(obj.x, obj.y, 'alex');
+            this.npc = this.physics.add.image(obj.x, obj.y, 'alex').setInteractive();
             this.npc.setScale(2);
+            
+            
         });
     }
     addCollisions() {

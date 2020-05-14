@@ -2,15 +2,23 @@
 
 
 class PlayerContainer extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, key, frame) {
+    constructor(scene, x, y, key, frame, health, maxHealth, id, playerName, gold, defenseValue, attackValue, items) {
         super(scene, x, y);
         this.scene = scene;
-        this.velocity = 160; // velocity(speed) to move players
-
-        //enable physics
-        this.scene.physics.world.enable(this);
+        this.velocity = 360; // velocity(speed) to move players
+        this.flipX = true;
+        this.id = id;
+        this.swordHit = false;
+    this.health = health;
+    this.maxHealth = maxHealth;
+        this.playerName = playerName;
+        this.gold = gold;
+        this.defenseValue = defenseValue;
+    this.attackValue = attackValue;
+    this.items = items;
+        this.playerAttacking = false;
         // set a size on the container
-        this.setSize(28, 28);
+        this.setSize(32, 32);
        
         this.body.setCollideWorldBounds(true);
 

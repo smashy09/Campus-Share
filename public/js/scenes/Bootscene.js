@@ -112,6 +112,7 @@ class BootScene extends Phaser.Scene {
         //video
 
         this.load.video('testvideo', '/audio/test_video.mp4')
+        this.load.video('alex1', '/audio/Alex text mp4s/alex taxt 1.mp4')
     };
     create() {
         console.log('start game')

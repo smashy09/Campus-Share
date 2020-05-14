@@ -115,7 +115,7 @@ class levelOneScene extends Phaser.Scene {
       this.quest = this.add.text(700, 1200, 'Click To See Quest', { font: '"Press to See Quest"' });
       this.quest.setScale(4)
       this.createBus();
-     
+      
     }
     update () {
             this.player.update(this.cursors);
@@ -129,7 +129,7 @@ class levelOneScene extends Phaser.Scene {
       this.map.findObject('Bus Stop', (obj) => {
         
         this.bus = this.physics.add.image(obj.x, obj.y, 'busstop')
-        this.bus.setImmovable();
+        
     });
       
     }
@@ -230,7 +230,7 @@ class levelOneScene extends Phaser.Scene {
         // this.physics.add.overlap(this.player, this.ball, function() {console.log('overlap'); });
         this.physics.add.collider(this.player,this.wallLayer);
         
-        
+        this.physics.add.collider(this.player,this.bus);
         // this.physics.add.collider(this.player, this.blockedLayer);
         
     }
