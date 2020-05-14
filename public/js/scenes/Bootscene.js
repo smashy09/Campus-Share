@@ -48,9 +48,12 @@ class BootScene extends Phaser.Scene {
         this.load.image('quest', '/assets/New design assets/laptop.png');
         this.load.image('backpack', '/assets/New design assets/backpack_open.png');
         this.load.image('busstop', '/assets/New design assets/bus stop(32x64).png');
+        this.load.image('pencil1', '/assets/New design assets/pencil.png');
+        this.load.image('pencil2', '/assets/New design assets/pencil2.png');
 
         //monster
         this.load.image('raccoon', '/assets/New design assets/Raccoon.png');
+        this.load.image('crow', '/assets/New design assets/Crow sprite.png');
         //npc
         this.load.image('alex', '/assets/New design assets/NPC1.png');
         //map
@@ -99,6 +102,8 @@ class BootScene extends Phaser.Scene {
         this.load.spritesheet('computer', '/assets/New design assets/C_Computer.png', {frameHeight: 32, frameWidth: 32});
 
         this.load.spritesheet('health', '/assets/New design assets/C_health and science.png', {frameHeight: 32, frameWidth: 32});
+        //crows
+        // this.load.spritesheet('crow', '/assets/New design assets/Crow sprite.png', {frameHeight: 32, frameWidth: 32});
         
     };
 

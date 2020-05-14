@@ -22,7 +22,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: false,
+            debug: true,
             gravity: {
                 y: 0,
             },
@@ -30,7 +30,19 @@ var config = {
     },
 };
 
-var game = new Phaser.Game(config);
+class Game extends Phaser.Game {
+    constructor() {
+      super(config);
+      const socket = io("http://localhost:5000");
+      this.globals = { socket };
+      this.scene.start('BootScene');
+    }
+  }
+  
+  window.onload = () => {
+    window.game = new Game();
+  };
+// var game = new Phaser.Game(config);
 
 
 

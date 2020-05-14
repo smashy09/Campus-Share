@@ -98,15 +98,16 @@ class levelTwoScene extends Phaser.Scene {
         
         // this.physics.add.overlap(this.player, this.npc, this.createquest1.bind(this));
 
-        this.movie = this.add.video(800, 1300, 'alex1');
-      this.movie.setScale(0.5);
-
-      this.movie.play(true);
-      this.createNPC().npc.setInteractive();
+       
+      
     //   .setScale(2)
     //   video.on('pointerdown', this.pointerdown.bind(this));
-      this.movie = this.add.video(800, 1300, 'testvideo');
-      this.movie.setScale(0.5);
+   
+
+    // function() {
+    //     // Se retornar falso não realiza colisão, isso previne que a função acima seja chamada multiplas vezes seguidas.
+    //     return player.getColliderStatus();
+    // }
       this.movie.setVisible(false);
       video.on('pointerout', this.pointerout.bind(this));
       this.quest = this.add.text(700, 1200, 'Click To See Quest', { font: '"Press to See Quest"' });

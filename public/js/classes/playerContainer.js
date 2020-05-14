@@ -1,21 +1,27 @@
 //Keep for game object container for other types.
-
+const Direction = {
+  RIGHT: 'RIGHT',
+  LEFT: 'LEFT',
+  UP: 'UP',
+  DOWN: 'DOWN',
+  
+};
 
 class PlayerContainer extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, key, frame, health, maxHealth, id, playerName, gold, defenseValue, attackValue, items) {
+    constructor(scene, x, y, key, health, maxHealth, id, playerName, gold, defenseValue, attackValue, items) {
         super(scene, x, y);
         this.scene = scene;
         this.velocity = 360; // velocity(speed) to move players
         this.flipX = true;
         this.id = id;
         this.swordHit = false;
-    this.health = health;
-    this.maxHealth = maxHealth;
+        this.health = health;
+        this.maxHealth = maxHealth;
         this.playerName = playerName;
         this.gold = gold;
         this.defenseValue = defenseValue;
-    this.attackValue = attackValue;
-    this.items = items;
+        this.attackValue = attackValue;
+        this.items = items;
         this.playerAttacking = false;
         // set a size on the container
         this.setSize(32, 32);
@@ -27,6 +33,16 @@ class PlayerContainer extends Phaser.GameObjects.Container {
         //follow player
         this.scene.cameras.main.startFollow(this);
         
+        this.player = new Player(this.scene, 0, 0, key);
+        this.add(this.player);
+
+    // create the weapon game object
+    this.weapon = this.scene.add.image(40, 0, 'items', 4);
+    this.scene.add.existing(this.weapon);
+    this.weapon.setScale(1.5);
+    this.scene.physics.world.enable(this.weapon);
+    this.add(this.weapon);
+    this.weapon.alpha = 0;
        
     }
 
