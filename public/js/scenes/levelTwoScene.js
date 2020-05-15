@@ -89,7 +89,7 @@ class levelTwoScene extends Phaser.Scene {
         }
         // this.chest = new Chest(this, 200, 290, 'items', 0);
         // this.createWalls ();
-        // this.createObject();
+        this.createObject();
         this.createPlayer();
          // physics
         
@@ -281,6 +281,29 @@ class levelTwoScene extends Phaser.Scene {
             
             
         });
+        this.map.findObject('NPC Student Services', (obj) => {
+        
+          this.npc2 = this.physics.add.image(obj.x, obj.y, 'SS1').setInteractive();
+          this.npc2.setScale(2);
+          this.npc2.setImmovable();
+          
+      });
+      this.map.findObject('NPC SS2', (obj) => {
+        
+        this.npc3 = this.physics.add.image(obj.x, obj.y, 'SS2').setInteractive();
+        this.npc3.setScale(2);
+        this.npc3.setImmovable();
+        
+    });
+    this.map.findObject('NPC SS3', (obj) => {
+        
+      this.npc4 = this.physics.add.image(obj.x, obj.y, 'SS3').setInteractive();
+      this.npc4.setScale(2);
+      this.npc4.setImmovable();
+      
+  });
+
+      
     }
 
     addCollisions() {
@@ -426,8 +449,12 @@ class levelTwoScene extends Phaser.Scene {
     // }
 
     createObject() {
-        this.ball = this.physics.add.image(400, 300, 'basketball')
-        this.ball.setScale(0.5);
+      this.map.findObject('Key Item Student Agenda', (obj) => {
+        
+        this.agenda = this.physics.add.image(obj.x + 130, obj.y, 'agenda').setInteractive();
+        this.agenda.setScale(2);
+        
+    });
     }
 
     createInput() {
@@ -469,6 +496,7 @@ class levelTwoScene extends Phaser.Scene {
             this.cameras.main.fade(500, 0, 0, 0);
             this.cameras.main.on( 'camerafadeoutcomplete', () => {
               if (this._LEVEL === 2) {
+                this.bgMusic.destroy();
               this.scene.start('levelThree',{level: 3, levels: this._LEVELS, newGame: false});
             } 
           });

@@ -50,12 +50,22 @@ class BootScene extends Phaser.Scene {
         this.load.image('busstop', '/assets/New design assets/bus stop(32x64).png');
         this.load.image('pencil1', '/assets/New design assets/newpencil.png');
         this.load.image('pencil2', '/assets/New design assets/pencil2.png');
-
+        this.load.image('lock', '/assets/New design assets/lock.png');
+        this.load.image('scard', '/assets/New design assets/student card.png');
+        this.load.image('agenda', '/assets/New design assets/agenda.png');
         //monster
         this.load.image('raccoon', '/assets/New design assets/Raccoon.png');
         this.load.image('crow', '/assets/New design assets/Crow sprite.png');
         //npc
         this.load.image('alex', '/assets/New design assets/NPC1.png');
+        this.load.image('Alex', '/assets/New design assets/Alex.png');
+        this.load.image('SS1', '/assets/New design assets/Student Services1.png');
+        this.load.image('SS2', '/assets/New design assets/Student Services2.png');
+        this.load.image('SS3', '/assets/New design assets/Student Services3.png');
+        this.load.image('Hoodnpc', '/assets/New design assets/BCIT shop  cashier.png');
+        this.load.image('Cashierfood', '/assets/New design assets/Cashier2.png');
+        this.load.image('CoffeeNpc', '/assets/New design assets/Cashier1.png');
+        this.load.image('SS4', '/assets/New design assets/Student Services-right.png');
         //map
         this.load.image('background', '/assets/Map/BCITA-tileset.png');
         this.load.image('tileset1', '/assets/Map/tileset.png');
