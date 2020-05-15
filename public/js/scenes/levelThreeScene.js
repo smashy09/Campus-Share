@@ -93,8 +93,8 @@ class levelThreeScene extends Phaser.Scene {
         rate: 1,
       }
         this.bgMusic = this.sound.add('bgMusic2', musicConfig);
-        this.physics.add.overlap(this.player, this.portal, this.bgMusic.stop());
-      // this.createSound();
+        // this.physics.add.overlap(this.player, this.portal, this.bgMusic.stop());
+      this.createSound();
       this.spawnMonster();
       this.createPortal();
       this.physics.add.overlap(this.player, this.portal, this.loadNextLevel.bind(this));
@@ -103,7 +103,7 @@ class levelThreeScene extends Phaser.Scene {
     // this.movie.setVisible(false);
     
     
-    this.createBus();
+   
     this.collider = this.physics.add.collider(this.player, this.bus, () => this.events.emit('flag'))
     this.events.once('flag', this.createQuest.bind(this) )
     this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
@@ -134,14 +134,9 @@ class levelThreeScene extends Phaser.Scene {
         
   }
 
-  createBus() {
-    this.map.findObject('Bus Stop', (obj) => {
-      
-      this.bus = this.physics.add.image(obj.x, obj.y, 'busstop');
-      this.bus.setImmovable();
-  });
   
-  }
+  
+  
   createQuest() {
     this.movie = this.add.video(800, 600, 'intro');
     this.movie.setScale(0.5);

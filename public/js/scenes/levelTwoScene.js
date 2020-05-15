@@ -469,6 +469,7 @@ class levelTwoScene extends Phaser.Scene {
             this.cameras.main.fade(500, 0, 0, 0);
             this.cameras.main.on( 'camerafadeoutcomplete', () => {
               if (this._LEVEL === 2) {
+                this.bgMusic.destroy();
               this.scene.start('levelThree',{level: 3, levels: this._LEVELS, newGame: false});
             } 
           });
