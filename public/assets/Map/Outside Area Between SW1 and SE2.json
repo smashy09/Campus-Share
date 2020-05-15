@@ -131,18 +131,6 @@
                  "width":0,
                  "x":1814.81248030255,
                  "y":747.456665616136
-                }, 
-                {
-                 "height":0,
-                 "id":23,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":2276.2054837693,
-                 "y":436.785376615191
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -203,18 +191,6 @@
          "objects":[
                 {
                  "height":0,
-                 "id":11,
-                 "name":"SE2_Portal_2",
-                 "point":true,
-                 "rotation":0,
-                 "type":"SE2 Portal Entrance",
-                 "visible":true,
-                 "width":0,
-                 "x":1561.33,
-                 "y":109.333
-                }, 
-                {
-                 "height":0,
                  "id":12,
                  "name":"SE2_Portal_1",
                  "point":true,
@@ -224,6 +200,29 @@
                  "width":0,
                  "x":72,
                  "y":44
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":26,
+         "name":"SE2 Portal2",
+         "objects":[
+                {
+                 "height":0,
+                 "id":11,
+                 "name":"SE2_Portal_2",
+                 "point":true,
+                 "rotation":0,
+                 "type":"SE2 Portal Entrance",
+                 "visible":true,
+                 "width":0,
+                 "x":1561.33,
+                 "y":109.333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -325,7 +324,7 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":26,
+ "nextlayerid":27,
  "nextobjectid":26,
  "orientation":"orthogonal",
  "renderorder":"right-down",

@@ -17,7 +17,7 @@
          "name":"Floor",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":60,
          "x":0,
          "y":0
@@ -90,18 +90,6 @@
                  "visible":true,
                  "width":0,
                  "x":1458.30444374409,
-                 "y":874.377560668137
-                }, 
-                {
-                 "height":0,
-                 "id":13,
-                 "name":"Player Spawn",
-                 "point":true,
-                 "rotation":0,
-                 "type":"Player Spawn",
-                 "visible":true,
-                 "width":0,
-                 "x":1455.27891585251,
                  "y":874.377560668137
                 }],
          "opacity":1,

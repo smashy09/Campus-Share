@@ -34,18 +34,36 @@ mongoose.connection.on('error', (error) => {
 });
 
 mongoose.set('useFindAndModify', false);
-// setup mongo
-// const uri = process.env.MONGO_CONNECTION_URL;
-// mongoose.connect(uri, { useUnifiedTopology: true,
-//   useNewUrlParser: true });
-// mongoose.connection.on('error', (error) => {
-//   console.log(error);
-//   process.exit(1);
-// });
-// mongoose.connection.on('connected', function () {
-//   console.log('connected to mongo');
-// });
-// mongoose.set('useFindAndModify', false);
+
+
+// create an instance of an express app
+
+const server = require('http').Server(app);
+const io = require('socket.io').listen(server);
+
+const players = {};
+io.on('connection', function (socket) {
+  console.log('a user connected: ', socket.id);
+  // create a new player and add it to our players object
+  players[socket.id] = {
+    flipX: false,
+    playerId: socket.id
+  };
+  socket.emit('currentPlayers', players);
+
+  socket.on('disconnect', function () {
+    console.log('user disconnected: ', socket.id);
+    delete players[socket.id];
+    // emit a message to all players to remove this player
+    io.emit('disconnect', socket.id);
+  });
+
+  socket.on('playerMovement', function (movementData) {
+    players[socket.id].x = movementData.x;
+    players[socket.id].y = movementData.y;
+    players[socket.id].flipX = movementData.flipX;
+  });
+});
 
 //bodyparse
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -121,7 +139,7 @@ app.use((err, req, res, next) => {
 
 mongoose.connection.on('connected', () => {
   console.log('connected to mongo');
-  app.listen(port, () => {
+  server.listen(port, () => {
     console.log(`server is running on port: ${port}`);
   });
 });

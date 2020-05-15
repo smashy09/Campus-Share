@@ -43,9 +43,18 @@ class BootScene extends Phaser.Scene {
         this.load.image('button2', '/images/ui/blue_button02.png');
         this.load.image('basketball', '/assets/New design assets/Basketball.png');
         this.load.image('weapon1', '/assets/New design assets/tennis racket.png');
-        this.load.image('portalicon', '/assets/Icon(objects)/1x/laptop.png');
+        this.load.image('portalicon', '/assets/New design assets/portal(64x64).png');
+        this.load.image('portal2', '/assets/New design assets/portal1 (64x64).png');
+        this.load.image('quest', '/assets/New design assets/laptop.png');
         this.load.image('backpack', '/assets/New design assets/backpack_open.png');
+        this.load.image('busstop', '/assets/New design assets/bus stop(32x64).png');
+        this.load.image('pencil1', '/assets/New design assets/newpencil.png');
+        this.load.image('pencil2', '/assets/New design assets/pencil2.png');
 
+        //monster
+        this.load.image('raccoon', '/assets/New design assets/Raccoon.png');
+        this.load.image('crow', '/assets/New design assets/Crow sprite.png');
+        //npc
         this.load.image('alex', '/assets/New design assets/NPC1.png');
         //map
         this.load.image('background', '/assets/Map/BCITA-tileset.png');
@@ -93,6 +102,8 @@ class BootScene extends Phaser.Scene {
         this.load.spritesheet('computer', '/assets/New design assets/C_Computer.png', {frameHeight: 32, frameWidth: 32});
 
         this.load.spritesheet('health', '/assets/New design assets/C_health and science.png', {frameHeight: 32, frameWidth: 32});
+        //crows
+        // this.load.spritesheet('crow', '/assets/New design assets/Crow sprite.png', {frameHeight: 32, frameWidth: 32});
         
     };
 
@@ -102,6 +113,11 @@ class BootScene extends Phaser.Scene {
         this.load.audio('goldSound', ['/audio/Pickup.wav']);
         this.load.audio('bgMusic', '/audio/omou matsu.mp3');
         this.load.audio('bgMusic2', '/audio/ayeon- more sunshine.mp3')
+
+        //video
+
+        this.load.video('intro', '/audio/talk to alex in next building.mp4')
+        this.load.video('alex1', '/audio/Alex text mp4s/alex taxt 1.mp4')
     };
     create() {
         console.log('start game')
