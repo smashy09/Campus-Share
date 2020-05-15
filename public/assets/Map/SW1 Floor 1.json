@@ -96,7 +96,18 @@
                  "width":0,
                  "x":1610,
                  "y":456
-                }, 
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":25,
+         "name":"NPC SS2",
+         "objects":[
                 {
                  "height":0,
                  "id":14,
@@ -108,7 +119,18 @@
                  "width":0,
                  "x":1612,
                  "y":632
-                }, 
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":26,
+         "name":"NPC SS3",
+         "objects":[
                 {
                  "height":0,
                  "id":15,
@@ -265,7 +287,7 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":25,
+ "nextlayerid":27,
  "nextobjectid":25,
  "orientation":"orthogonal",
  "renderorder":"right-down",

@@ -165,12 +165,39 @@ class levelFiveScene extends Phaser.Scene {
   createNPC() {
     this.map.findObject('Alex', (obj) => {
     
-        this.npc = this.physics.add.image(obj.x, obj.y, 'alex').setInteractive();
+        this.npc = this.physics.add.image(obj.x, obj.y, 'Alex').setInteractive();
         this.npc.setScale(2);
         this.npc.setImmovable();
         
-        
     });
+    this.map.findObject('Student Services', (obj) => {
+    
+      this.npc2 = this.physics.add.image(obj.x, obj.y, 'SS4').setInteractive();
+      this.npc2.setScale(2);
+      this.npc2.setImmovable();
+      
+  });
+  this.map.findObject('Cafeteria cashier', (obj) => {
+    
+    this.npc3 = this.physics.add.image(obj.x, obj.y, 'Cashierfood').setInteractive();
+    this.npc3.setScale(2);
+    this.npc3.setImmovable();
+    
+});
+this.map.findObject('Coffee cashier', (obj) => {
+    
+  this.npc4 = this.physics.add.image(obj.x, obj.y, 'CoffeeNpc').setInteractive();
+  this.npc4.setScale(2);
+  this.npc4.setImmovable();
+  
+});
+this.map.findObject('Hoodie Cashier', (obj) => {
+    
+  this.npc5 = this.physics.add.image(obj.x, obj.y, 'Hoodnpc').setInteractive();
+  this.npc5.setScale(2);
+  this.npc5.setImmovable();
+  
+});
 }
   createGroups() {
     this.monsters = this.physics.add.group();
