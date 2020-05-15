@@ -48,7 +48,7 @@ class BootScene extends Phaser.Scene {
         this.load.image('quest', '/assets/New design assets/laptop.png');
         this.load.image('backpack', '/assets/New design assets/backpack_open.png');
         this.load.image('busstop', '/assets/New design assets/bus stop(32x64).png');
-        this.load.image('pencil1', '/assets/New design assets/pencil.png');
+        this.load.image('pencil1', '/assets/New design assets/newpencil.png');
         this.load.image('pencil2', '/assets/New design assets/pencil2.png');
 
         //monster
@@ -116,7 +116,7 @@ class BootScene extends Phaser.Scene {
 
         //video
 
-        this.load.video('testvideo', '/audio/test_video.mp4')
+        this.load.video('intro', '/audio/talk to alex in next building.mp4')
         this.load.video('alex1', '/audio/Alex text mp4s/alex taxt 1.mp4')
     };
     create() {

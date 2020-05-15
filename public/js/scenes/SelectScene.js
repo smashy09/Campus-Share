@@ -65,7 +65,7 @@ class SelectScene extends Phaser.Scene {
         console.log(datas);
         console.log(this);
         this.scene.start('level1', datas)
-        window.network.saveAvatar(character)
+        // window.network.saveAvatar(character)
     }
 
 }

@@ -1,6 +1,6 @@
-class levelFourScene extends Phaser.Scene {
+class levelFiveScene extends Phaser.Scene {
     constructor() {
-        super("levelfour");
+        super("levelfive");
         
 
     }
@@ -98,6 +98,7 @@ class levelFourScene extends Phaser.Scene {
       this.createAnimations();
       this.createInput();
       this.createGroups();
+      this.createNPC();
       const musicConfig = {
         mute: false,
         volume: 1,
@@ -108,10 +109,10 @@ class levelFourScene extends Phaser.Scene {
         this.bgMusic = this.sound.add('bgMusic2', musicConfig);
         // this.physics.add.overlap(this.player, this.portal, this.bgMusic.stop());
       this.createSound();
-      this.spawnMonster();
+      // this.spawnMonster();
       this.createPortal();
-      this.physics.add.overlap(this.player, this.portal2, this.loadNextMap.bind(this));
-      this.physics.add.overlap(this.player, this.portal3, this.loadNextMap.bind(this));
+      this.physics.add.overlap(this.player, this.portal2, this.loadPrevMap.bind(this));
+      
       this.physics.add.overlap(this.player, this.portal, this.loadPrevMap.bind(this));
      
     // this.movie.setVisible(false);
@@ -125,7 +126,7 @@ class levelFourScene extends Phaser.Scene {
   }
   update () {
     this.player.update(this.cursors);
-    // if (this.keyQ.isDown) {
+         // if (this.keyQ.isDown) {
     //   this.movie.destroy();
     //   this.quest2.destroy();
     //       }
@@ -161,6 +162,16 @@ class levelFourScene extends Phaser.Scene {
     this.movie = this.add.video(800, 600, 'intro');
     this.movie.setScale(0.5);
   }  
+  createNPC() {
+    this.map.findObject('Alex', (obj) => {
+    
+        this.npc = this.physics.add.image(obj.x, obj.y, 'alex').setInteractive();
+        this.npc.setScale(2);
+        this.npc.setImmovable();
+        
+        
+    });
+}
   createGroups() {
     this.monsters = this.physics.add.group();
   this.monsters.runChildUpdate = true;
@@ -168,7 +179,7 @@ class levelFourScene extends Phaser.Scene {
   createPlayer() {
     
 
-    this.map.findObject('Player_Spawn_SW1', (obj) => {
+    this.map.findObject('Player Spawn1', (obj) => {
       // this.player = new PlayerContainer(this, obj.x, obj.y,'health' );
       this.player = new PlayerContainer(this, obj.x, obj.y,this.useCharacter([this.selectedCharacter]) );
       this.player.setInteractive(); 
@@ -200,20 +211,15 @@ class levelFourScene extends Phaser.Scene {
   }
   createPortal() {
 
-    this.map.findObject('SW1 Portal Entrance ', (obj) => {
+    this.map.findObject('Se2 Portal Entrance', (obj) => {
         
       this.portal = this.physics.add.image(obj.x, obj.y, 'portal2')
   });
-  this.map.findObject('SE2 Portal Entrance', (obj) => {
+  this.map.findObject('Se2 Side portal', (obj) => {
     
     this.portal2 = this.physics.add.image(obj.x, obj.y, 'portal2')
 });
 
-this.map.findObject('SE2 Portal2', (obj) => {
-    
-  this.portal3 = this.physics.add.image(obj.x, obj.y, 'portal2')
-});
-    
    
 }
 spawnMonster() {
@@ -342,18 +348,19 @@ spawnMonster() {
   // create the tilemap
   // this.map = this.make.tilemap({ key: this._LEVELS[this._LEVEL] });
 
-      this.map = this.make.tilemap({key: 'outdoor1'});
+      this.map = this.make.tilemap({key: 'SE2'});
       
      // add tileset image . use the tileset name, key of the image, etc
      this.tiles = this.map.addTilesetImage("main tileset", 'tileset1', 32, 32, 0, 0);
       
      //create background layer
-     this.backgroundLayer = this.map.createStaticLayer("Floor", this.tiles, 0,0);
+     this.backgroundLayer = this.map.createStaticLayer("floor", this.tiles, 0,0);
      // this.backgroundLayer.setScale(2);
 
      this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-     this.wallLayer = this.map.createStaticLayer('Walls, Stairs, Tables', this.tiles, 0, 0);
+     this.wallLayer = this.map.createStaticLayer('se2 walls/collision', this.tiles, 0, 0);
      
+     this.decor = this.map.createStaticLayer('Table decoration/objects no collision', this.tiles, 0, 0);
      this.wallLayer.setCollisionByProperty({collides: true});
     //  this.wallLayer.setCollision([2], true);
     //  this.decor = this.map.createStaticLayer('Decoration', this.tiles, 0, 0);
@@ -457,33 +464,32 @@ spawnMonster() {
 }
 
 
-    loadNextMap() {
+    // loadNextMap() {
         
-        // this.scene.start('levelThree',{level: 3, levels: this._LEVELS, newGame: false});
-        // this.loadingLevel = true;
+    //     // this.scene.start('levelThree',{level: 3, levels: this._LEVELS, newGame: false});
+    //     // this.loadingLevel = true;
 
-        if (!this.loadingLevel) {
-            this.cameras.main.fade(500, 0, 0, 0);
-            this.cameras.main.on( 'camerafadeoutcomplete', () => {
-              if (this._LEVEL === 4) {
-                this.bgMusic.destroy();
-              this.scene.start('levelfive',{level: 5, levels: this._LEVELS, newGame: false});
-            } 
-          });
-          this.loadingLevel = true;
-          }
+    //     if (!this.loadingLevel) {
+    //         this.cameras.main.fade(500, 0, 0, 0);
+    //         this.cameras.main.on( 'camerafadeoutcomplete', () => {
+    //           if (this._LEVEL === 5) {
+    //           this.scene.start('levelfour',{level: 4, levels: this._LEVELS, newGame: false});
+    //         } 
+    //       });
+    //       this.loadingLevel = true;
+    //       }
         
-    }
+    // }
     loadPrevMap () {
 
     // this.scene.restart({level: 'leveltwo', levels: this._LEVELS, newGame: false});
       if (!this.loadingLevel) {
         this.cameras.main.fade(500, 0, 0, 0);
         this.cameras.main.on( 'camerafadeoutcomplete', () => {
-          if (this._LEVEL === 4) {
+          if (this._LEVEL === 5) {
             this.bgMusic.destroy();
-          this.scene.start('leveltwo', {level: 2, levels: this._LEVELS, newGame: false});
-        }
+          this.scene.start('levelfour', {level: 4, levels: this._LEVELS, newGame: false});
+        } 
       });
       this.loadingLevel = true;
       }

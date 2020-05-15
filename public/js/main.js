@@ -15,6 +15,7 @@ var config = {
         levelTwoScene,
         levelThreeScene,
         levelFourScene,
+        levelFiveScene,
         GameScene,
         UiScene,
         TitleScene,
@@ -22,7 +23,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
+            debug: false,
             gravity: {
                 y: 0,
             },
@@ -30,19 +31,19 @@ var config = {
     },
 };
 
-class Game extends Phaser.Game {
-    constructor() {
-      super(config);
-      const socket = io("http://localhost:5000");
-      this.globals = { socket };
-      this.scene.start('BootScene');
-    }
-  }
+// class Game extends Phaser.Game {
+//     constructor() {
+//       super(config);
+//       const socket = io("http://localhost:5000");
+//       this.globals = { socket };
+//       this.scene.start('BootScene');
+//     }
+//   }
   
-  window.onload = () => {
-    window.game = new Game();
-  };
-// var game = new Phaser.Game(config);
+//   window.onload = () => {
+//     window.game = new Game();
+//   };
+var game = new Phaser.Game(config);
 
 
 

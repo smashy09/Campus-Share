@@ -20,28 +20,28 @@ class levelOneScene extends Phaser.Scene {
         this.score = 0
         this.loadingLevel = false;
          // get a reference to our socket
-    this.socket = this.sys.game.globals.socket;
+    // this.socket = this.sys.game.globals.socket;
 
     // listen for socket event
-    this.listenForSocketEvents();
+    // this.listenForSocketEvents();
 
         this.selectedCharacter = data.selectedCharacter || 0;
         console.log(data)
 
     }
-    listenForSocketEvents() {
-      // spawn player game objects
-      this.socket.on('currentPlayers', (players) => {
-        Object.keys(players).forEach((id) => {
-          if (players[id].id === this.socket.id) {
-            this.createPlayer(players[id], true);
-            this.addCollisions();
-          } else {
-            this.createPlayer(players[id], false);
-          }
-        });
-      });
-    }
+    // listenForSocketEvents() {
+    //   // spawn player game objects
+    //   this.socket.on('currentPlayers', (players) => {
+    //     Object.keys(players).forEach((id) => {
+    //       if (players[id].id === this.socket.id) {
+    //         this.createPlayer(players[id], true);
+    //         this.addCollisions();
+    //       } else {
+    //         this.createPlayer(players[id], false);
+    //       }
+    //     });
+    //   });
+    // }
     create() {
         
       this.anims.create({
@@ -105,117 +105,94 @@ class levelOneScene extends Phaser.Scene {
           rate: 1,
         }
           this.bgMusic = this.sound.add('bgMusic2', musicConfig);
-          this.physics.add.overlap(this.player, this.portal, this.bgMusic.stop());
-        // this.createSound();
+          
+        this.createSound();
         this.spawnMonster();
         this.createPortal();
         this.physics.add.overlap(this.player, this.portal, this.loadNextLevel.bind(this));
         // this.physics.add.overlap(this.player, this.portal3, this.loadNextLevel2.bind(this));
-        //video test
-        
-
-      //   pointerover(){
-      //     this.setAlpha(1)
-      // }
-  
-      // pointerout() {
-      //     console.log(this);
-      //     this.setAlpha(0.4)
-      // }
-      this.physics.add.overlap(this.player, this.bus, this.loadNextLevel.bind(this));
-      const video = this.add.image(500,1200, 'quest').setInteractive();
-      video.setScale(2)
-      video.on('pointerdown', this.pointerdown.bind(this));
-      this.movie = this.add.video(800, 1300, 'testvideo');
-      this.movie.setScale(0.5);
-      this.movie.setVisible(false);
-      video.on('pointerout', this.pointerout.bind(this));
-      this.quest = this.add.text(700, 1200, 'Click To See Quest', { font: '"Press to See Quest"' });
+       
+      // this.movie.setVisible(false);
+      
+      this.quest = this.add.text(700, 1200, 'Go To Bus STOP', { font: '"Press to See Quest"' });
       this.quest.setScale(4)
       this.createBus();
-      
+      this.collider = this.physics.add.collider(this.player, this.bus, () => this.events.emit('flag'))
+      this.events.once('flag', this.createQuest.bind(this) )
+       this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
     }
     update () {
-            this.player.update(this.cursors);
-          //   if(game.input.keyboard.isDown(Phaser.Keyboard.space)) {
+      this.player.update(this.cursors);
+            if (this.keyQ.isDown) {
+              this.movie.destroy();
+              this.quest2.destroy();
+            }
           //  this.bgMusic.stop();
           //   }
-          if (Phaser.Input.Keyboard.JustDown(this.cursors.space) && !this.attacking) {
-            this.attacking = true;
-            setTimeout(() => {
-              this.attacking = false;
-              this.weapon.angle = 0;
-            }, 150);
-          }
+          // if (Phaser.Input.Keyboard.JustDown(this.cursors.space) && !this.attacking) {
+          //   this.attacking = true;
+          //   setTimeout(() => {
+          //     this.attacking = false;
+          //     this.weapon.angle = 0;
+          //   }, 150);
+          // }
     
-          if (this.attacking) {
-            if (this.weapon.flipX) {
-              this.weapon.angle -= 10;
-            } else {
-              this.weapon.angle += 10;
-            }
-          }
+          // if (this.attacking) {
+          //   if (this.weapon.flipX) {
+          //     this.weapon.angle -= 10;
+          //   } else {
+          //     this.weapon.angle += 10;
+          //   }
+          // }
+          
     }
   
     createBus() {
       this.map.findObject('Bus Stop', (obj) => {
         
-        this.bus = this.physics.add.image(obj.x, obj.y, 'busstop')
-        
+        this.bus = this.physics.add.image(obj.x, obj.y, 'busstop');
+        this.bus.setImmovable();
     });
-      
+    
     }
+    createQuest() {
+      this.movie = this.add.video(800, 600, 'intro');
+      this.movie.setScale(0.5);
+      this.quest2 = this.add.text(700, 400, 'PRESS Q TO CLOSE', { font: '"Press to See Quest"' });
+      this.quest2.setScale(4)
+    }  
     createGroups() {
       this.monsters = this.physics.add.group();
     this.monsters.runChildUpdate = true;
     }
-    createPlayer(playerObject, mainPlayer) {
+    createPlayer() {
       
-      const container = this.add.container(0, 0)
-      container.setInteractive();
+      
+
   
       if (this._LEVEL === 1) {
       this.map.findObject('Player Spawn', (obj) => {
-        this.player = new Player(this, obj.x, obj.y,this.useCharacter([this.selectedCharacter]) );
-        console.log('add the pencil')
-        container.add(this.player);
-       
-    
+        // this.player = new PlayerContainer(this, obj.x, obj.y,'health' );
+        this.player = new PlayerContainer(this, obj.x, obj.y,this.useCharacter([this.selectedCharacter]) );
+        this.player.setInteractive(); 
+      //   this.container = this.add.container(0, 0)
+      //  this.container.setSize(32, 32);
+      //   this.container.add(this.player);
+      //   this.container.setInteractive();
+      //   this.container.add(this.weapon);
         
-      });
-      //   const newPlayerGameObject = new PlayerContainer(
-      //     this, 
-      //     obj.x, 
-      //     obj.y,
-      //     this.useCharacter([this.selectedCharacter]),
-      //     obj.health,
-      //     obj.maxHealth,
-      //     obj.id,
-      //     this.playerAttackAudio,
-      //     mainPlayer,
-      //     obj.playerName,
-      //     obj.gold,
-      //     obj.defense,
-      //     obj.attack,
-      //     obj.playerItems,
-      //      );
-           
-      //   this.player = newPlayerGameObject;
-          
-      
-      //     newPlayerGameObject.setInteractive();
-      //  });
-    // add weapon
-    
+        
+      })
     
     }
-    this.weapon = this.physics.add.image(100, 400, 'pencil2');
-      console.log(this.weapon);
-      this.weapon.setScale(1);
-      this.weapon.setSize(16, 16);
+    // this.weapon = this.physics.add.image(100, 400, 'pencil2');
+    //   console.log(this.weapon);
+    //   this.weapon.setScale(1);
+    //   this.weapon.setSize(16, 16);
+   
+     
       
-      container.add(this.weapon);
-        this.attacking = false;
+    //     this.attacking = false;
     };
     onMeetEnemy(player, enemy) {
       if (this.attacking) {
@@ -230,25 +207,6 @@ class levelOneScene extends Phaser.Scene {
         
         this.portal = new Portal(this, obj.x, obj.y);
     });
-
-      this.map.findObject('SW1 Portal Entrance', (obj) => {
-        
-          this.portal2 = new Portal(this, obj.x, obj.y);
-      });
-      this.map.findObject('SW1 Portal Entrance to floor 2', (obj) => {
-        
-        this.portal3 = new Portal(this, obj.x, obj.y);
-    });
-
-    this.map.findObject('SW1 Portal Exit', (obj) => {
-        
-      this.portal4 = new Portal(this, obj.x, obj.y);
-  });
-
-  this.map.findObject('SW1 Floor 2 Entrance and Exit', (obj) => {
-        
-    this.portal5 = new Portal(this, obj.x, obj.y);
-});
       
      
   }
@@ -258,48 +216,48 @@ class levelOneScene extends Phaser.Scene {
     });
     this.map.findObject('Mob Crow', (obj) => {
       console.log('caw caw')
-      var enemy = this.physics.add.image(obj.x, obj.y, 'crow');
-    enemy.body.setCollideWorldBounds(true);
-    enemy.body.setImmovable();
-    this.timedEvent = this.time.addEvent({
-      delay: 3000,
-      callback: this.moveEnemies,
-      callbackScope: this,
-      loop: true
-    });
+      this.crow = this.physics.add.image(obj.x, obj.y, 'crow');
+    this.crow.body.setCollideWorldBounds(true);
+    // enemy.body.setImmovable();
+    // this.timedEvent = this.time.addEvent({
+    //   delay: 3000,
+    //   callback: this.moveEnemies,
+    //   callbackScope: this,
+    //   loop: true
+    // });
     });
   }
-  moveEnemies () {
-    this.spawns.getChildren().forEach((enemy) => {
-      const randNumber = Math.floor((Math.random() * 4) + 1);
+  // moveEnemies () {
+  //   this.spawns.getChildren().forEach((enemy) => {
+  //     const randNumber = Math.floor((Math.random() * 4) + 1);
 
-      switch(randNumber) {
-        case 1:
-          enemy.body.setVelocityX(50);
-          break;
-        case 2:
-          enemy.body.setVelocityX(-50);
-          break;
-        case 3:
-          enemy.body.setVelocityY(50);
-          break;
-        case 4:
-          enemy.body.setVelocityY(50);
-          break;
-        default:
-          enemy.body.setVelocityX(50);
-      }
-    });
+  //     switch(randNumber) {
+  //       case 1:
+  //         enemy.body.setVelocityX(50);
+  //         break;
+  //       case 2:
+  //         enemy.body.setVelocityX(-50);
+  //         break;
+  //       case 3:
+  //         enemy.body.setVelocityY(50);
+  //         break;
+  //       case 4:
+  //         enemy.body.setVelocityY(50);
+  //         break;
+  //       default:
+  //         enemy.body.setVelocityX(50);
+  //     }
+  //   });
 
-    setTimeout(() => {
-      this.spawns.setVelocityX(0);
-      this.spawns.setVelocityY(0);
-    }, 500);
-  }
+  //   setTimeout(() => {
+  //     this.spawns.setVelocityX(0);
+  //     this.spawns.setVelocityY(0);
+  //   }, 500);
+  // }
       useCharacter(data) {
         
         // this.selectedCharacter = 'health'
-        // console.log(this.selectedCharacter)
+        console.log(this.selectedCharacter)
         if (this.selectedCharacter === 0) {
            return this.selectedCharacter = 'health';
         }else if (this.selectedCharacter === 1) {
@@ -327,9 +285,15 @@ class levelOneScene extends Phaser.Scene {
         
         this.physics.add.collider(this.player,this.bus);
         // this.physics.add.collider(this.player, this.blockedLayer);
-        
+        this.physics.add.overlap(this.player.weapon, this.crow, this.enemyOverlap, null, this)
     }
-    
+    enemyOverlap(weapon, enemy) {
+      if (this.player.playerAttacking && !this.player.swordHit) {
+        this.player.swordHit = true;
+        this.events.emit('destroy', enemy.id, this.player.id);
+      }
+    }
+
     createAnimations() {
 
         this.player2 = this.add.sprite('playerLeft')
@@ -375,9 +339,6 @@ class levelOneScene extends Phaser.Scene {
       }
     createMap() {
         
-        
-       
-       
     // create the tilemap
     // this.map = this.make.tilemap({ key: this._LEVELS[this._LEVEL] });
  
@@ -502,29 +463,13 @@ loadNextLevel () {
       this.cameras.main.fade(500, 0, 0, 0);
       this.cameras.main.on( 'camerafadeoutcomplete', () => {
         if (this._LEVEL === 1) {
+          this.bgMusic.destroy();
         this.scene.start('leveltwo',{level: 2, levels: this._LEVELS, newGame: false});
-      } else if (this._LEVEL === 2) {
-        this.scene.start({level: 1, levels: this._LEVELS, newGame: false});
-      }
+      } 
     });
     this.loadingLevel = true;
     }
   }
 
-  
-
-    pointerdown() {
-      
-      this.movie = this.add.video(800, 1300, 'testvideo');
-      this.movie.setScale(0.5);
-      let x = true;
-      this.movie.play(x);
-
-    }
-    pointerout(video) {
-      console.log("move out")
-
-      this.movie.setVisible(false);
-  }
     
 };

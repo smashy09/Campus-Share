@@ -4,7 +4,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, key) {
         super(scene, x, y, key);
         this.scene = scene;
-        this.velocity = 360; // velocity(speed) to move players
+        // this.velocity = 360; // velocity(speed) to move players
         
         //enable physics
         this.scene.physics.world.enable(this);
@@ -13,12 +13,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
        
         //scale our player
         this.setScale(2);
-        this.setCollideWorldBounds(true);
+        // this.setCollideWorldBounds(true);
 
         //add player to existing scene
         this.scene.add.existing(this);
         //follow player
-        this.scene.cameras.main.startFollow(this);
+        // this.scene.cameras.main.startFollow(this);
         
     
     }
@@ -81,34 +81,34 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     //   });
     // }
 
-    update(cursors) {
-        this.body.setVelocity(0);
+    // update(cursors) {
+    //     this.body.setVelocity(0);
     
-        if (cursors.left.isDown) {
-          this.body.setVelocityX(-this.velocity);
-          this.currentDirection = Direction.LEFT;
-          this.anims.play('LEFT', true);
+    //     if (cursors.left.isDown) {
+    //       this.body.setVelocityX(-this.velocity);
+    //       this.currentDirection = Direction.LEFT;
+    //       this.anims.play('LEFT', true);
           
           
-        } else if (cursors.right.isDown) {
-          this.body.setVelocityX(this.velocity);
-          this.currentDirection = Direction.RIGHT;
-          this.anims.play('RIGHT', true);
+    //     } else if (cursors.right.isDown) {
+    //       this.body.setVelocityX(this.velocity);
+    //       this.currentDirection = Direction.RIGHT;
+    //       this.anims.play('RIGHT', true);
           
-        }
+    //     }
     
-        if (cursors.up.isDown) {
-          this.body.setVelocityY(-this.velocity);
-          this.currentDirection = Direction.UP;
-          this.anims.play('UP', true);
+    //     if (cursors.up.isDown) {
+    //       this.body.setVelocityY(-this.velocity);
+    //       this.currentDirection = Direction.UP;
+    //       this.anims.play('UP', true);
          
          
-        } else if (cursors.down.isDown) {
-          this.body.setVelocityY(this.velocity);
-          this.currentDirection = Direction.DOWN;
-          this.anims.play('DOWN', true);
+    //     } else if (cursors.down.isDown) {
+    //       this.body.setVelocityY(this.velocity);
+    //       this.currentDirection = Direction.DOWN;
+    //       this.anims.play('DOWN', true);
           
           
-        }
-    }
+    //     }
+    // }
 }
