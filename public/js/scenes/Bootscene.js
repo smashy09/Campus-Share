@@ -46,6 +46,7 @@ class BootScene extends Phaser.Scene {
         this.load.image('portalicon', '/assets/New design assets/portal(64x64).png');
         this.load.image('portal2', '/assets/New design assets/portal1 (64x64).png');
         this.load.image('quest', '/assets/New design assets/laptop.png');
+        this.load.image('volume', '/assets/New design assets/volume3.png');
         this.load.image('backpack', '/assets/New design assets/backpack_open.png');
         this.load.image('busstop', '/assets/New design assets/bus stop(32x64).png');
         this.load.image('pencil1', '/assets/New design assets/newpencil.png');
@@ -59,7 +60,7 @@ class BootScene extends Phaser.Scene {
         //npc
         this.load.image('alex', '/assets/New design assets/NPC1.png');
         this.load.image('Alex', '/assets/New design assets/Alex.png');
-        this.load.image('SS1', '/assets/New design assets/Student Services1.png');
+        this.load.image('SS1', '/assets/New design assets/Student Servcies1.png');
         this.load.image('SS2', '/assets/New design assets/Student Services2.png');
         this.load.image('SS3', '/assets/New design assets/Student Services3.png');
         this.load.image('Hoodnpc', '/assets/New design assets/BCIT shop  cashier.png');
@@ -121,17 +122,28 @@ class BootScene extends Phaser.Scene {
     
     loadAudio () {
         this.load.audio('goldSound', ['/audio/Pickup.wav']);
+        this.load.audio('playerhit', ['/audio/PlayerDamage.wav']);
         this.load.audio('bgMusic', '/audio/omou matsu.mp3');
-        this.load.audio('bgMusic2', '/audio/ayeon- more sunshine.mp3')
+        this.load.audio('bgMusic2', '/audio/ayeon- more sunshine.mp3');
+        this.load.audio('bgMusic3', '/audio/Morning 8-bit Relaxing Music.mp3');
+        this.load.audio('bgMusic4', '/audio/8 Bit Love! Happy Fun Game Music by HeatleyBros.mp3');
+        this.load.audio('bgMusic5', '/audio/Bloody Stream [8-Bit VRC6] - JoJos Bizarre Adventure OP 2.mp3');
 
         //video
 
         this.load.video('intro', '/audio/talk to alex in next building.mp4')
-        this.load.video('alex1', '/audio/Alex text mp4s/alex taxt 1.mp4')
+        this.load.video('alex1', '/audio/Alex text mp4s/alex taxt 1.mp4');
+        this.load.video('alex2', '/audio/Alex text mp4s/alex taxt 2.mp4');
+        this.load.video('alex3', '/audio/Alex text mp4s/alex taxt 3.mp4');
+        this.load.video('alex4', '/audio/Alex text mp4s/alex taxt 4.mp4');
+        this.load.video('alex5', '/audio/Alex text mp4s/alex taxt 5.mp4');
+        this.load.video('alex6', '/audio/Alex text mp4s/alex taxt 6.mp4');
+        this.load.video('alex7', '/audio/Alex text mp4s/alex taxt 7.mp4');
+        this.load.video('alex8', '/audio/Alex text mp4s/alex taxt 8.mp4');
     };
     create() {
         console.log('start game')
-        this.scene.start('Select', );
+        this.scene.start('Select');
     };
     //{ level: 1, newGame: true, levels: this.levels }
 };

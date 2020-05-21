@@ -7,12 +7,15 @@ class UiScene extends Phaser.Scene {
         //grab a reference to the game scene
         // this.gameScene = this.scene.get('Game');
         this.levelThreeScene = this.scene.get('levelThree');
-        // this.levelTwoScene = this.scene.get('levelTwo');
+        this.levelTwoScene = this.scene.get('leveltwo');
+        this.levelOneScene = this.scene.get('level1');
+
         
     }
     create() {
         this.setupUiElements();
         this.setupEvents();
+        
     }
 
     setupUiElements() {
@@ -20,17 +23,18 @@ class UiScene extends Phaser.Scene {
 
         this.coinIcon = this.add.image(15, 15, 'items', 3);
     }
-
+    
+    
     setupEvents() {
         //listen
         this.levelThreeScene.events.on('updateScore', (score) => {
             this.scoreText.setText(`Coins: ${score}`);
         });
-        // this.levelTwoScene.events.on('updateScore', (score) => {
-        //     this.scoreText.setText(`Coins: ${score}`);
-        // });
-        // this.gameScene.events.on('updateScore', (score) => {
-        //     this.scoreText.setText(`Coins: ${score}`);
-        // });
+        this.levelTwoScene.events.on('updateScore', (score) => {
+            this.scoreText.setText(`Coins: ${score}`);
+        });
+        this.levelOneScene.events.on('updateScore', (score) => {
+            this.scoreText.setText(`Coins: ${score}`);
+        });
     }
 }

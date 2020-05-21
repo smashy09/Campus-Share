@@ -18,7 +18,7 @@ class levelFourScene extends Phaser.Scene {
       this._NEWGAME = data.newGame;
       
       this.scene.launch('Ui');
-      this.score = 0
+      this.score = data.score;
       this.loadingLevel = false;
        // get a reference to our socket
   // this.socket = this.sys.game.globals.socket;

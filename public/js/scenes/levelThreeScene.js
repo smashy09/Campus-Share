@@ -17,7 +17,7 @@ class levelThreeScene extends Phaser.Scene {
       this._NEWGAME = data.newGame;
       
       this.scene.launch('Ui');
-      this.score = 0
+      this.score = 0;
       this.loadingLevel = false;
        // get a reference to our socket
   // this.socket = this.sys.game.globals.socket;
@@ -87,31 +87,34 @@ class levelThreeScene extends Phaser.Scene {
       this.createGroups();
       const musicConfig = {
         mute: false,
-        volume: 1,
+        volume: 0.25,
         loop: true,
         delay:0,
         rate: 1,
       }
-        this.bgMusic = this.sound.add('bgMusic2', musicConfig);
+        this.bgMusic = this.sound.add('bgMusic4', musicConfig);
         // this.physics.add.overlap(this.player, this.portal, this.bgMusic.stop());
       this.createSound();
       this.spawnMonster();
-      this.createPortal();
-      this.physics.add.overlap(this.player, this.portal, this.loadNextLevel.bind(this));
+      
+      
       // this.physics.add.overlap(this.player, this.portal3, this.loadNextLevel2.bind(this));
-     
+      this.volumeButton();
     // this.movie.setVisible(false);
     
-    
+    this.questText = this.add.text(1000,1200, 'FIND THE LOCK', { font: '"Press to See Quest"' });
+            this.questText.setScale(4);
    
-    this.collider = this.physics.add.collider(this.player, this.bus, () => this.events.emit('flag'))
-    this.events.once('flag', this.createQuest.bind(this) )
+    // this.collider = this.physics.add.collider(this.player, this.bus, () => this.events.emit('flag'))
+    // this.events.once('flag', this.createQuest.bind(this) )
     this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
   }
   update () {
     this.player.update(this.cursors);
-          // if (this.keyQ.isDown) {
-        // this.movie.destroy();
+        //   if (this.keyQ.isDown) {
+          this.createPortal();     
+           
+            
         // this.quest2.destroy();
         //     }
         //  this.bgMusic.stop();
@@ -134,7 +137,14 @@ class levelThreeScene extends Phaser.Scene {
         
   }
 
-  
+  volumeButton() {
+    this.volume = this.add.image(50, 1150, 'volume').setInteractive();
+}
+pointerdown() {
+  console.log('you click')
+ 
+  this.bgMusic.mute = !this.bgMusic.mute
+}
   
   
   createQuest() {
@@ -145,11 +155,19 @@ class levelThreeScene extends Phaser.Scene {
     this.monsters = this.physics.add.group();
   this.monsters.runChildUpdate = true;
   }
+  //
+  createObject() {
+    this.map.findObject('Key Item Locker Lock', (obj) => {
+      
+      this.locker = this.physics.add.image(obj.x + 130, obj.y, 'lock').setInteractive();
+      this.locker.setScale(2);
+      
+  });
+  }
+
+
   createPlayer() {
     
-    
-
-
     
     this.map.findObject('Player Spawn', (obj) => {
       // this.player = new PlayerContainer(this, obj.x, obj.y,'health' );
@@ -182,13 +200,33 @@ class levelThreeScene extends Phaser.Scene {
     }
   }
   createPortal() {
-
+    console.log(this.score)
+    if (this.score >= 120) {
+      console.log(this.score)
     this.map.findObject('SW1 Floor 2 Entrance and Exit', (obj) => {
       
       this.portal = new Portal(this, obj.x, obj.y);
   });
-    
-   
+  this.physics.add.overlap(this.player, this.portal, this.loadNextLevel.bind(this));
+}
+}
+delText2() {
+  this.questText2.destroy();
+}
+takeItem(){
+  this.locker.destroy();
+  this.timedEvent = this.time.addEvent({
+    delay: 8000,
+    callback: this.delText2,
+    callbackScope: this,
+    loop: false
+  });
+  this.questText2 = this.add.text(100,200, 'COLLECT CHEST TO OPEN PORTAL', { font: '"Press to See Quest"' });
+            this.questText2.setScale(4);
+  // this.playWhenUnlocked = true;
+  // if (this.playWhenUnlocked = true) {
+  //   this.createPortal();
+  // }
 }
 spawnMonster() {
   this.spawns = this.physics.add.group({
@@ -259,6 +297,7 @@ spawnMonster() {
   
       this.physics.add.overlap(this.player, this.chests, this.collectChest, null, this);
       
+      this.physics.add.overlap(this.player, this.locker, this.takeItem.bind(this))
       
       // this.physics.add.overlap(this.player, this.ball, function() {console.log('overlap'); });
       this.physics.add.collider(this.player,this.wallLayer);
@@ -395,10 +434,6 @@ spawnMonster() {
   //     this.wall2.setImmovable();
   // }
 
-  createObject() {
-      this.ball = this.physics.add.image(400, 300, 'basketball')
-      this.ball.setScale(0.5);
-  }
 
   createInput() {
       this.cursors = this.input.keyboard.createCursorKeys();
