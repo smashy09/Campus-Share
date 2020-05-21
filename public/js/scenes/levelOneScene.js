@@ -17,8 +17,10 @@ class levelOneScene extends Phaser.Scene {
         this._NEWGAME = data.newGame;
         
         this.scene.launch('Ui');
-        this.score = 0
+        this.score = data.score;
         this.loadingLevel = false;
+        
+        
          // get a reference to our socket
     // this.socket = this.sys.game.globals.socket;
 
@@ -83,12 +85,12 @@ class levelOneScene extends Phaser.Scene {
         
         
         this.createAudio();
-        if (this._LEVEL === 3) {
+        
         this.createChests();
-        }
+        
         // this.chest = new Chest(this, 200, 290, 'items', 0);
         // this.createWalls ();
-        // this.createObject();
+        this.createObject();
         this.createPlayer();
          // physics
         
@@ -96,7 +98,7 @@ class levelOneScene extends Phaser.Scene {
     
         this.createAnimations();
         this.createInput();
-        this.createGroups();
+        this.spawns = this.physics.add.group();
         const musicConfig = {
           mute: false,
           volume: 1,
@@ -108,11 +110,25 @@ class levelOneScene extends Phaser.Scene {
           
         this.createSound();
         this.spawnMonster();
+        this.spawnMonster();
+        this.spawnMonster();
+       
+        this.timedEvent = this.time.addEvent({
+          delay: 3000,
+          callback: this.moveEnemies,
+          callbackScope: this,
+          loop: true
+        });
         this.createPortal();
+        this.volumeButton();
         this.physics.add.overlap(this.player, this.portal, this.loadNextLevel.bind(this));
+
+        this.physics.add.overlap(this.player.weapon, this.crow, this.killenemy, false, this);
+    this.physics.add.collider(this.player, this.crow);
         // this.physics.add.overlap(this.player, this.portal3, this.loadNextLevel2.bind(this));
        
       // this.movie.setVisible(false);
+      
       
       this.quest = this.add.text(700, 1200, 'Go To Bus STOP', { font: '"Press to See Quest"' });
       this.quest.setScale(4)
@@ -120,6 +136,19 @@ class levelOneScene extends Phaser.Scene {
       this.collider = this.physics.add.collider(this.player, this.bus, () => this.events.emit('flag'))
       this.events.once('flag', this.createQuest.bind(this) )
        this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+
+       this.volume.on('pointerdown', this.pointerdown.bind(this)
+       );
+
+      
+        console.log(this.crow);
+        console.log(this.player.weapon);
+        this.physics.add.overlap(this.player.weapon, this.crow, function() { console.log('wassup')})
+        // this.physics.add.overlap(this.player, this.crow, this.respond());
+        // this.physics.add.overlap(this.player, this.crow, function() {console.log('overlap'); });
+        this.registry.set('player', this.player);
+        console.log(this.player);
+       
     }
     update () {
       this.player.update(this.cursors);
@@ -127,26 +156,21 @@ class levelOneScene extends Phaser.Scene {
               this.movie.destroy();
               this.quest2.destroy();
             }
-          //  this.bgMusic.stop();
-          //   }
-          // if (Phaser.Input.Keyboard.JustDown(this.cursors.space) && !this.attacking) {
-          //   this.attacking = true;
-          //   setTimeout(() => {
-          //     this.attacking = false;
-          //     this.weapon.angle = 0;
-          //   }, 150);
-          // }
-    
-          // if (this.attacking) {
-          //   if (this.weapon.flipX) {
-          //     this.weapon.angle -= 10;
-          //   } else {
-          //     this.weapon.angle += 10;
-          //   }
-          // }
+          
+          
           
     }
-  
+respond() {
+  console.log('you got this');
+}
+    volumeButton() {
+      this.volume = this.add.image(50, 1150, 'volume').setInteractive();
+  }
+  pointerdown() {
+    console.log('you click')
+   
+    this.bgMusic.mute = !this.bgMusic.mute
+  }
     createBus() {
       this.map.findObject('Bus Stop', (obj) => {
         
@@ -161,46 +185,25 @@ class levelOneScene extends Phaser.Scene {
       this.quest2 = this.add.text(700, 400, 'PRESS Q TO CLOSE', { font: '"Press to See Quest"' });
       this.quest2.setScale(4)
     }  
-    createGroups() {
-      this.monsters = this.physics.add.group();
-    this.monsters.runChildUpdate = true;
-    }
+    
     createPlayer() {
       
-      
-
   
       if (this._LEVEL === 1) {
       this.map.findObject('Player Spawn', (obj) => {
         // this.player = new PlayerContainer(this, obj.x, obj.y,'health' );
         this.player = new PlayerContainer(this, obj.x, obj.y,this.useCharacter([this.selectedCharacter]) );
         this.player.setInteractive(); 
-      //   this.container = this.add.container(0, 0)
-      //  this.container.setSize(32, 32);
-      //   this.container.add(this.player);
-      //   this.container.setInteractive();
-      //   this.container.add(this.weapon);
         
-        
+        // this.physics.world.enable(this.player.weapon);
+        console.log(this.player.weapon);
+      
       })
     
     }
-    // this.weapon = this.physics.add.image(100, 400, 'pencil2');
-    //   console.log(this.weapon);
-    //   this.weapon.setScale(1);
-    //   this.weapon.setSize(16, 16);
-   
-     
-      
-    //     this.attacking = false;
+  
     };
-    onMeetEnemy(player, enemy) {
-      if (this.attacking) {
-        const location = this.getValidLocation();
-        enemy.x = location.x;
-        enemy.y = location.y;
-      }
-    }
+    
     createPortal() {
 
       this.map.findObject('Portal Entrances SW1', (obj) => {
@@ -211,49 +214,47 @@ class levelOneScene extends Phaser.Scene {
      
   }
   spawnMonster() {
-    this.spawns = this.physics.add.group({
-      classType: Phaser.GameObjects.Sprite
-    });
+    
     this.map.findObject('Mob Crow', (obj) => {
-      console.log('caw caw')
-      this.crow = this.physics.add.image(obj.x, obj.y, 'crow');
+      
+      this.crow = this.spawns.create(obj.x, obj.y, 'crow');
+      this.crow.setInteractive();
     this.crow.body.setCollideWorldBounds(true);
-    // enemy.body.setImmovable();
-    // this.timedEvent = this.time.addEvent({
-    //   delay: 3000,
-    //   callback: this.moveEnemies,
-    //   callbackScope: this,
-    //   loop: true
-    // });
+    this.crow.body.setImmovable();
+    
+    this.timedEvent = this.time.addEvent({
+      delay: 3000,
+      callback: this.moveEnemies,
+      callbackScope: this,
+      loop: true
+    });
     });
   }
-  // moveEnemies () {
-  //   this.spawns.getChildren().forEach((enemy) => {
-  //     const randNumber = Math.floor((Math.random() * 4) + 1);
+  moveEnemies () {
+    
+    this.spawns.getChildren().forEach((enemy) => {
+      const randNumber = Math.floor((Math.random() * 4) + 1);
 
-  //     switch(randNumber) {
-  //       case 1:
-  //         enemy.body.setVelocityX(50);
-  //         break;
-  //       case 2:
-  //         enemy.body.setVelocityX(-50);
-  //         break;
-  //       case 3:
-  //         enemy.body.setVelocityY(50);
-  //         break;
-  //       case 4:
-  //         enemy.body.setVelocityY(50);
-  //         break;
-  //       default:
-  //         enemy.body.setVelocityX(50);
-  //     }
-  //   });
+      switch(randNumber) {
+        case 1:
+          enemy.body.setVelocityX(50);
+          break;
+        case 2:
+          enemy.body.setVelocityX(-50);
+          break;
+        case 3:
+          enemy.body.setVelocityY(50);
+          break;
+        case 4:
+          enemy.body.setVelocityY(50);
+          break;
+        default:
+          enemy.body.setVelocityX(50);
+      }
+    });
 
-  //   setTimeout(() => {
-  //     this.spawns.setVelocityX(0);
-  //     this.spawns.setVelocityY(0);
-  //   }, 500);
-  // }
+  
+  }
       useCharacter(data) {
         
         // this.selectedCharacter = 'health'
@@ -285,15 +286,21 @@ class levelOneScene extends Phaser.Scene {
         
         this.physics.add.collider(this.player,this.bus);
         // this.physics.add.collider(this.player, this.blockedLayer);
-        this.physics.add.overlap(this.player.weapon, this.crow, this.enemyOverlap, null, this)
+        
+        
+        
     }
-    enemyOverlap(weapon, enemy) {
-      if (this.player.playerAttacking && !this.player.swordHit) {
-        this.player.swordHit = true;
-        this.events.emit('destroy', enemy.id, this.player.id);
-      }
+    createSfx(){
+    this.playerHitAudio = this.sound.add('playerhit', {loop: false, volume: 0.2});
     }
-
+  
+    killenemy(crow) {
+      console.log('being hit');
+    this.createSfx();
+    this.crow.destroy();
+        //spawn chest
+        this.time.delayedCall(2000, this.spawnMonster(), [], this);
+    }
     createAnimations() {
 
         this.player2 = this.add.sprite('playerLeft')
@@ -366,16 +373,7 @@ class levelOneScene extends Phaser.Scene {
         //setbounds of the world
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
 
-        //create wall layer
-        // this.wallLayer = this.map.createStaticLayer('SW1 Walls and Tables', this.tiles, 0, 0);
         
-        // this.wallLayer.setCollisionByProperty({collides: true});
-        // this.wallLayer.setCollision([2], true);
-        
-        
-        // this.wallLayer.setScale(2);
-    // TODO test later
-    //this.wallLayer.setCollisionByExclusion([-1]);
 
         //limit camera view
         this.cameras.main.setBounds(0,0, this.map.widthInPixels * 2, this.map.heightInPixels * 2)
@@ -383,14 +381,14 @@ class levelOneScene extends Phaser.Scene {
     }
     createChests() {
         this.chests = this.physics.add.group();
-        this.chestPositions = [[100, 100], [200,200], [300, 300], [400,400], [500, 500]];
+        this.chestPositions = [[100, 800], [200,700], [300, 600], [400,500], [500, 1000]];
        //specify the max number of chest we can have
        this.maxNumberChests = 4
        for (let i =0; i <this.maxNumberChests; i+=1){
            this.spawnChest();
        }
        
-        // this.pokemon = this.physics.add.sprite(400, 300, 'pokemon', 0);
+        
     }
     spawnChest(){
         const location = this.chestPositions[Math.floor(Math.random() * this.chestPositions.length)];
@@ -444,6 +442,7 @@ class levelOneScene extends Phaser.Scene {
         chest.makeInactive();
         //spawn chest
         this.time.delayedCall(2000, this.spawnChest, [], this);
+        
     }
     createSound() {
       
@@ -464,7 +463,8 @@ loadNextLevel () {
       this.cameras.main.on( 'camerafadeoutcomplete', () => {
         if (this._LEVEL === 1) {
           this.bgMusic.destroy();
-        this.scene.start('leveltwo',{level: 2, levels: this._LEVELS, newGame: false});
+          this.score = parseInt(localStorage.getItem('score')) || 0;
+        this.scene.start('leveltwo',{level: 2, levels: this._LEVELS, newGame: false, score: this.score});
       } 
     });
     this.loadingLevel = true;

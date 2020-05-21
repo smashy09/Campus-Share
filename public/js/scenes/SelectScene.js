@@ -9,6 +9,7 @@ class SelectScene extends Phaser.Scene {
         this._LEVELS = data.levels;
         this._NEWGAME = data.newGame;
         this.loadingLevel = false;
+        this.score = data.score;
         
     }
     create() {
@@ -61,7 +62,7 @@ class SelectScene extends Phaser.Scene {
     }
 
     pointerdown(character) {
-        var datas = { level: 1, newGame: true, levels: this.levels, selectedCharacter: character.characterId };
+        var datas = { level: 1, newGame: true, levels: this.levels, score: this.score||0, selectedCharacter: character.characterId };
         console.log(datas);
         console.log(this);
         this.scene.start('level1', datas)

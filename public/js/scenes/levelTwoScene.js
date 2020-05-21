@@ -18,8 +18,9 @@ class levelTwoScene extends Phaser.Scene {
         this._NEWGAME = data.newGame;
         
         this.scene.launch('Ui');
-        this.score = 0
+        this.score = data.score;
         this.loadingLevel = false;
+        this.gateWay = false;
          // get a reference to our socket
     // this.socket = this.sys.game.globals.socket;
 
@@ -105,16 +106,21 @@ class levelTwoScene extends Phaser.Scene {
           delay:0,
           rate: 1,
         }
-          this.bgMusic = this.sound.add('bgMusic2', musicConfig);
+          this.bgMusic = this.sound.add('bgMusic3', musicConfig);
         //   this.physics.add.overlap(this.player, this.portal, this.bgMusic.stop());
+
+        
         this.createSound();
         this.spawnMonster();
         this.createPortal();
-        this.physics.add.overlap(this.player, this.portal3, this.loadNextMap.bind(this));
+        
         this.physics.add.overlap(this.player, this.portal2, this.loadPreviousMap.bind(this));
-        this.physics.add.overlap(this.player, this.portal4, this.loadNextlevel4.bind(this));
+        
+         
+        
+        
         // this.physics.add.overlap(this.player, this.portal3, this.loadNextLevel2.bind(this));
-       
+        this.volumeButton();
       // this.movie.setVisible(false);
       
     
@@ -122,45 +128,91 @@ class levelTwoScene extends Phaser.Scene {
       this.collider = this.physics.add.collider(this.player, this.npc, () => this.events.emit('flag'))
       this.events.once('flag', this.createQuest1.bind(this) )
       this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+      this.volume.on('pointerdown', this.pointerdown.bind(this)
+      );
     }
     update () {
       this.player.update(this.cursors);
       if (this.keyQ.isDown) {
-        this.movie.destroy();
-        this.quest2.destroy();
+        
+        this.movie2.destroy();
             }
-          //  this.bgMusic.stop();
-          //   }
-          // if (Phaser.Input.Keyboard.JustDown(this.cursors.space) && !this.attacking) {
-          //   this.attacking = true;
-          //   setTimeout(() => {
-          //     this.attacking = false;
-          //     this.weapon.angle = 0;
-          //   }, 150);
-          // }
-    
-          // if (this.attacking) {
-          //   if (this.weapon.flipX) {
-          //     this.weapon.angle -= 10;
-          //   } else {
-          //     this.weapon.angle += 10;
-          //   }
-          // }
+      
           
     }
    
+    volumeButton() {
+      this.volume = this.add.image(50, 1150, 'volume').setInteractive();
+  }
+  pointerdown() {
+    console.log('you click')
+   
+    this.bgMusic.mute = !this.bgMusic.mute
+  }
     createQuest1() {
+      this.playWhenUnlocked = false;
         this.map.findObject('NPC Alex Tutorial', (obj) => {
         this.movie = this.add.video(obj.x, obj.y, 'alex1');
+
       this.movie.setScale(0.3);
       this.movie.play();
-      this.quest2 = this.add.text(obj.x,obj.y, 'PRESS Q TO CLOSE', { font: '"Press to See Quest"' });
-      this.quest2.setScale(4)
+      this.timedEvent = this.time.addEvent({
+        delay: 8000,
+        callback: this.createQuest2,
+        callbackScope: this,
+        loop: false
+      });
+      
+     
+      this.questText = this.add.text(obj.x,obj.y, 'PRESS Q TO CLOSE', { font: '"Press to See Quest"' });
+      this.questText.setScale(4)
         });
     }
-    createPlayer() {
+
+    createQuest2() {
+      this.movie.destroy();
+      this.map.findObject('NPC Alex Tutorial', (obj) => {
+        this.movie2 = this.add.video(obj.x, obj.y, 'alex2');
+      this.movie2.setScale(0.3);
+      this.movie2.play();
+      });
+    }
+    createQuest3() {
+      
+      this.map.findObject('NPC Alex Tutorial', (obj) => {
+        this.movie3 = this.add.video(obj.x, obj.y, 'alex3');
+      this.movie3.setScale(0.3);
+      this.movie3.play();
+      });
+      this.timedEvent = this.time.addEvent({
+        delay: 8000,
+        callback: this.openGate,
+        callbackScope: this,
+        loop: false
+      });
+    }
+
+    openGate() {
+      this.movie3.destroy();
+      this.gateWay = true
+      if (this.gateWay == true) {
+        this.map.findObject('SW1 Portal Entrance to floor 2', (obj) => {
+          
+          this.portal3 = new Portal(this, obj.x, obj.y);
+      });
+    
+      this.map.findObject('SW1 Portal Exit to outside', (obj) => {
+          
+        this.portal4 = this.physics.add.image(obj.x, obj.y, 'portal2')
+      
+    });
+    this.physics.add.overlap(this.player, this.portal3, this.loadNextMap.bind(this));
+    this.physics.add.overlap(this.player, this.portal4, this.loadNextlevel4.bind(this));
+  }
   
-     
+    }
+
+    createPlayer() {
       this.map.findObject('Player Spawn1', (obj) => {
         // this.player = new PlayerContainer(this, obj.x, obj.y,'health' );
         this.player = new PlayerContainer(this, obj.x, obj.y,this.useCharacter([this.selectedCharacter]) );
@@ -193,21 +245,13 @@ class levelTwoScene extends Phaser.Scene {
       }
     }
     createPortal() {
-
+      console.log(this.gateWay)
         this.map.findObject('SW1 Portal Entrance ', (obj) => {
         
             this.portal2 = new Portal(this, obj.x, obj.y);
         });
-        this.map.findObject('SW1 Portal Entrance to floor 2', (obj) => {
-          
-          this.portal3 = new Portal(this, obj.x, obj.y);
-      });
-    
-      this.map.findObject('SW1 Portal Exit to outside', (obj) => {
-          
-        this.portal4 = this.physics.add.image(obj.x, obj.y, 'portal2')
-    });
-      
+
+       
      
   }
   spawnMonster() {
@@ -312,7 +356,7 @@ class levelTwoScene extends Phaser.Scene {
     
         this.physics.add.overlap(this.player, this.chests, this.collectChest, null, this);
         
-        
+        this.physics.add.overlap(this.player, this.agenda, this.takeItem.bind(this))
         // this.physics.add.overlap(this.player, this.ball, function() {console.log('overlap'); });
         this.physics.add.collider(this.player,this.wallLayer);
         
@@ -447,12 +491,20 @@ class levelTwoScene extends Phaser.Scene {
     //     this.wall2 = this.physics.add.image(500, 200, 'button1')
     //     this.wall2.setImmovable();
     // }
-
+    takeItem(){
+      this.agenda.destroy();
+      this.playWhenUnlocked = true;
+      if (this.playWhenUnlocked = true) {
+        this.createQuest3();
+      }
+    }
     createObject() {
       this.map.findObject('Key Item Student Agenda', (obj) => {
         
         this.agenda = this.physics.add.image(obj.x + 130, obj.y, 'agenda').setInteractive();
         this.agenda.setScale(2);
+        
+       
         
     });
     }
