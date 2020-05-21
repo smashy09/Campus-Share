@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="1">
- <tileset firstgid="1" source="Thirteen_South/Map/main tileset.tsx"/>
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="5">
+ <tileset firstgid="1" source="../main tileset.tsx"/>
  <layer id="1" name="floor" width="60" height="34">
   <data encoding="csv">
 362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,
@@ -39,6 +39,21 @@
 362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362,362
 </data>
  </layer>
+ <objectgroup id="4" name="from se2 outside 1">
+  <object id="1" name="from se2 outside 1" x="78" y="672">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="se2 outside 2 to rec outside">
+  <object id="2" name="se2 outside 2 to rec outside" x="1846" y="686">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="6" name="se14 front">
+  <object id="4" name="se14 front" x="1802" y="328">
+   <point/>
+  </object>
+ </objectgroup>
  <layer id="2" name="wall" width="60" height="34">
   <data encoding="csv">
 706,706,706,706,706,706,706,706,706,706,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,464,462,474,0,0,0,705,705,705,705,705,705,
