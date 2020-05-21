@@ -67,6 +67,8 @@ class BootScene extends Phaser.Scene {
         this.load.image('Cashierfood', '/assets/New design assets/Cashier2.png');
         this.load.image('CoffeeNpc', '/assets/New design assets/Cashier1.png');
         this.load.image('SS4', '/assets/New design assets/Student Services-right.png');
+
+        this.load.image('Josh', '/assets/New design assets/Josh.png');
         //map
         this.load.image('background', '/assets/Map/BCITA-tileset.png');
         this.load.image('tileset1', '/assets/Map/tileset.png');
@@ -140,6 +142,10 @@ class BootScene extends Phaser.Scene {
         this.load.video('alex6', '/audio/Alex text mp4s/alex taxt 6.mp4');
         this.load.video('alex7', '/audio/Alex text mp4s/alex taxt 7.mp4');
         this.load.video('alex8', '/audio/Alex text mp4s/alex taxt 8.mp4');
+
+        this.load.video('josh1', '/audio/Josh text mp4s/josh text 1.mp4');
+        this.load.video('josh2', '/audio/Josh text mp4s/josh text 2.mp4');
+        this.load.video('josh3', '/audio/Josh text mp4s/josh text 3.mp4');
     };
     create() {
         console.log('start game')

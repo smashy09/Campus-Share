@@ -269,47 +269,22 @@
                  "width":0,
                  "x":1274,
                  "y":768
-                }, 
-                {
-                 "height":0,
-                 "id":15,
-                 "name":"MOB Crow",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":440,
-                 "y":250.667
-                }, 
-                {
-                 "height":0,
-                 "id":16,
-                 "name":"MOB Crow",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":394.667,
-                 "y":825.333
-                }, 
-                {
-                 "height":0,
-                 "id":17,
-                 "name":"MOB Crow",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":825.333,
-                 "y":1028
-                }, 
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":27,
+         "name":"crow2",
+         "objects":[
                 {
                  "height":0,
                  "id":18,
-                 "name":"MOB Crow",
+                 "name":"crow2",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -323,8 +298,77 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":28,
+         "name":"crow3",
+         "objects":[
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"crow3",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":440,
+                 "y":250.667
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":29,
+         "name":"crow4",
+         "objects":[
+                {
+                 "height":0,
+                 "id":16,
+                 "name":"crow4",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":394.667,
+                 "y":825.333
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":30,
+         "name":"crow5",
+         "objects":[
+                {
+                 "height":0,
+                 "id":17,
+                 "name":"crow5",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":825.333,
+                 "y":1028
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":27,
+ "nextlayerid":31,
  "nextobjectid":26,
  "orientation":"orthogonal",
  "renderorder":"right-down",

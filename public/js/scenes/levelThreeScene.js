@@ -108,6 +108,8 @@ class levelThreeScene extends Phaser.Scene {
     // this.collider = this.physics.add.collider(this.player, this.bus, () => this.events.emit('flag'))
     // this.events.once('flag', this.createQuest.bind(this) )
     this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+    this.volume.on('pointerdown', this.pointerdown.bind(this)
+       );
   }
   update () {
     this.player.update(this.cursors);
