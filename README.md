@@ -7,10 +7,10 @@ Scenes:
 -   boot
 -   Title:
 -   Game:
--   ui: display gold, items etc
+-   ui: display gold etc
 
 classes:
     -player: creating the player game object, handle the player input
     - chest: creating the chest game object. how much gold
 
-    
+    https://bcita-mmorpg.herokuapp.com/
