@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="6">
  <editorsettings>
   <export target="../../public/assets/Map/se2 to se14 outside.json" format="json"/>
@@ -256,6 +257,10 @@
    </properties>
   </tile>
  </tileset>
+=======
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="12">
+ <tileset firstgid="1" source="../main tileset.tsx"/>
+>>>>>>> developer
  <layer id="1" name="floor" width="60" height="34">
   <data encoding="csv">
 582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,582,
@@ -314,6 +319,34 @@
  </objectgroup>
  <objectgroup id="5" name="se2 outside1 to to se2 outside 2">
   <object id="2" name="se2 outside1 to to se2 outside 2" x="1838" y="238">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="6" name="crow">
+  <object id="3" name="Crow" x="494" y="592">
+   <point/>
+  </object>
+  <object id="4" name="Crow" x="854" y="484">
+   <point/>
+  </object>
+  <object id="6" name="Crow" x="1106" y="308">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="raccoon">
+  <object id="7" name="raccoon" x="528" y="170">
+   <point/>
+  </object>
+  <object id="8" name="raccoon" x="660" y="364">
+   <point/>
+  </object>
+  <object id="9" name="raccoon" x="1196" y="184">
+   <point/>
+  </object>
+  <object id="10" name="raccoon" x="1534" y="254">
+   <point/>
+  </object>
+  <object id="11" name="raccoon" x="662" y="822">
    <point/>
   </object>
  </objectgroup>
