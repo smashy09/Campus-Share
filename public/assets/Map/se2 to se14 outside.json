@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"se2 to se14 outside.json"
+        }
+    },
  "height":34,
  "infinite":false,
  "layers":[
@@ -62,6 +70,41 @@
         }, 
         {
          "draworder":"topdown",
+         "id":7,
+         "name":"se2 portal2",
+         "objects":[
+                {
+                 "height":0,
+                 "id":4,
+                 "name":"se2 portal2",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":39.3318625906083,
+                 "y":163.378506145604
+                }, 
+                {
+                 "height":0,
+                 "id":5,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-145.225338796092,
+                 "y":468.956823195714
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":5,
          "name":"se2 outside1 to to se2 outside 2",
          "objects":[
@@ -107,8 +150,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":7,
- "nextobjectid":4,
+ "nextlayerid":8,
+ "nextobjectid":6,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.3.4",

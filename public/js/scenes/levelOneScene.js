@@ -86,11 +86,11 @@ class levelOneScene extends Phaser.Scene {
         
         this.createAudio();
         
-        this.createChests();
+        // this.createChests();
         
         // this.chest = new Chest(this, 200, 290, 'items', 0);
         // this.createWalls ();
-        this.createObject();
+        // this.createObject();
         this.createPlayer();
          // physics
         
