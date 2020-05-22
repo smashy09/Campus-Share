@@ -16,6 +16,13 @@ var config = {
         levelThreeScene,
         levelFourScene,
         levelFiveScene,
+        levelSixScene,
+        levelSevenScene,
+        levelEightScene,
+        levelNineScene,
+        levelTenScene,
+        levelElevenScene,
+        levelTwelveScene,
         GameScene,
         UiScene,
         TitleScene,
@@ -23,7 +30,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
+            debug: false,
             gravity: {
                 y: 0,
             },

@@ -89,7 +89,7 @@ class levelFiveScene extends Phaser.Scene {
       }
       // this.chest = new Chest(this, 200, 290, 'items', 0);
       // this.createWalls ();
-      // this.createObject();
+      this.createObject();
       this.createPlayer();
        // physics
       
@@ -106,16 +106,16 @@ class levelFiveScene extends Phaser.Scene {
         delay:0,
         rate: 1,
       }
-        this.bgMusic = this.sound.add('bgMusic2', musicConfig);
+        this.bgMusic = this.sound.add('bgMusic3', musicConfig);
         // this.physics.add.overlap(this.player, this.portal, this.bgMusic.stop());
       this.createSound();
-      // this.spawnMonster();
+      this.createQuest();
       this.createPortal();
       this.physics.add.overlap(this.player, this.portal2, this.loadPrevMap.bind(this));
       
       this.physics.add.overlap(this.player, this.portal, this.loadPrevMap.bind(this));
      
-    // this.movie.setVisible(false);
+      this.volumeButton();
     
     // this.quest = this.add.text(700, 1200, 'Go To Bus STOP', { font: '"Press to See Quest"' });
     // this.quest.setScale(4)
@@ -123,6 +123,8 @@ class levelFiveScene extends Phaser.Scene {
     // this.collider = this.physics.add.collider(this.player, this.bus, () => this.events.emit('flag'))
     // this.events.once('flag', this.createQuest.bind(this) )
     this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+    this.volume.on('pointerdown', this.pointerdown.bind(this)
+       );
   }
   update () {
     this.player.update(this.cursors);
@@ -130,38 +132,102 @@ class levelFiveScene extends Phaser.Scene {
     //   this.movie.destroy();
     //   this.quest2.destroy();
     //       }
-        //  this.bgMusic.stop();
-        //   }
-        // if (Phaser.Input.Keyboard.JustDown(this.cursors.space) && !this.attacking) {
-        //   this.attacking = true;
-        //   setTimeout(() => {
-        //     this.attacking = false;
-        //     this.weapon.angle = 0;
-        //   }, 150);
-        // }
-  
-        // if (this.attacking) {
-        //   if (this.weapon.flipX) {
-        //     this.weapon.angle -= 10;
-        //   } else {
-        //     this.weapon.angle += 10;
-        //   }
-        // }
         
   }
 
-  createBus() {
-    this.map.findObject('Bus Stop', (obj) => {
+  volumeButton() {
+    this.volume = this.add.image(1192, 1124, 'volume').setInteractive();
+}
+pointerdown() {
+  console.log('you click')
+ 
+  this.bgMusic.mute = !this.bgMusic.mute
+}
+  // createBus() {
+  //   this.map.findObject('Bus Stop', (obj) => {
       
-      this.bus = this.physics.add.image(obj.x, obj.y, 'busstop');
-      this.bus.setImmovable();
-  });
+  //     this.bus = this.physics.add.image(obj.x, obj.y, 'busstop');
+  //     this.bus.setImmovable();
+  // });
   
-  }
+  // }
   createQuest() {
-    this.movie = this.add.video(800, 600, 'intro');
-    this.movie.setScale(0.5);
+    this.questText = this.add.text(1100,1000, 'COLLECT HOODIE AT SHOP', { font: '"Press to See Quest"' });
+    this.questText.setScale(4);
+    
+    this.timedEvent = this.time.addEvent({
+      delay: 8000,
+      callback: this.delText,
+      callbackScope: this,
+      loop: false
+    });
+            
   }  
+  delText() {
+    this.questText.destroy();
+    this.map.findObject('coffee', (obj) => {
+      
+      this.coffee = this.physics.add.image(obj.x, obj.y, 'coffee');
+      this.coffee.setImmovable(); 
+    });
+    this.physics.add.overlap(this.player, this.coffee, this.createQuest3.bind(this));
+  }
+
+  createQuest2() {
+    this.hoodie.destroy();
+    this.questText2 = this.add.text(1700,900, 'COLLECT COFFEE AT CAFE', { font: '"Press to See Quest"' });
+    this.questText2.setScale(4);
+    this.timedEvent2 = this.time.addEvent({
+      delay: 8000,
+      callback: this.delText2,
+      callbackScope: this,
+      loop: false
+    });
+  }
+  delText2() {
+    this.questText2.destroy();
+
+  }
+  createQuest3() {
+    this.coffee.destroy();
+    this.questText3 = this.add.text(670,180, 'FIND AND COLLECT MAGAZINE', { font: '"Press to See Quest"' });
+    this.questText3.setScale(4);
+    this.timedEvent3 = this.time.addEvent({
+      delay: 8000,
+      callback: this.delText3,
+      callbackScope: this,
+      loop: false
+    });
+  }
+  delText3() {
+    this.questText3.destroy();
+    this.map.findObject('magazine', (obj) => {
+      
+      this.magazine = this.physics.add.image(obj.x, obj.y, 'magazine');
+      this.magazine.setImmovable(); 
+    });
+    this.physics.add.overlap(this.player, this.magazine, this.createQuest4.bind(this));
+    this.map.findObject('Se2 Exit1', (obj) => {
+    
+      this.portal3 = this.physics.add.image(obj.x, obj.y, 'portalicon')
+  });
+
+  this.map.findObject('Se2 Exit2', (obj) => {
+    
+    this.portal4 = this.physics.add.image(obj.x, obj.y, 'portalicon')
+});
+  }
+
+  createQuest4() {
+
+    this.magazine.destroy();
+    this.questText4 = this.add.text(520,630, 'PORTALS TOP RIGHT', { font: '"Press to See Quest"' });
+    this.questText3.setScale(4);
+    
+this.physics.add.overlap(this.player, this.portal3, this.loadNextMap.bind(this));
+this.physics.add.overlap(this.player, this.portal4, this.loadNextMap.bind(this));
+
+  }
   createNPC() {
     this.map.findObject('Alex', (obj) => {
     
@@ -220,22 +286,9 @@ this.map.findObject('Hoodie Cashier', (obj) => {
     })
   
   
-  // this.weapon = this.physics.add.image(100, 400, 'pencil2');
-  //   console.log(this.weapon);
-  //   this.weapon.setScale(1);
-  //   this.weapon.setSize(16, 16);
  
-   
-    
-  //     this.attacking = false;
   };
-  onMeetEnemy(player, enemy) {
-    if (this.attacking) {
-      const location = this.getValidLocation();
-      enemy.x = location.x;
-      enemy.y = location.y;
-    }
-  }
+  
   createPortal() {
 
     this.map.findObject('Se2 Portal Entrance', (obj) => {
@@ -246,6 +299,7 @@ this.map.findObject('Hoodie Cashier', (obj) => {
     
     this.portal2 = this.physics.add.image(obj.x, obj.y, 'portal2')
 });
+
 
    
 }
@@ -266,33 +320,7 @@ spawnMonster() {
   // });
   });
 }
-// moveEnemies () {
-//   this.spawns.getChildren().forEach((enemy) => {
-//     const randNumber = Math.floor((Math.random() * 4) + 1);
 
-//     switch(randNumber) {
-//       case 1:
-//         enemy.body.setVelocityX(50);
-//         break;
-//       case 2:
-//         enemy.body.setVelocityX(-50);
-//         break;
-//       case 3:
-//         enemy.body.setVelocityY(50);
-//         break;
-//       case 4:
-//         enemy.body.setVelocityY(50);
-//         break;
-//       default:
-//         enemy.body.setVelocityX(50);
-//     }
-//   });
-
-//   setTimeout(() => {
-//     this.spawns.setVelocityX(0);
-//     this.spawns.setVelocityY(0);
-//   }, 500);
-// }
     useCharacter(data) {
       
       // this.selectedCharacter = 'health'
@@ -319,7 +347,11 @@ spawnMonster() {
       this.physics.add.overlap(this.player, this.chests, this.collectChest, null, this);
       
       
-      // this.physics.add.overlap(this.player, this.ball, function() {console.log('overlap'); });
+      this.physics.add.overlap(this.player, this.hoodie, this.createQuest2.bind(this));
+
+      
+
+
       this.physics.add.collider(this.player,this.wallLayer);
       
       this.physics.add.collider(this.player,this.bus);
@@ -456,8 +488,10 @@ spawnMonster() {
   // }
 
   createObject() {
-      this.ball = this.physics.add.image(400, 300, 'basketball')
-      this.ball.setScale(0.5);
+    this.map.findObject('hoodie', (obj) => {
+        
+      this.hoodie = this.physics.add.image(obj.x, obj.y, 'hoodie');
+  });
   }
 
   createInput() {
@@ -489,24 +523,25 @@ spawnMonster() {
     this.bgMusic.destroy();
     
 }
-
-
-    // loadNextMap() {
+loadNextMap() {
         
-    //     // this.scene.start('levelThree',{level: 3, levels: this._LEVELS, newGame: false});
-    //     // this.loadingLevel = true;
+  // this.scene.start('levelThree',{level: 3, levels: this._LEVELS, newGame: false});
+  // this.loadingLevel = true;
 
-    //     if (!this.loadingLevel) {
-    //         this.cameras.main.fade(500, 0, 0, 0);
-    //         this.cameras.main.on( 'camerafadeoutcomplete', () => {
-    //           if (this._LEVEL === 5) {
-    //           this.scene.start('levelfour',{level: 4, levels: this._LEVELS, newGame: false});
-    //         } 
-    //       });
-    //       this.loadingLevel = true;
-    //       }
-        
-    // }
+  if (!this.loadingLevel) {
+      this.cameras.main.fade(500, 0, 0, 0);
+      this.cameras.main.on( 'camerafadeoutcomplete', () => {
+        if (this._LEVEL === 5) {
+          this.bgMusic.destroy();
+        this.scene.start('levelsix',{level: 6, levels: this._LEVELS, newGame: false});
+      } 
+    });
+    this.loadingLevel = true;
+    }
+  
+}
+
+   
     loadPrevMap () {
 
     // this.scene.restart({level: 'leveltwo', levels: this._LEVELS, newGame: false});

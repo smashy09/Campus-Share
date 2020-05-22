@@ -4,7 +4,7 @@
      "export":
         {
          "format":"json",
-         "target":"..\/public\/assets\/Map\/Outside REC.json"
+         "target":"..\/..\/..\/Map\/Outside REC.json"
         }
     },
  "height":34,
@@ -125,7 +125,7 @@
         {
          "columns":10,
          "firstgid":1,
-         "image":"tileset.png",
+         "image":"..\/..\/..\/Map\/tileset.png",
          "imageheight":4419,
          "imagewidth":328,
          "margin":0,
@@ -589,7 +589,7 @@
         {
          "columns":10,
          "firstgid":1381,
-         "image":"tileset.png",
+         "image":"..\/..\/..\/Map\/tileset.png",
          "imageheight":4419,
          "imagewidth":328,
          "margin":0,

@@ -86,11 +86,11 @@ class levelOneScene extends Phaser.Scene {
         
         this.createAudio();
         
-        this.createChests();
+        // this.createChests();
         
         // this.chest = new Chest(this, 200, 290, 'items', 0);
         // this.createWalls ();
-        this.createObject();
+        // this.createObject();
         this.createPlayer();
          // physics
         
@@ -98,7 +98,7 @@ class levelOneScene extends Phaser.Scene {
     
         this.createAnimations();
         this.createInput();
-        this.spawns = this.physics.add.group();
+        
         const musicConfig = {
           mute: false,
           volume: 1,
@@ -109,6 +109,7 @@ class levelOneScene extends Phaser.Scene {
           this.bgMusic = this.sound.add('bgMusic2', musicConfig);
           
         this.createSound();
+        this.spawns = this.physics.add.group();
         this.spawnMonster();
         this.spawnMonster();
         this.spawnMonster();

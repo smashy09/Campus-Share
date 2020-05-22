@@ -134,7 +134,7 @@ class levelTwoScene extends Phaser.Scene {
     update () {
       this.player.update(this.cursors);
       if (this.keyQ.isDown) {
-        
+        this.questText.destroy();
         this.movie2.destroy();
             }
       
