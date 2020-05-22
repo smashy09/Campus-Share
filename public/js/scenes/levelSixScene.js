@@ -1,6 +1,6 @@
-class levelFourScene extends Phaser.Scene {
+class levelSixScene extends Phaser.Scene {
     constructor() {
-        super("levelfour");
+        super("levelsix");
         
 
     }
@@ -18,7 +18,7 @@ class levelFourScene extends Phaser.Scene {
       this._NEWGAME = data.newGame;
       
       this.scene.launch('Ui');
-      this.score = data.score;
+      this.score = 0
       this.loadingLevel = false;
        // get a reference to our socket
   // this.socket = this.sys.game.globals.socket;
@@ -94,81 +94,46 @@ class levelFourScene extends Phaser.Scene {
        // physics
       
       this.addCollisions() ; 
-      this.createNpc();
-      this.createQuest();
+  
       this.createAnimations();
       this.createInput();
-      
+      this.createGroups();
+      // this.createNPC();
       const musicConfig = {
         mute: false,
-        volume: 0.25,
+        volume: 1,
         loop: true,
         delay:0,
         rate: 1,
       }
-        this.bgMusic = this.sound.add('bgMusic', musicConfig);
+        this.bgMusic = this.sound.add('bgMusic2', musicConfig);
         // this.physics.add.overlap(this.player, this.portal, this.bgMusic.stop());
       this.createSound();
-      this.spawns = this.physics.add.group();
-      this.spawnMonster();
-      this.spawnMonster2();
-    this.spawnMonster3();
-    this.spawnMonster4();
-    this.spawnMonster5();
-
-    this.timedEvent = this.time.addEvent({
-      delay: 3000,
-      callback: this.moveEnemies,
-      callbackScope: this,
-      loop: true
-    });
+      // this.spawnMonster();
       this.createPortal();
       this.physics.add.overlap(this.player, this.portal2, this.loadNextMap.bind(this));
-      this.physics.add.overlap(this.player, this.portal3, this.loadNextMap.bind(this));
+      
       this.physics.add.overlap(this.player, this.portal, this.loadPrevMap.bind(this));
      
-      this.physics.add.overlap(this.player.weapon, this.crow, this.killenemy, false, this);
-      this.physics.add.overlap(this.player.weapon, this.crow2, this.killenemy, false, this);
-      this.physics.add.overlap(this.player.weapon, this.crow3, this.killenemy, false, this);
-      this.physics.add.overlap(this.player.weapon, this.crow4, this.killenemy, false, this);
-      this.physics.add.overlap(this.player.weapon, this.crow5, this.killenemy5, false, this);
+    // this.movie.setVisible(false);
     
-    
-    
-    this.collider = this.physics.add.collider(this.player, this.josh, () => this.events.emit('flag'))
-    this.events.once('flag', this.createQuest2.bind(this) )
+    // this.quest = this.add.text(700, 1200, 'Go To Bus STOP', { font: '"Press to See Quest"' });
+    // this.quest.setScale(4)
+   
+    // this.collider = this.physics.add.collider(this.player, this.bus, () => this.events.emit('flag'))
+    // this.events.once('flag', this.createQuest.bind(this) )
     this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
     this.volumeButton();
     this.volume.on('pointerdown', this.pointerdown.bind(this)
        );
-
-       
-
   }
   update () {
     this.player.update(this.cursors);
-    if (this.keyQ.isDown) {
-      this.movie3.destroy();
-      this.questText.destroy();
-      this.questText2.destroy();
-          }
-        //  this.bgMusic.stop();
-        //   }
-        // if (Phaser.Input.Keyboard.JustDown(this.cursors.space) && !this.attacking) {
-        //   this.attacking = true;
-        //   setTimeout(() => {
-        //     this.attacking = false;
-        //     this.weapon.angle = 0;
-        //   }, 150);
-        // }
-  
-        // if (this.attacking) {
-        //   if (this.weapon.flipX) {
-        //     this.weapon.angle -= 10;
-        //   } else {
-        //     this.weapon.angle += 10;
-        //   }
-        // }
+         // if (this.keyQ.isDown) {
+    //   this.movie.destroy();
+    //   this.quest2.destroy();
+    //       }
+        
         
   }
 
@@ -180,86 +145,64 @@ pointerdown() {
  
   this.bgMusic.mute = !this.bgMusic.mute
 }
-  createNpc() {
-    this.map.findObject(' NPC Josh Paulson', (obj) => {
+
+  createBus() {
+    this.map.findObject('Bus Stop', (obj) => {
       
-      this.josh = this.physics.add.image(obj.x, obj.y, 'Josh');
-      this.josh.setImmovable();
-      this.josh.setScale(2);
+      this.bus = this.physics.add.image(obj.x, obj.y, 'busstop');
+      this.bus.setImmovable();
   });
   
   }
-  createSfx(){
-    this.playerHitAudio = this.sound.add('playerhit', {loop: false, volume: 0.2});
-    }
-
-    
-  killenemy() {
-    console.log('being hit');
-  this.createSfx();
-  this.crow.destroy();
-  
-  this.crow3.destroy();
-  this.crow4.destroy();
-  this.crow5.destroy();
-      //spawn chest
-      this.time.delayedCall(2000, this.spawnMonster(), [], this);
-      this.time.delayedCall(2000, this.spawnMonster2(), [], this);
-      this.time.delayedCall(2000, this.spawnMonster3(), [], this);
-      this.time.delayedCall(2000, this.spawnMonster4(), [], this);
-      this.time.delayedCall(2000, this.spawnMonster5(), [], this);
-  }
   createQuest() {
-    this.map.findObject('Player_Spawn_SW1', (obj) => {
-    this.movie = this.add.video(obj.x, obj.y, 'josh1');
+    this.movie = this.add.video(800, 600, 'intro');
     this.movie.setScale(0.5);
-    this.movie.play();
-    this.timedEvent = this.time.addEvent({
-      delay: 6000,
-      callback: this.endQuest1,
-      callbackScope: this,
-      loop: false
-    });
-
-    });
   }  
-
-  endQuest1() {
-    this.movie.destroy();
-  }
-
-  createQuest2() {
-    this.map.findObject(' NPC Josh Paulson', (obj) => {
-      this.movie2 = this.add.video(obj.x, obj.y, 'josh2');
-      this.movie2.setScale(0.5);
-      this.movie2.play();
-      this.timedEvent = this.time.addEvent({
-        delay: 4000,
-        callback: this.createQuest3,
-        callbackScope: this,
-        loop: false
-      });
+  createNPC() {
+    this.map.findObject('Alex', (obj) => {
+    
+        this.npc = this.physics.add.image(obj.x, obj.y, 'Alex').setInteractive();
+        this.npc.setScale(2);
+        this.npc.setImmovable();
+        
     });
-    //blank
+    this.map.findObject('Student Services', (obj) => {
+    
+      this.npc2 = this.physics.add.image(obj.x, obj.y, 'SS4').setInteractive();
+      this.npc2.setScale(2);
+      this.npc2.setImmovable();
+      
+  });
+  this.map.findObject('Cafeteria cashier', (obj) => {
+    
+    this.npc3 = this.physics.add.image(obj.x, obj.y, 'Cashierfood').setInteractive();
+    this.npc3.setScale(2);
+    this.npc3.setImmovable();
+    
+});
+this.map.findObject('Coffee cashier', (obj) => {
+    
+  this.npc4 = this.physics.add.image(obj.x, obj.y, 'CoffeeNpc').setInteractive();
+  this.npc4.setScale(2);
+  this.npc4.setImmovable();
+  
+});
+this.map.findObject('Hoodie Cashier', (obj) => {
+    
+  this.npc5 = this.physics.add.image(obj.x, obj.y, 'Hoodnpc').setInteractive();
+  this.npc5.setScale(2);
+  this.npc5.setImmovable();
+  
+});
+}
+  createGroups() {
+    this.monsters = this.physics.add.group();
+  this.monsters.runChildUpdate = true;
   }
-  createQuest3() {
-    this.movie2.destroy();
-    this.map.findObject(' NPC Josh Paulson', (obj) => {
-      this.movie3 = this.add.video(obj.x, obj.y, 'josh3');
-      this.movie3.setScale(0.5);
-      this.movie3.play();
-      this.questText = this.add.text(obj.x +100,obj.y - 100, 'PRESS Q TO CLOSE TEXT ', { font: '"Press to See Quest"' });
-            this.questText.setScale(4);
-            this.questText2 = this.add.text(obj.x +100,obj.y - 200, 'PRESS SPACE TO ATTACK CROW ', { font: '"Press to See Quest"' });
-            this.questText2.setScale(4);
-    })
-
-  }
-
   createPlayer() {
     
 
-    this.map.findObject('Player_Spawn_SW1', (obj) => {
+    this.map.findObject('Player Spawn', (obj) => {
       // this.player = new PlayerContainer(this, obj.x, obj.y,'health' );
       this.player = new PlayerContainer(this, obj.x, obj.y,this.useCharacter([this.selectedCharacter]) );
       this.player.setInteractive(); 
@@ -282,123 +225,70 @@ pointerdown() {
     
   //     this.attacking = false;
   };
-  
+  onMeetEnemy(player, enemy) {
+    if (this.attacking) {
+      const location = this.getValidLocation();
+      enemy.x = location.x;
+      enemy.y = location.y;
+    }
+  }
   createPortal() {
 
-    this.map.findObject('SW1 Portal Entrance ', (obj) => {
+    this.map.findObject('Se2 Portal Entrance', (obj) => {
         
       this.portal = this.physics.add.image(obj.x, obj.y, 'portal2')
   });
-  this.map.findObject('SE2 Portal Entrance', (obj) => {
+  this.map.findObject('se2 outside1 to to se2 outside 2', (obj) => {
     
     this.portal2 = this.physics.add.image(obj.x, obj.y, 'portal2')
 });
 
-this.map.findObject('SE2 Portal2', (obj) => {
-    
-  this.portal3 = this.physics.add.image(obj.x, obj.y, 'portal2')
-});
-    
    
 }
-spawnMonster5(){this.map.findObject('crow5', (obj) => {
-  console.log('caw caw')
-  this.crow5 = this.spawns.create(obj.x, obj.y, 'crow');
-  this.crow5.body.setCollideWorldBounds(true);
-  this.crow5.body.setImmovable();
-this.timedEvent = this.time.addEvent({
-  delay: 3000,
-  callback: this.moveEnemies,
-  callbackScope: this,
-  loop: true
-});
-});
-}
-spawnMonster4(){this.map.findObject('crow4', (obj) => {
-  console.log('caw caw')
-  this.crow4 = this.spawns.create(obj.x, obj.y, 'crow');
-  this.crow4.body.setCollideWorldBounds(true);
-  this.crow4.body.setImmovable();
-this.timedEvent = this.time.addEvent({
-  delay: 3000,
-  callback: this.moveEnemies,
-  callbackScope: this,
-  loop: true
-});
-});
-}
-spawnMonster3(){this.map.findObject('crow3', (obj) => {
-  console.log('caw caw')
-  this.crow3 = this.spawns.create(obj.x, obj.y, 'crow');
-  this.crow3.body.setCollideWorldBounds(true);
-  this.crow3.body.setImmovable();
-this.timedEvent = this.time.addEvent({
-  delay: 3000,
-  callback: this.moveEnemies,
-  callbackScope: this,
-  loop: true
-});
-});
-}
-spawnMonster2(){this.map.findObject('crow2', (obj) => {
-  console.log('caw caw')
-  this.crow2 = this.spawns.create(obj.x, obj.y, 'crow');
-  this.crow2.body.setCollideWorldBounds(true);
-  this.crow2.body.setImmovable();
-this.timedEvent = this.time.addEvent({
-  delay: 3000,
-  callback: this.moveEnemies,
-  callbackScope: this,
-  loop: true
-});
-});
-}
 spawnMonster() {
-  
+  this.spawns = this.physics.add.group({
+    classType: Phaser.GameObjects.Sprite
+  });
   this.map.findObject('MOB Crow', (obj) => {
     console.log('caw caw')
-    this.crow = this.spawns.create(obj.x, obj.y, 'crow');
-  this.crow.body.setCollideWorldBounds(true);
-  this.crow.body.setImmovable();
-  this.timedEvent = this.time.addEvent({
-    delay: 3000,
-    callback: this.moveEnemies,
-    callbackScope: this,
-    loop: true
-  });
-  });
-}
-moveEnemies () {
-  this.time.delayedCall(500, () => {
-    console.log('stop');
-    
-    this.spawns.setVelocity(0, 0);
-  });
-
-  this.spawns.getChildren().forEach((enemy) => {
-    const randNumber = Math.floor((Math.random() * 4) + 1);
-
-    switch (randNumber) {
-      case 1:
-        enemy.body.setVelocityX(50);
-        break;
-      case 2:
-        enemy.body.setVelocityX(-50);
-        break;
-      case 3:
-        enemy.body.setVelocityY(50);
-        break;
-      case 4:
-        enemy.body.setVelocityY(50);
-        break;
-      default:
-        enemy.body.setVelocityX(50);
-    }
-  
-    console.log('velocity', enemy.body.velocity.x, enemy.body.velocity.y);
+    var enemy = this.physics.add.image(obj.x, obj.y, 'crow');
+  enemy.body.setCollideWorldBounds(true);
+  // enemy.body.setImmovable();
+  // this.timedEvent = this.time.addEvent({
+  //   delay: 3000,
+  //   callback: this.moveEnemies,
+  //   callbackScope: this,
+  //   loop: true
+  // });
   });
 }
+// moveEnemies () {
+//   this.spawns.getChildren().forEach((enemy) => {
+//     const randNumber = Math.floor((Math.random() * 4) + 1);
 
+//     switch(randNumber) {
+//       case 1:
+//         enemy.body.setVelocityX(50);
+//         break;
+//       case 2:
+//         enemy.body.setVelocityX(-50);
+//         break;
+//       case 3:
+//         enemy.body.setVelocityY(50);
+//         break;
+//       case 4:
+//         enemy.body.setVelocityY(50);
+//         break;
+//       default:
+//         enemy.body.setVelocityX(50);
+//     }
+//   });
+
+//   setTimeout(() => {
+//     this.spawns.setVelocityX(0);
+//     this.spawns.setVelocityY(0);
+//   }, 500);
+// }
     useCharacter(data) {
       
       // this.selectedCharacter = 'health'
@@ -481,18 +371,19 @@ moveEnemies () {
   // create the tilemap
   // this.map = this.make.tilemap({ key: this._LEVELS[this._LEVEL] });
 
-      this.map = this.make.tilemap({key: 'outdoor1'});
+      this.map = this.make.tilemap({key: 'outdoor2'});
       
      // add tileset image . use the tileset name, key of the image, etc
      this.tiles = this.map.addTilesetImage("main tileset", 'tileset1', 32, 32, 0, 0);
       
      //create background layer
-     this.backgroundLayer = this.map.createStaticLayer("Floor", this.tiles, 0,0);
+     this.backgroundLayer = this.map.createStaticLayer("floor", this.tiles, 0,0);
      // this.backgroundLayer.setScale(2);
 
      this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-     this.wallLayer = this.map.createStaticLayer('Walls, Stairs, Tables', this.tiles, 0, 0);
+     this.wallLayer = this.map.createStaticLayer('walls', this.tiles, 0, 0);
      
+    //  this.decor = this.map.createStaticLayer('Table decoration/objects no collision', this.tiles, 0, 0);
      this.wallLayer.setCollisionByProperty({collides: true});
     //  this.wallLayer.setCollision([2], true);
     //  this.decor = this.map.createStaticLayer('Decoration', this.tiles, 0, 0);
@@ -604,9 +495,9 @@ moveEnemies () {
         if (!this.loadingLevel) {
             this.cameras.main.fade(500, 0, 0, 0);
             this.cameras.main.on( 'camerafadeoutcomplete', () => {
-              if (this._LEVEL === 4) {
-                this.bgMusic.destroy();
-              this.scene.start('levelfive',{level: 5, levels: this._LEVELS, newGame: false});
+              if (this._LEVEL === 6) {
+      this.bgMusic.destroy();
+              this.scene.start('levelseven',{level: 7, levels: this._LEVELS, newGame: false});
             } 
           });
           this.loadingLevel = true;
@@ -619,10 +510,10 @@ moveEnemies () {
       if (!this.loadingLevel) {
         this.cameras.main.fade(500, 0, 0, 0);
         this.cameras.main.on( 'camerafadeoutcomplete', () => {
-          if (this._LEVEL === 4) {
+          if (this._LEVEL === 6) {
             this.bgMusic.destroy();
-          this.scene.start('leveltwo', {level: 2, levels: this._LEVELS, newGame: false});
-        }
+          this.scene.start('levelfive', {level: 5, levels: this._LEVELS, newGame: false});
+        } 
       });
       this.loadingLevel = true;
       }

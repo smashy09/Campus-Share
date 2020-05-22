@@ -54,6 +54,14 @@ class BootScene extends Phaser.Scene {
         this.load.image('lock', '/assets/New design assets/lock.png');
         this.load.image('scard', '/assets/New design assets/student card.png');
         this.load.image('agenda', '/assets/New design assets/agenda.png');
+
+        this.load.image('hoodie', '/assets/New design assets/hoodie.png');
+        this.load.image('coffee', '/assets/New design assets/coffee.png');
+        this.load.image('magazine', '/assets/New design assets/Magazine.png');
+        this.load.image('laptop', '/assets/New design assets/laptop.png');
+        this.load.image('weights', '/assets/New design assets/weights1.png');
+        
+        
         //monster
         this.load.image('raccoon', '/assets/New design assets/Raccoon.png');
         this.load.image('crow', '/assets/New design assets/Crow sprite.png');
@@ -91,10 +99,17 @@ class BootScene extends Phaser.Scene {
 
         this.load.tilemapTiledJSON('SE2', '/assets/Map/SE2.json');
 
-        this.load.tilemapTiledJSON('SE14', '/assets/Map/SE14(wcollide).json');
+        
 
-        this.load.tilemapTiledJSON('zone1', '/assets/Map/level1.json');
-        this.load.tilemapTiledJSON('zone2', '/assets/Map/level2.json');
+        this.load.tilemapTiledJSON('outdoor2', '/assets/Map/se2 to se14 outside.json');
+        this.load.tilemapTiledJSON('outdoor3', '/assets/Map/se2 to se14 outside p2.json');
+        this.load.tilemapTiledJSON('REC', '/assets/Map/REC.json');
+        this.load.tilemapTiledJSON('SE14B', '/assets/Map/SE14(Basement).json');
+        this.load.tilemapTiledJSON('SE14', '/assets/Map/SE14.json');
+        this.load.tilemapTiledJSON('SE14-2', '/assets/Map/SE14-2nd-Floor.json');
+
+        this.load.tilemapTiledJSON('outdoor4', '/assets/Map/Outside REC.json');
+        // this.load.tilemapTiledJSON('zone2', '/assets/Map/level2.json');
         
     };
     loadSpritesheet () {

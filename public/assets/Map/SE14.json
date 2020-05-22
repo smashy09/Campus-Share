@@ -3,7 +3,8 @@
     {
      "export":
         {
-         "target":"..\/..\/..\/Map"
+         "format":"json",
+         "target":"SE14.json"
         }
     },
  "height":34,

@@ -4,7 +4,7 @@
      "export":
         {
          "format":"json",
-         "target":"..\/..\/..\/Map\/REC..json"
+         "target":"REC.json"
         }
     },
  "height":34,
