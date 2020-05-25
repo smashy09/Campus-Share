@@ -62,10 +62,10 @@ class SelectScene extends Phaser.Scene {
     }
 
     pointerdown(character) {
-        var datas = { level: 8, newGame: true, levels: this.levels, score: this.score||0, selectedCharacter: character.characterId };
+        var datas = { level: 1, newGame: true, levels: this.levels, score: this.score||0, selectedCharacter: character.characterId };
         console.log(datas);
         console.log(this);
-        this.scene.start('leveleight', datas)
+        this.scene.start('level1', datas)
         // window.network.saveAvatar(character)
     }
 
