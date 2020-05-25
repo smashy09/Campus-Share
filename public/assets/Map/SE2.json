@@ -3,7 +3,8 @@
     {
      "export":
         {
-         "target":"."
+         "format":"json",
+         "target":"SE2.json"
         }
     },
  "height":34,
